@@ -24,6 +24,9 @@
 	<p>The name is <span data-ng-bind="firstName"></span></p>
 	 
 	</div>
+	
+	<a href="login.do"> login</a>
+	<a href="signup.do"> signIn</a>
 
 </body>
 </html>

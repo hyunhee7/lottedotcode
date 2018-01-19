@@ -1,0 +1,59 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+.background-color {
+	background-color : #518ddd;
+}
+.login-wrapper{
+	background-color : #518ddd;
+}
+.img-mockup{
+	margin-top:20%;
+	text-align:center;
+}
+.img-mockup > img {
+	width : 170px;
+}
+.logo{
+	color : white;
+	font-size : 50px;
+	font-weight: bold;
+	text-align: center;
+	font-family: 'Ubuntu', sans-serif;
+}
+.login-sublogo{
+	color : white;
+	font-size: 15px;
+	text-align: center;
+}
+
+.line-input-white {
+  letter-spacing: 1px;
+  width: 100%;
+  height: 46px;;
+  color: white;
+  border: 0;
+  border-bottom: 1px solid white;
+  background: none;
+  padding-left: 4px;
+}
+.line-input-white:focus {
+    border-bottom: 2px solid white;
+  }
+  
+.full-button-white {
+  background-color: white;
+  color: #518ddd;
+  height: 46px;
+  font-weight:bold;
+  width: 100%;
+  border: 0;
+  border-radius: 3px;
+}
+
+.full-button-white:hover {
+	background-color : #F5F5F5;
+	transition : 0.5s;
+	
+}
+
