@@ -21,6 +21,7 @@ public class HomeController {
 		mView.setViewName("home");
 		return mView;
 	}
+	
 }
 	
 
