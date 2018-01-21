@@ -1,0 +1,14 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+.hambugbtn{
+	background-color:#333949;
+}
+.bg-darks{
+	/* background-color:#8378EE; !important; */
+	background-color:#518ddd; !important;
+}
+.navbar-brand{
+	font-weight:bold;
+	font-family: 'Ubuntu', sans-serif;
+	font-size : 26px;
+}

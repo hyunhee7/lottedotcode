@@ -39,7 +39,7 @@
 						<div class="form-group">
 							<input name="password" type="password" class="line-input-white" id="login-password" placeholder="비밀번호">
 						</div>
-						<input type="submit" class="full-button-white hvr-shadow" value="로그인">
+						<a href="main.do"><input  class="full-button-white hvr-shadow" value="로그인"></a>
 					</div>
 				</form>
 				<div class="login-bottom">
@@ -49,5 +49,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		
+	</script>
 </body>
 </html>
