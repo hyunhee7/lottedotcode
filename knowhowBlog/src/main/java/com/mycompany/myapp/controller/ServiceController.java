@@ -17,12 +17,12 @@ public class ServiceController {
 		mView.setViewName("service/main");
 		return mView;
 	}
-	@RequestMapping("/projectList.do")
-	public ModelAndView projectList(){
+	@RequestMapping("/projectTimeline.do")
+	public ModelAndView projectTimeline(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("list", list);
-		mView.setViewName("service/projectList");
+		mView.setViewName("service/projectTimeline");
 		return mView;
 	}
 	@RequestMapping("/projectDetail.do")
@@ -32,5 +32,29 @@ public class ServiceController {
 		mView.addObject("list", list);
 		mView.setViewName("service/projectDetail");
 		return mView;
+	}
+	@RequestMapping("/projectList.do")
+	public ModelAndView projectList(){
+		List<String> list=new ArrayList<String>();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", list);
+		mView.setViewName("service/projectList");
+		return mView;
 	}	
+	@RequestMapping("/knowhowList.do")
+	public ModelAndView knowhowList(){
+		List<String> list=new ArrayList<String>();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", list);
+		mView.setViewName("service/knowhowList");
+		return mView;
+	}	
+	@RequestMapping("/knowhowDetail.do")
+	public ModelAndView knowhowDetail(){
+		List<String> list=new ArrayList<String>();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", list);
+		mView.setViewName("service/knowhowDetail");
+		return mView;
+	}		
 }
