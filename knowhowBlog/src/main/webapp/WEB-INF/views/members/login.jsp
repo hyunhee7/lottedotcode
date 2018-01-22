@@ -39,7 +39,7 @@
 						<div class="form-group">
 							<input name="password" type="password" class="line-input-white" id="login-password" placeholder="비밀번호">
 						</div>
-						<a href="main.do"><input  class="full-button-white hvr-shadow" value="로그인"></a>
+						<a href="main.do"><input type="submit" class="full-button-white hvr-shadow" value="로그인"></a>
 					</div>
 				</form>
 				<div class="login-bottom">

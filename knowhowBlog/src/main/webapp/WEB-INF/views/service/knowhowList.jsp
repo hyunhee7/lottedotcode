@@ -34,7 +34,7 @@
               <a class="nav-link" href="projectList.do">ProjectBoard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="knowhowList.do">KnowHow</a>
+              <a class="nav-link" href="knowhowList.do" style="font-weight:bold">KnowHow</a>
             </li>
             
             
@@ -98,7 +98,7 @@
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
             </div>
             <div class="card-footer">
-              <a href="projectDetail.do" class="btn btn-primary">Learn More</a>
+              <a href="knowhowDetail.do" class="btn btn-primary">Learn More</a>
             </div>
           </div>
         </div>

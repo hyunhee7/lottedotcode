@@ -31,10 +31,10 @@
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="services.html">ProjectBoard</a>
+              <a class="nav-link" href="services.html" style="font-weight:bold">ProjectBoard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">KnowHow</a>
+              <a class="nav-link" href="knowhowList.do">KnowHow</a>
             </li>
             
             

@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <input id="email" name="user_email" type="email" class="line-input-main" placeholder="이메일"
+                        <input id="id" name="user_email" type="text" class="line-input-main" placeholder="아이디"
                                autofocus>
                         <input id="name" name="user_name" type="text" class="line-input-main" placeholder="닉네임">
                         <input id="password1" name="user_password1" type="password" class="line-input-main"
