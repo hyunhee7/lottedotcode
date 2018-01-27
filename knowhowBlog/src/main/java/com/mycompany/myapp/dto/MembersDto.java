@@ -1,11 +1,13 @@
 package com.mycompany.myapp.dto;
 
+
 public class MembersDto {
 	
 	private int mem_num;
 	private String id, pwd, name, image;
 	private boolean isMember;
 	
+	public MembersDto() {}
 	public MembersDto(int mem_num, String id, String pwd, String name, String image, boolean isMember) {
 		super();
 		this.mem_num = mem_num;

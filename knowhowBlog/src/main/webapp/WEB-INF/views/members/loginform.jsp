@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String cPath = request.getContextPath();
+	String url = request.getParameter("url");
+	if(url==null){ //만일 없으면
+		//인덱스 페이지로 이동 될 수 있도록 
+		url=request.getContextPath();
+	}
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,7 +52,7 @@
 					</div>
 				</form>
 				<div class="login-bottom">
-				<p>아직도 가입을 안하셨나요? &nbsp;&nbsp; <a class="signup-hover" href="signup.do">회원가입 하기</a>
+				<p>아직도 가입을 안하셨나요? &nbsp;&nbsp; <a class="signup-hover" href="signupform.do">회원가입 하기</a>
 				</p>
 				</div>
 			</div>

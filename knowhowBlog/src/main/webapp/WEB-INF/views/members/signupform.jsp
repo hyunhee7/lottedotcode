@@ -29,7 +29,7 @@
                <div class="title">회원가입</div>
            </div>
 
-           <form class="form-signup">
+           <form action="signup.do" method="post" class="form-signup">
                <div class="row">
                    <div class="col-md-4">
                        <div class="photo-wrap">
@@ -40,12 +40,12 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <input id="id" name="user_email" type="text" class="line-input-main" placeholder="아이디"
+                        <input id="id" name="id" type="text" class="line-input-main" placeholder="아이디"
                                autofocus>
-                        <input id="name" name="user_name" type="text" class="line-input-main" placeholder="닉네임">
-                        <input id="password1" name="user_password1" type="password" class="line-input-main"
+                        <input id="name" name="name" type="text" class="line-input-main" placeholder="닉네임">
+                        <input id="pwd" name="pwd" type="password" class="line-input-main"
                                placeholder="비밀번호">
-                        <input id="password2" name="user_password2" type="password" class="line-input-main"
+                        <input id="pwd2" name="pwd2" type="password" class="line-input-main"
                                placeholder="비밀번호 확인">
                     </div>
                 </div>
@@ -56,5 +56,43 @@
 			
 		</div>
 	</div>
+	<script>
+	$("#id").on("keyup", function(){	
+		var inputId=$("#id").val();
+		$.ajax({
+			url:"checkid.do",
+			method:"get",
+			data:{inputId:inputId},
+			
+			success:function(data){
+				console.log(data);
+				$("#id").parent()
+				.removeClass("has-success has-error");
+				if(data.canUse){
+					$("#id")
+					.parent()
+					.addClass("has-success")
+					.find(".help-block")
+					.hide()
+					.parent()
+					.find(".glyphicon")
+					.removeClass("glyphicon-remove")
+					.addClass("glyphicon-ok");
+				}else{
+					$("#id")
+					.parent()
+					.addClass("has-error")
+					
+					.find(".help-block")
+					.show()
+					.parent()
+					.find(".glyphicon")
+					.removeClass("glyphicon-ok")
+					.addClass("glyphicon-remove");
+				}					
+			}
+		});
+	});	
+	</script>
 </body>
 </html>

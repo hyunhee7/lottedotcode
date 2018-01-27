@@ -1,8 +1,14 @@
 package com.mycompany.myapp.service;
 
-import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletRequest;
 
-@Service
-public class MembersService {
+import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.dto.MembersDto;
+
+
+
+public interface MembersService {
+	public ModelAndView signup(MembersDto dto, HttpServletRequest request);
+	
 }

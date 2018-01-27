@@ -15,8 +15,8 @@
 	</select>	
 	<insert id="insert" parameterType="membersDto">
 		INSERT INTO members
-		(id,pwd,name,phone,email,regdate)
-		VALUES(#{id},#{pwd},#{name},#{phone},#{email}, SYSDATE)
+		(id,pwd,name,image)
+		VALUES(#{id},#{pwd},#{name},#{image})
 	</insert>
 	<select id="isPwcheck" parameterType="string" resultType="string">
 		SELECT pwd
