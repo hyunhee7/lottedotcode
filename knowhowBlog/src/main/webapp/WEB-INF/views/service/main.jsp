@@ -1,5 +1,9 @@
+<%@page import="com.mycompany.myapp.dto.MembersDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String id = session.getId();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,6 +41,16 @@
               <a class="nav-link" href="knowhowList.do">KnowHow</a>
             </li>
             
+            <% if (id.isEmpty()) {%>
+	            <li class="nav-item">
+	              <a href="${pageContext.request.contextPath }/members/login.do">login</a>
+	            </li>            
+            <% } else {%>
+	            <li class="nav-item">
+	              <a href="#"><img id="profile-image" class="img-circle">${id}</a>
+	              <a href="${pageContext.request.contextPath }/members/logout.do">logout</a>
+	            </li>
+            <% } %>
             
 <!--          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

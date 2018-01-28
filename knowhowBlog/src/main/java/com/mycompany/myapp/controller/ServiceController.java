@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ServiceController {
-	@RequestMapping("/main.do")
+	@RequestMapping("/service/main.do")
 	public ModelAndView login(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
@@ -17,7 +17,7 @@ public class ServiceController {
 		mView.setViewName("service/main");
 		return mView;
 	}
-	@RequestMapping("/projectTimeline.do")
+	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
@@ -25,7 +25,7 @@ public class ServiceController {
 		mView.setViewName("service/projectTimeline");
 		return mView;
 	}
-	@RequestMapping("/projectDetail.do")
+	@RequestMapping("/service/projectDetail.do")
 	public ModelAndView projectDetail(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
@@ -33,7 +33,7 @@ public class ServiceController {
 		mView.setViewName("service/projectDetail");
 		return mView;
 	}
-	@RequestMapping("/projectList.do")
+	@RequestMapping("/service/projectList.do")
 	public ModelAndView projectList(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
@@ -41,7 +41,7 @@ public class ServiceController {
 		mView.setViewName("service/projectList");
 		return mView;
 	}	
-	@RequestMapping("/knowhowList.do")
+	@RequestMapping("/service/knowhowList.do")
 	public ModelAndView knowhowList(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
@@ -49,7 +49,7 @@ public class ServiceController {
 		mView.setViewName("service/knowhowList");
 		return mView;
 	}	
-	@RequestMapping("/knowhowDetail.do")
+	@RequestMapping("/service/knowhowDetail.do")
 	public ModelAndView knowhowDetail(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();

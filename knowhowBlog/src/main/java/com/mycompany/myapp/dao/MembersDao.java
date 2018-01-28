@@ -1,6 +1,9 @@
 package com.mycompany.myapp.dao;
 
-public class MembersDao {
-	
-	
+import com.mycompany.myapp.dto.MembersDto;
+
+public interface MembersDao {
+	public void insert(MembersDto dto);
+	public boolean canUseId(String id);
+	public boolean isValid(MembersDto dto);
 }
