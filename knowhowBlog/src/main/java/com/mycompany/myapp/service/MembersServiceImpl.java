@@ -75,12 +75,13 @@ public class MembersServiceImpl implements MembersService {
 		if(isValid){//아이디 비밀번호가 일치한 경우 
 			//로그인 처리를 해준다.
 			request.getSession().setAttribute("id", dto.getId());
+			request.getSession().setAttribute("image", dto.getImagePath());
 			String id=(String)dto.getId();
+			String imagePath=(String)dto.getImagePath();
 			System.out.println(id);
 
 			mView.addObject("msg", dto.getId()+" 님 로그인 되었습니다.");
 			mView.addObject("url", url);				
-			
 		}else{//아이디 혹은 비밀번호가 다른 경우 
 			mView.addObject("msg", "아이디 혹은 비밀번호가 맞지 않습니다.");
 			String location=request.getContextPath()+

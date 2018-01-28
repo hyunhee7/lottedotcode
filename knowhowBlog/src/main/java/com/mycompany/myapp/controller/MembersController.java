@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,4 +72,18 @@ public class MembersController {
       mView.setViewName("members/alert");
       return mView;
    }    
+   
+   @RequestMapping("/members/logout")
+   public ModelAndView signout(HttpSession session){
+      //로그 아웃 처리
+      session.invalidate();
+      ModelAndView mView=new ModelAndView();
+      mView.addObject("msg", "로그 아웃 되었습니다.");
+      mView.addObject("url", 
+            session.getServletContext().getContextPath());
+      mView.setViewName("members/alert");
+      
+      return mView;
+   }      
+   
 }
