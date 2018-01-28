@@ -4,5 +4,5 @@ import com.mycompany.myapp.dto.MembersDto;
 
 public interface MembersDao {
 	public void insert(MembersDto dto);
-	
+	public boolean canUseId(String id);
 }

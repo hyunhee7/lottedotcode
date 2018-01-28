@@ -58,4 +58,11 @@ public class MembersServiceImpl implements MembersService {
 		return mView;
 	}
 
+	@Override
+	public boolean canUseId(String id) {
+		//사용가능한 아이디 인지 여부를 리턴받아서 
+		boolean canUse=membersDao.canUseId(id);
+		//리턴해준다. 
+		return canUse;		
+	}	
 }

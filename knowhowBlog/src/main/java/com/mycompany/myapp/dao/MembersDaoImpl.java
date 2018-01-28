@@ -17,5 +17,15 @@ public class MembersDaoImpl implements MembersDao {
 		System.out.println("들어옴3");
 		session.insert("members.insert", dto);
 	}
-
+	
+	@Override
+	public boolean canUseId(String id) {
+		String result=session.selectOne("members.isExistId", id);
+		if(result==null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }

@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
   	<meta name="viewport" http-equiv="Content-Type"
           content="width=device-width, initial-scale=1 text/html; charset=utf-8">	
 	<title>views/members/signup.jsp</title>
@@ -11,7 +10,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/basic.css" />			
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member.css" />		
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />	
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"/>	
 	
 	<!-- jQuery -->
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.2.0.js"></script>
@@ -41,6 +41,7 @@
                     <div class="col-md-8">
                         <input id="id" name="id" type="text" class="line-input-main" placeholder="아이디"
                                autofocus>
+                               <p class="help-block" style="display:none" ></p>
                         <input id="name" name="name" type="text" class="line-input-main" placeholder="닉네임">
                         <input id="pwd" name="pwd" type="password" class="line-input-main"
                                placeholder="비밀번호">
@@ -49,47 +50,45 @@
                     </div>
                 </div>
                 <div id="login-link">
-                    <input type="submit" value="회원가입" class="full-button-main hvr-shadow">
+                    <input type="submit" value="회원가입" id="signupBtn" class="full-button-main hvr-shadow">
                 </div>
             </form>
 			
 		</div>
 	</div>
 	<script>
-	
+
 	/* 유효성검사 */
 	$("#id").on("keyup", function(){	
 		var inputId=$("#id").val();
+		if(inputId==""){
+			$(".help-block").text("");
+		}
 		$.ajax({
 			url:"checkid.do",
 			method:"get",
 			data:{inputId:inputId},
 			
 			success:function(data){
-				console.log(data);
-				$("#id").parent()
-				.removeClass("has-success has-error");
+				
 				if(data.canUse){
 					$("#id")
 					.parent()
-					.addClass("has-success")
+					.removeClass("has-error")
+					.addClass("has-success")					
 					.find(".help-block")
-					.hide()
-					.parent()
-					.find(".glyphicon")
-					.removeClass("glyphicon-remove")
-					.addClass("glyphicon-ok");
+					.show()
+					.text("사용 가능합니다.");
+					$("#signupBtn").attr('disabled',false).css("background-color","#518ddd").addClass("hvr-shadow");
 				}else{
 					$("#id")
 					.parent()
+					.removeClass("has-success")
 					.addClass("has-error")
-					
 					.find(".help-block")
 					.show()
-					.parent()
-					.find(".glyphicon")
-					.removeClass("glyphicon-ok")
-					.addClass("glyphicon-remove");
+					.text("이미 사용중인 아이디 입니다.");
+					$("#signupBtn").attr('disabled',true).css("background-color","#bababa").removeClass("hvr-shadow");
 				}					
 			}
 		});
@@ -97,8 +96,9 @@
 	
 	/* 예외처리  */
     $("form").submit(function () {
-        if ( $('#id').val() == '' || $('#pwd').val() == '' || $('#pwd2').val() == '' || $('#name').val() == '') {
-            alert('모든 정보를 입력해주세요.');
+        if ( $('#id').val() == '' || $('#pwd').val() == '' || 
+        	 $('#pwd2').val() == '' || $('#name').val() == '') {
+            	alert('모든 정보를 입력해주세요.');
             return false;
         }
         if ($("#pwd").val() != $("#pwd2").val()) {
@@ -107,15 +107,12 @@
         }
     });
 
-
     /* 첨부사진 미리보기 */
 	var upload = document.getElementsByTagName('input')[0],
 	holder = document.getElementById('profile-preview');
 
-	 
 	upload.onchange = function (e) {
 	  e.preventDefault();
-		
 	  var file = upload.files[0],
 	      reader = new FileReader();
 	  reader.onload = function (event) {
@@ -131,10 +128,8 @@
 							 .css("height","100px")
 							 .css("border-radius", "50%")
 							 .css("border","1px solid #e5e5e5");
-		
 	  };
 	  reader.readAsDataURL(file);
-	
 	  return false;
 	};    
     

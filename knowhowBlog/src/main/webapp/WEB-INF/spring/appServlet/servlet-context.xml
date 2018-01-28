@@ -52,6 +52,7 @@
 	<context:component-scan base-package="com.mycompany.myapp.controller.*" />
 	<context:component-scan base-package="com.mycompany.myapp.dao.*" />
 	<context:component-scan base-package="com.mycompany.myapp.dto.*" />
+	<context:component-scan base-package="com.mycompany.myapp.service.*" />
 			
 
 
