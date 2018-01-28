@@ -16,7 +16,7 @@
 	<insert id="insert" parameterType="membersDto">
 		INSERT INTO members
 		(id,pwd,name,image)
-		VALUES(#{id},#{pwd},#{name},#{image})
+		VALUES(#{id},#{pwd},#{name},#{imagePath})
 	</insert>
 	<select id="isPwcheck" parameterType="string" resultType="string">
 		SELECT pwd

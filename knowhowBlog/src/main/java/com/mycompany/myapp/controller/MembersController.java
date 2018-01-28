@@ -43,6 +43,7 @@ public class MembersController {
 	public ModelAndView signup(@ModelAttribute MembersDto dto,
 			HttpServletRequest request) {
 		ModelAndView mView = membersService.signup(dto, request);
+		
 		mView.setViewName("members/alert");
 		return mView;
 	}

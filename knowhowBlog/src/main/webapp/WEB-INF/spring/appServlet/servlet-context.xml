@@ -28,13 +28,20 @@
 			value="classpath:com/mycompany/myapp/mybatis/Configuration.xml"/>
 	</bean>
 	
-	<!-- Dao 에 주입해줄 SqlSession 인터페이스를 구현한 
-	SqlSessionTemplate 객체 -->
+	<!-- Dao 에 주입해줄 SqlSession 인터페이스를 구현한 SqlSessionTemplate 객체 -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sessionFactory"/>
 	</bean>	
 	
-
+    <!-- Multipart 폼 전송을 처리하기 위한 bean -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10240000"/>
+    </bean>
+    
+    <!--  -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="0"/>
+    </bean>
 	
 	<mvc:annotation-driven/>
 		

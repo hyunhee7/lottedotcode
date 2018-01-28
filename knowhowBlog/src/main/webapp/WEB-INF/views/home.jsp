@@ -4,5 +4,5 @@
 <%
 	//컨트롤러를 거치도록 리다일렉트 시켜준다. 
 	String cPath=request.getContextPath();
-	response.sendRedirect(cPath+"/members/signupform.do");
+	response.sendRedirect(cPath+"/members/loginform.do");
 %>

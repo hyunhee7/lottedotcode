@@ -1,20 +1,25 @@
 package com.mycompany.myapp.dto;
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class MembersDto {
 	
 	private int mem_num;
-	private String id, pwd, name, image;
+	private String id, pwd, name, imagePath;
+	private MultipartFile uploadImage;
 	private boolean isMember;
 	
 	public MembersDto() {}
-	public MembersDto(int mem_num, String id, String pwd, String name, String image, boolean isMember) {
+
+	public MembersDto(int mem_num, String id, String pwd, String name, String imagePath, MultipartFile uploadImage,
+			boolean isMember) {
 		super();
 		this.mem_num = mem_num;
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
-		this.image = image;
+		this.imagePath = imagePath;
+		this.uploadImage = uploadImage;
 		this.isMember = isMember;
 	}
 
@@ -50,12 +55,20 @@ public class MembersDto {
 		this.name = name;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public MultipartFile getUploadImage() {
+		return uploadImage;
+	}
+
+	public void setUploadImage(MultipartFile uploadImage) {
+		this.uploadImage = uploadImage;
 	}
 
 	public boolean isMember() {
@@ -65,8 +78,6 @@ public class MembersDto {
 	public void setMember(boolean isMember) {
 		this.isMember = isMember;
 	}
-	
-	
 	
 	
 }

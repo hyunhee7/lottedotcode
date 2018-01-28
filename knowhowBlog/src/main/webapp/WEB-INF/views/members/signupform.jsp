@@ -10,8 +10,7 @@
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/basic.css" />			
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member.css" />	
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/home.css" />	
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member.css" />		
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />	
 	
 	<!-- jQuery -->
@@ -25,18 +24,18 @@
 	<div class="signup-wrapper">
 		<div class="popup-container">
             <div class="popup-header">
-                <div class="ic-back"><a href="login.do"><img src="${pageContext.request.contextPath }/resources/images/ic-back.png"></a></div>
+                <div class="ic-back"><a href="loginform.do"><img src="${pageContext.request.contextPath }/resources/images/ic-back.png"></a></div>
                <div class="title">회원가입</div>
            </div>
 
-           <form action="signup.do" method="post" class="form-signup">
+           <form action="signup.do" method="post" class="form-signup" enctype="multipart/form-data">
                <div class="row">
                    <div class="col-md-4">
                        <div class="photo-wrap">
                            <img alt="profile picture css" class="pic-circle-corner" id="profile-preview"
                                 src="${pageContext.request.contextPath }/resources/images/img-profile-empty.png"/>
                             <button class="main-line-button">사진등록</button>
-                            <input type="file" id="photo" accept="image/*" class="file_input_hidden" name="profile_img">
+                            <input type="file" id="image" accept="image/*" class="file_input_hidden" name="uploadImage">
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -57,6 +56,8 @@
 		</div>
 	</div>
 	<script>
+	
+	/* 유효성검사 */
 	$("#id").on("keyup", function(){	
 		var inputId=$("#id").val();
 		$.ajax({
@@ -93,6 +94,50 @@
 			}
 		});
 	});	
+	
+	/* 예외처리  */
+    $("form").submit(function () {
+        if ( $('#id').val() == '' || $('#pwd').val() == '' || $('#pwd2').val() == '' || $('#name').val() == '') {
+            alert('모든 정보를 입력해주세요.');
+            return false;
+        }
+        if ($("#pwd").val() != $("#pwd2").val()) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return false;
+        }
+    });
+
+
+    /* 첨부사진 미리보기 */
+	var upload = document.getElementsByTagName('input')[0],
+	holder = document.getElementById('profile-preview');
+
+	 
+	upload.onchange = function (e) {
+	  e.preventDefault();
+		
+	  var file = upload.files[0],
+	      reader = new FileReader();
+	  reader.onload = function (event) {
+		$("#profile-preview").removeAttr("src");
+	    var img = new Image();
+	    img.src = event.target.result;
+	    // note: no onload required since we've got the dataurl...I think! :)
+	    if (img.width > 560) { // holder width
+	      img.width = 30;
+	    }
+		$("#profile-preview").attr('src', img.src)
+							 .css("width","100px")
+							 .css("height","100px")
+							 .css("border-radius", "50%")
+							 .css("border","1px solid #e5e5e5");
+		
+	  };
+	  reader.readAsDataURL(file);
+	
+	  return false;
+	};    
+    
 	</script>
 </body>
 </html>
