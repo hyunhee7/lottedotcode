@@ -28,4 +28,14 @@ public class MembersDaoImpl implements MembersDao {
 		}
 	}
 	
+	@Override
+	public boolean isValid(MembersDto dto) {
+		MembersDto resultDto=session.selectOne("members.isValid", dto);
+		if(resultDto==null){//id 혹은 비밀번호가 틀린 경우 
+			return false;
+		}else{
+			return true;
+		}
+	}	
+	
 }

@@ -51,7 +51,8 @@ public class MembersController {
 		mView.setViewName("members/alert");
 		return mView;
 	}
-   // ajax 요청 처리 
+
+   // 중복확인 ajax 요청 처리 
    @RequestMapping("/members/checkid")
    @ResponseBody 
    public Map<String, Object> checkid(@RequestParam String inputId){
@@ -61,4 +62,13 @@ public class MembersController {
       System.out.println("controller:"+canUse);
       return map;
    }   	
+   
+   // 로그인
+   @RequestMapping("/members/login")
+   public ModelAndView signin(@ModelAttribute MembersDto dto, 
+            HttpServletRequest request){
+      ModelAndView mView=membersService.signin(dto, request);
+      mView.setViewName("members/alert");
+      return mView;
+   }    
 }

@@ -40,13 +40,13 @@
 				<div class="logo">LOEEE'D</div>
 				<p class="login-sublogo">LOEEEEE Developer 공간</p>
 				
-				<form>
+				<form action="login.do">
 					<div class="form-login">
 						<div class="form-group">
 							<input name="id" type="text" class="line-input-white" id="login-id" placeholder="아이디">
 						</div>
 						<div class="form-group">
-							<input name="password" type="password" class="line-input-white" id="login-password" placeholder="비밀번호">
+							<input name="pwd" type="password" class="line-input-white" id="login-password" placeholder="비밀번호">
 						</div>
 						<a href="main.do"><input type="submit" class="full-button-white hvr-shadow" value="로그인"></a>
 					</div>
