@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
+    <style>
+    	.menu1 { font-weight : bold;}
+    </style>    
 </head>
 <body>
     <!-- Navigation -->

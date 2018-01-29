@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>service/index.jsp</title>
+    <title>service/projectList.jsp</title>
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" />
@@ -16,6 +16,12 @@
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
+  	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"/>	
+  
+    <style>
+    	.menu1 { font-weight : bold;}
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -27,9 +33,13 @@
 
 
       <!-- Portfolio Section -->
-      <h1 class="my-4">Project List</h1>
+	 <h1 class="my-4 col-xs-12">Project Board</h1>
 
       <div class="row">
+      	<div class="write col-lg-12">
+      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projectInsertform.do'">글쓰기</button> 
+      	</div>
+      	<br />
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>

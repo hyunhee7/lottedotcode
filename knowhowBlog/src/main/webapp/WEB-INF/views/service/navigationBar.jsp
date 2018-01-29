@@ -13,10 +13,10 @@
 		              <a class="nav-link" href="${pageContext.request.contextPath }/members/loginform.do" style="color:white">login</a>
 		            </li>    
 		            <li class="nav-item">
-		              <a class="nav-link" href="projectList.do">ProjectBoard</a>
+		              <a class="nav-link menu1" href="projectList.do">ProjectBoard</a>
 		            </li>
 		            <li class="nav-item">
-		              <a class="nav-link" href="knowhowList.do">KnowHow</a>
+		              <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
 		            </li>	
 		            	                    
 			<% } else { %>
@@ -29,10 +29,10 @@
 			              </div>
             		</li>
 		            <li class="nav-item">
-		              <a class="nav-link" href="projectList.do">ProjectBoard</a>
+		              <a class="nav-link menu1" href="projectList.do">ProjectBoard</a>
 		            </li>
 		            <li class="nav-item">
-		              <a class="nav-link" href="knowhowList.do">KnowHow</a>
+		              <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
 		            </li>		            	            
 			<% } %>
             

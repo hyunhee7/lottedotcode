@@ -56,5 +56,13 @@ public class ServiceController {
 		mView.addObject("list", list);
 		mView.setViewName("service/knowhowDetail");
 		return mView;
+	}	
+	@RequestMapping("/service/projectInsertform.do")
+	public ModelAndView projectInsertform(){
+		List<String> list=new ArrayList<String>();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", list);
+		mView.setViewName("service/projectInsertform");
+		return mView;
 	}		
 }
