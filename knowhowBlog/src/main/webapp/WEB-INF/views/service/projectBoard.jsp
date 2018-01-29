@@ -12,7 +12,7 @@
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" />
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/custom.css" />
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
@@ -32,11 +32,11 @@
 
 
 
-      <!-- Portfolio Section -->
+     <!-- Portfolio Section -->
 	 <h1 class="my-4 col-xs-12">Project Board</h1>
 
       <div class="row">
-      	<div class="write col-lg-12">
+      	<div class="mobile-hidden write col-lg-12">
       		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projectInsertform.do'">글쓰기</button> 
       	</div>
       	<br />

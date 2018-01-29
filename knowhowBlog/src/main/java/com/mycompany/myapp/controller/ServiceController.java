@@ -46,14 +46,7 @@ public class ServiceController {
 		mView.setViewName("service/projectDetail");
 		return mView;
 	}
-	@RequestMapping("/service/projectBoard.do")
-	public ModelAndView projectList(){
-		List<String> list=new ArrayList<String>();
-		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
-		mView.setViewName("service/projectBoard");
-		return mView;
-	}	
+
 	@RequestMapping("/service/knowhowList.do")
 	public ModelAndView knowhowList(){
 		List<String> list=new ArrayList<String>();
@@ -95,4 +88,14 @@ public class ServiceController {
 		
 		return "redirect:/service/projectBoard.do";
 	}
+
+	/* 프로젝트 목록 */
+	@RequestMapping("/service/projectBoard")
+	public ModelAndView projectList(){
+		List<String> list=new ArrayList<String>();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", list);
+		mView.setViewName("service/projectBoard");
+		return mView;
+	}		
 }

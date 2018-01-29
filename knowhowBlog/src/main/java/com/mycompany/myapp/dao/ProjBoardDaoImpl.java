@@ -1,5 +1,7 @@
 package com.mycompany.myapp.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,5 +18,9 @@ public class ProjBoardDaoImpl implements ProjBoardDao {
 	public void insert(ProjBoardDto dto) {
 		session.insert("projBoard.insert", dto);
 	}
-
+	@Override
+	public List<ProjBoardDto> getList() {
+		List<ProjBoardDto> list=session.selectList("projBoard.getList");
+		return list;
+	}
 }
