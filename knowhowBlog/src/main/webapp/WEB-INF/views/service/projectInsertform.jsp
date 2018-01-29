@@ -39,24 +39,26 @@
     <!-- Page Content -->
     <div class="container">
     	<h1 class="my-4 col-xs-12">Project Write</h1>
-		<form>
+		<form action="projectInsert.do" method="post">
 		  <div class="form-group">
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="프로젝트 명">
+		    <input type="text" class="form-control" id="proj_title" name="proj_title" placeholder="프로젝트 명">
 		  </div>
 		  <div class="custom-file">
-		 	<input type="file" class="custom-file-input" id="customFile">
+		 	<input type="file" class="custom-file-input" id="proj_file" name="proj_image">
 			<label class="custom-file-label" for="customFile">Choose file</label>
 		  </div>
 		  <div class="form-group">
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" style="margin-top:17px;" placeholder="프로젝트 부가 설명"></textarea>
+		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" style="margin-top:17px;" name="proj_content"
+		    placeholder="프로젝트 부가 설명" ></textarea>
 		  </div>		  
-		</form>    
-		<div style="text-align: center;">
-      	<div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
-      		<button type="button" class="btn btn-b hvr-shadow" style="margin-right:10pxr" onclick="location.href='projectInsertform.do'">등록</button>
-      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='projectInsertform.do'">취소</button> 
-      	</div>    
+		  <div style="text-align: center;">
+	      <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
+	      		<button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" >등록</button>
+	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='projectBoard.do'">취소</button> 
+	      </div>    
     	</div>
+		</form>    
+
     </div>
 </body>
 </html>

@@ -13,7 +13,7 @@
 		              <a class="nav-link" href="${pageContext.request.contextPath }/members/loginform.do" style="color:white">login</a>
 		            </li>    
 		            <li class="nav-item">
-		              <a class="nav-link menu1" href="projectList.do">ProjectBoard</a>
+		              <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
 		            </li>
 		            <li class="nav-item">
 		              <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
@@ -29,7 +29,7 @@
 			              </div>
             		</li>
 		            <li class="nav-item">
-		              <a class="nav-link menu1" href="projectList.do">ProjectBoard</a>
+		              <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
 		            </li>
 		            <li class="nav-item">
 		              <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>

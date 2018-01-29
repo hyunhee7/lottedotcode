@@ -3,12 +3,25 @@ package com.mycompany.myapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.dto.ProjBoardDto;
+import com.mycompany.myapp.service.ProjBoardService;
+
+
+
 @Controller
 public class ServiceController {
+	
+	@Autowired
+	private ProjBoardService projboardService;
+	
 	@RequestMapping("/service/main.do")
 	public ModelAndView login(){
 		List<String> list=new ArrayList<String>();
@@ -33,12 +46,12 @@ public class ServiceController {
 		mView.setViewName("service/projectDetail");
 		return mView;
 	}
-	@RequestMapping("/service/projectList.do")
+	@RequestMapping("/service/projectBoard.do")
 	public ModelAndView projectList(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("list", list);
-		mView.setViewName("service/projectList");
+		mView.setViewName("service/projectBoard");
 		return mView;
 	}	
 	@RequestMapping("/service/knowhowList.do")
@@ -57,12 +70,29 @@ public class ServiceController {
 		mView.setViewName("service/knowhowDetail");
 		return mView;
 	}	
+	
+	/* 프로젝트 등록 form */
 	@RequestMapping("/service/projectInsertform.do")
-	public ModelAndView projectInsertform(){
+	public ModelAndView ProjectInsertform(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("list", list);
 		mView.setViewName("service/projectInsertform");
 		return mView;
 	}		
+
+	
+	/* 프로젝트 등록 */
+	@RequestMapping("/service/projectInsert")
+	public String projectInsert(HttpSession session,
+			@ModelAttribute ProjBoardDto dto){
+		String proj_writer = (String)session.getAttribute("id");
+		System.out.println("작성자:"+proj_writer);
+		dto.setProj_writer(proj_writer);
+		dto.setProj_imagePath("default.png");
+		dto.setProj_disp_tf(false);
+		projboardService.insert(dto);
+		
+		return "redirect:/service/projectBoard.do";
+	}
 }
