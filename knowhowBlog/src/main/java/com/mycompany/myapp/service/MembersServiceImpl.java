@@ -54,7 +54,7 @@ public class MembersServiceImpl implements MembersService {
 		membersDao.insert(dto);
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("msg", dto.getId()+" 회원님! 가입이 완료되었습니다.");
-		mView.addObject("url", request.getContextPath());		
+		mView.addObject("url", "loginform.do");		
 		return mView;
 	}
 
@@ -70,16 +70,15 @@ public class MembersServiceImpl implements MembersService {
 	public ModelAndView signin(MembersDto dto, HttpServletRequest request) {
 		boolean isValid=membersDao.isValid(dto);
 		ModelAndView mView=new ModelAndView();		
-		
 		String url=request.getContextPath();
 		if(isValid){//아이디 비밀번호가 일치한 경우 
 			//로그인 처리를 해준다.
 			request.getSession().setAttribute("id", dto.getId());
-			request.getSession().setAttribute("image", dto.getImagePath());
+			
 			String id=(String)dto.getId();
 			String imagePath=(String)dto.getImagePath();
 			System.out.println(id);
-
+			System.out.println("왜안들와:"+imagePath);
 			mView.addObject("msg", dto.getId()+" 님 로그인 되었습니다.");
 			mView.addObject("url", url);				
 		}else{//아이디 혹은 비밀번호가 다른 경우 
