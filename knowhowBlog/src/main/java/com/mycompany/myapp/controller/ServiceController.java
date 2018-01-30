@@ -102,4 +102,15 @@ public class ServiceController {
 		mView.setViewName("service/projectTimeline");
 		return mView;
 	}	
+	
+	/* 포스트 등록 form */
+	@RequestMapping("/service/postInsertform.do")
+	public ModelAndView PostInsertform(){
+		List<String> list=new ArrayList<String>();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", list);
+		mView.setViewName("service/postInsertform");
+		return mView;
+	}			
+	
 }
