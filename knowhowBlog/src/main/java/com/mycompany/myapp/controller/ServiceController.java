@@ -92,9 +92,7 @@ public class ServiceController {
 	/* 프로젝트 목록 */
 	@RequestMapping("/service/projectBoard")
 	public ModelAndView projectList(){
-		List<String> list=new ArrayList<String>();
-		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
+		ModelAndView mView=projboardService.list();
 		mView.setViewName("service/projectBoard");
 		return mView;
 	}		

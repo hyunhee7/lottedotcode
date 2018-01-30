@@ -1,5 +1,7 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,17 +42,24 @@
       		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projectInsertform.do'">글쓰기</button> 
       	</div>
       	<br />
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="projectList.do">Project One</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-            </div>
-          </div>
-        </div>
+      	
+      	<!-- card1 -->
+      	<c:forEach var="tmp" items="${list }">
+	        <div class="col-lg-4 col-sm-6 portfolio-item">
+	          <div class="card h-100">
+	            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+	            <div class="card-body">
+	              <h4 class="card-title">
+	                <a href="projectList.do">${tmp.proj_title }</a>
+	              </h4>
+	              <p class="card-text">${tmp.proj_content }</p>
+	            </div>
+	          </div>
+	        </div>
+        </c:forEach>
+        <!-- card1 fin. -->
+        
+        
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
