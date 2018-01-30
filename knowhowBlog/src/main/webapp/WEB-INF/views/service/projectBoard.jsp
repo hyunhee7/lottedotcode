@@ -47,10 +47,15 @@
       	<c:forEach var="tmp" items="${list }">
 	        <div class="col-lg-4 col-sm-6 portfolio-item">
 	          <div class="card h-100">
-	            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+	          	<c:if test="${empty tmp.proj_imagePath}">
+	            	<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+	            </c:if>
+	          	<c:if test="${!empty tmp.proj_imagePath}"> 
+	            	<a href="#" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="height:100%;"></a>
+	            </c:if>	            
 	            <div class="card-body">
 	              <h4 class="card-title">
-	                <a href="projectList.do">${tmp.proj_title }</a>
+	                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
 	              </h4>
 	              <p class="card-text">${tmp.proj_content }</p>
 	            </div>
@@ -59,51 +64,6 @@
         </c:forEach>
         <!-- card1 fin. -->
         
-        
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Two</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>

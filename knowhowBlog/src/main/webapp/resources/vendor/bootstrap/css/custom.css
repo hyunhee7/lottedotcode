@@ -9,7 +9,10 @@
 .btn-b:hover{
 	background-color:#4177BF;
 }
-
+.imgSize{
+	width: 348px;
+	height: 200px;
+}
 @media (max-width: 576px){
 	
 	.mobile-hidden{
