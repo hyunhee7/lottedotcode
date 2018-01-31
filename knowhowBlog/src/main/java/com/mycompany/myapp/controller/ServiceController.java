@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dto.ProjBoardDto;
+import com.mycompany.myapp.dto.ProjTimelineDto;
 import com.mycompany.myapp.service.ProjBoardService;
 import com.mycompany.myapp.service.ProjTimelineService;
 import com.mycompany.myapp.service.ProjTimelineServiceImpl;
@@ -111,6 +112,21 @@ public class ServiceController {
 		mView.addObject("list", list);
 		mView.setViewName("service/postInsertform");
 		return mView;
-	}			
+	}
+
+/*	 포스트 등록 
+	@RequestMapping("/service/postInsert")
+	public String postInsert(@RequestParam int num, HttpSession session, HttpServletRequest request,
+			@ModelAttribute ProjTimelineDto dto){
+		String proj_writer = (String)session.getAttribute("id");
+		int post_proj_num = (Integer)request.getAttribute("proj_num");
+		System.out.println("작성자:"+proj_writer);
+		dto.setPost_writer(proj_writer);
+		//dto.setProj_disp_tf(false);
+		dto.setPost_proj_num(post_proj_num);
+		projboardService.insert(dto,request);
+		
+		return "redirect:/service/projectBoard.do";
+	}*/
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String proj_num = (String)request.getParameter("num"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,12 +59,14 @@
 		  </div>
           <div class="bs-example">
             <input type="text" value="java,spring,javascript" data-role="tagsinput" />
-          </div>	  	
-	  	  <br /><br />          	  
+          </div>	
+            	
+	  	  <br /><br /> 
+	  	           	  
 		  <div style="text-align: center;">
 	      <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
 	      		<button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" >등록</button>
-	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='projectTimeline.do'">취소</button> 
+	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='projectTimeline.do?num=<%=proj_num%>'">취소</button> 
 	      </div>    
     	</div>
 		</form> 
