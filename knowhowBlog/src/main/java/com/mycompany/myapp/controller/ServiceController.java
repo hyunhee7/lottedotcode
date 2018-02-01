@@ -120,17 +120,12 @@ public class ServiceController {
 			@ModelAttribute ProjTimelineDto dto){
 		System.out.println("오잉 들어옴");
 		String post_regr_id = (String)session.getAttribute("id");
-		System.out.println(request.getAttribute("proj_num"));
-		String proj_num = (String)request.getAttribute("proj_num");
-		System.out.println(proj_num);
-		int post_proj_num = Integer.parseInt(proj_num);
 		System.out.println(post_regr_id);
 		System.out.println(request.getAttribute("proj_num"));
 		//int post_proj_num = (Integer)request.getAttribute("proj_num");
 		System.out.println();
 		dto.setPost_regr_id(post_regr_id);
 		dto.setPost_modr_id(post_regr_id);
-		dto.setPost_proj_num(post_proj_num);
 		projTimelineService.insert(dto,request);
 		
 		return "redirect:/service/projectTimeline.do";
