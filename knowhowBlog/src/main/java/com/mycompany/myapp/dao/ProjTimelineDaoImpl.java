@@ -22,6 +22,6 @@ public class ProjTimelineDaoImpl implements ProjTimelineDao{
 
 	@Override
 	public void insert(ProjTimelineDto dto) {
-		session.insert("projTimelineBoard.insert", dto);
+		session.insert("projTimeline.insert", dto);
 	}
 }

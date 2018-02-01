@@ -34,7 +34,8 @@
       <h1 class="mt-4 mb-3">Project Timeline
         <!-- <small>PC</small> -->
       </h1>
- 
+ 	  
+ 	  <!-- Current location -->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="projectBoard.do">Project Board</a>
@@ -43,11 +44,15 @@
         	<li class="breadcrumb-item active">${tmp.post_num }</li>
         </c:forEach>
       </ol>
+      
+      <!-- Post Insert Btn -->
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
-      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='postInsertform.do?num=<%=proj_num%>'">글쓰기</button> 
+      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">글쓰기</button> 
       </div>	 
+      
       <br />
       <br />
+      
       <!-- Blog Post1 -->
       <c:forEach var="tmp" items="${list }">
 	      <div class="card mb-4">
@@ -70,7 +75,7 @@
       <!-- Blog Post1 fin. -->
       
       
-      <!-- Blog Post -->
+      <!-- Default Post -->
       <div class="card mb-4">
         <div class="card-body">
           <div class="row">

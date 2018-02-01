@@ -1,30 +1,38 @@
 package com.mycompany.myapp.dto;
 
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+@Repository
 public class ProjTimelineDto {
 	private int post_num, post_proj_num;
-	private String post_title, post_content, post_filePath, post_regr_id, post_reg_dtime, post_modr_id, post_mod_dtime;
-	private boolean disp_tf;
+	private String post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_modr_id, post_mod_dtime;
+	private boolean post_disp_tf;
 	private MultipartFile uploadImage;
+	private List<ProjPostTagDto> post_tag;
+	private String[] tags;
 	
 	public ProjTimelineDto() {}
 
-	public ProjTimelineDto(int post_num, int post_proj_num, String post_title, String post_content,
-			String post_filePath, String post_regr_id, String post_reg_dtime, String post_modr_id,
-			String post_mod_dtime, boolean disp_tf, MultipartFile uploadImage) {
+	public ProjTimelineDto(int post_num, int post_proj_num, String post_title, String post_filePath,
+			String post_content, String post_regr_id, String post_reg_dtime, String post_modr_id, String post_mod_dtime,
+			boolean post_disp_tf, MultipartFile uploadImage, List<ProjPostTagDto> post_tag, String[] tags) {
 		super();
 		this.post_num = post_num;
 		this.post_proj_num = post_proj_num;
 		this.post_title = post_title;
-		this.post_content = post_content;
 		this.post_filePath = post_filePath;
+		this.post_content = post_content;
 		this.post_regr_id = post_regr_id;
 		this.post_reg_dtime = post_reg_dtime;
 		this.post_modr_id = post_modr_id;
 		this.post_mod_dtime = post_mod_dtime;
-		this.disp_tf = disp_tf;
+		this.post_disp_tf = post_disp_tf;
 		this.uploadImage = uploadImage;
+		this.post_tag = post_tag;
+		this.tags = tags;
 	}
 
 	public int getPost_num() {
@@ -51,20 +59,20 @@ public class ProjTimelineDto {
 		this.post_title = post_title;
 	}
 
-	public String getPost_content() {
-		return post_content;
-	}
-
-	public void setPost_content(String post_content) {
-		this.post_content = post_content;
-	}
-
 	public String getPost_filePath() {
 		return post_filePath;
 	}
 
 	public void setPost_filePath(String post_filePath) {
 		this.post_filePath = post_filePath;
+	}
+
+	public String getPost_content() {
+		return post_content;
+	}
+
+	public void setPost_content(String post_content) {
+		this.post_content = post_content;
 	}
 
 	public String getPost_regr_id() {
@@ -99,12 +107,12 @@ public class ProjTimelineDto {
 		this.post_mod_dtime = post_mod_dtime;
 	}
 
-	public boolean isDisp_tf() {
-		return disp_tf;
+	public boolean isPost_disp_tf() {
+		return post_disp_tf;
 	}
 
-	public void setDisp_tf(boolean disp_tf) {
-		this.disp_tf = disp_tf;
+	public void setPost_disp_tf(boolean post_disp_tf) {
+		this.post_disp_tf = post_disp_tf;
 	}
 
 	public MultipartFile getUploadImage() {
@@ -114,6 +122,24 @@ public class ProjTimelineDto {
 	public void setUploadImage(MultipartFile uploadImage) {
 		this.uploadImage = uploadImage;
 	}
+
+	public List<ProjPostTagDto> getPost_tag() {
+		return post_tag;
+	}
+
+	public void setPost_tag(List<ProjPostTagDto> post_tag) {
+		this.post_tag = post_tag;
+	}
+
+	public String[] getTags() {
+		return tags;
+	}
+
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+
+
 
 	
 }

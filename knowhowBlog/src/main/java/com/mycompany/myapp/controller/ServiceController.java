@@ -105,28 +105,35 @@ public class ServiceController {
 	}	
 	
 	/* 포스트 등록 form */
-	@RequestMapping("/service/postInsertform.do")
+	@RequestMapping("/service/projPostInsertform.do")
 	public ModelAndView PostInsertform(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("list", list);
-		mView.setViewName("service/postInsertform");
+		mView.setViewName("service/projPostInsertform");
 		return mView;
 	}
 
 	/*	포스트 등록 */ 
-	@RequestMapping("/service/postInsert")
-	public String postInsert(@RequestParam int num, HttpSession session, HttpServletRequest request,
+	@RequestMapping("/service/projPostInsert")
+	public String postInsert(HttpSession session, HttpServletRequest request,
 			@ModelAttribute ProjTimelineDto dto){
+		System.out.println("오잉 들어옴");
 		String post_regr_id = (String)session.getAttribute("id");
-		int post_proj_num = (Integer)request.getAttribute("proj_num");
-		System.out.println("작성자:"+post_regr_id);
+		System.out.println(request.getAttribute("proj_num"));
+		String proj_num = (String)request.getAttribute("proj_num");
+		System.out.println(proj_num);
+		int post_proj_num = Integer.parseInt(proj_num);
+		System.out.println(post_regr_id);
+		System.out.println(request.getAttribute("proj_num"));
+		//int post_proj_num = (Integer)request.getAttribute("proj_num");
+		System.out.println();
 		dto.setPost_regr_id(post_regr_id);
-		//dto.setProj_disp_tf(false);
+		dto.setPost_modr_id(post_regr_id);
 		dto.setPost_proj_num(post_proj_num);
 		projTimelineService.insert(dto,request);
 		
-		return "redirect:/service/projectBoard.do";
+		return "redirect:/service/projectTimeline.do";
 	}
 	
 }
