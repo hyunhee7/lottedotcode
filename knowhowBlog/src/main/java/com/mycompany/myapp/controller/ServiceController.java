@@ -114,19 +114,19 @@ public class ServiceController {
 		return mView;
 	}
 
-/*	 포스트 등록 
+	/*	포스트 등록 */ 
 	@RequestMapping("/service/postInsert")
 	public String postInsert(@RequestParam int num, HttpSession session, HttpServletRequest request,
 			@ModelAttribute ProjTimelineDto dto){
-		String proj_writer = (String)session.getAttribute("id");
+		String post_regr_id = (String)session.getAttribute("id");
 		int post_proj_num = (Integer)request.getAttribute("proj_num");
-		System.out.println("작성자:"+proj_writer);
-		dto.setPost_writer(proj_writer);
+		System.out.println("작성자:"+post_regr_id);
+		dto.setPost_regr_id(post_regr_id);
 		//dto.setProj_disp_tf(false);
 		dto.setPost_proj_num(post_proj_num);
-		projboardService.insert(dto,request);
+		projTimelineService.insert(dto,request);
 		
 		return "redirect:/service/projectBoard.do";
-	}*/
+	}
 	
 }

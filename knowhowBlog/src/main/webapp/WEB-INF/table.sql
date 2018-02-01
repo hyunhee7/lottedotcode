@@ -7,11 +7,11 @@ DROP TABLE MEMBERS;
 
 /* member 테이블 생성 */
 CREATE TABLE MEMBERS (
-	mem_num		INT		    NOT NULL AUTO_INCREMENT 	PRIMARY KEY,	/* num */
-	id 			VARCHAR(50) NOT NULL, 									/* 아이디 */
-	pwd			VARCHAR(50) NOT NULL, 	 								/* 비밀번호 */
-	name		VARCHAR(50) NOT NULL,	 								/* 이름 */
-	imagePath	VARCHAR(50)					 							/* 이미지 */
+	mem_num			INT		    NOT NULL AUTO_INCREMENT 	PRIMARY KEY,	/* num */
+	id 				VARCHAR(50) NOT NULL, 									/* 아이디 */
+	pwd				VARCHAR(50) NOT NULL, 	 								/* 비밀번호 */
+	name			VARCHAR(50) NOT NULL,	 								/* 이름 */
+	imagePath		VARCHAR(50)						 						/* 이미지 */
 )
 
 /* member 컬럼 생성 */
@@ -48,10 +48,12 @@ select * from proj_board;
 CREATE TABLE PROJ_POST_BOARD (
 	post_num			INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
 	post_title  		VARCHAR(50)		NOT NULL DEFAULT "포스팅",
-	post_writer 		VARCHAR(50) 	NOT NULL,
 	post_filePath		VARCHAR(50),
 	post_content		VARCHAR(1500),
-	post_date			DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	post_regr_id		VARCHAR(50)		NOT NULL,	
+	post_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	post_modr_id		VARCHAR(50)		NOT NULL,	
+	post_mod_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,	
 	post_disp_tf		BOOLEAN			NOT NULL DEFAULT false,
 	post_proj_num		INT,
 	INDEX(post_proj_num),
@@ -68,8 +70,18 @@ CREATE TABLE PROJ_POST_TAG (
 
 
 /* POST 테이블 삭제 */
-DROP TABLE POST_BOARD;	
+DROP TABLE PROJ_POST_BOARD;
+/* TAG 테이블 삭제 */
+DROP TABLE PROJ_POST_TAG;	
 
 /* POST 컬럼 생성 */
-INSERT INTO PROJ_POST_BOARD (post_title, post_writer, post_content, post_disp_tf, post_proj_num)
-				VALUES ('hello', 'hyunhi7', 'hello this is code', false, 1);
+INSERT INTO PROJ_POST_BOARD (post_title, post_content, post_regr_id, post_modr_id, post_disp_tf, post_proj_num)
+				VALUES ('hello', 'hello this is code','hyunhi7', 'hyunhi7',false, 1);
+				
+INSERT INTO POSTING (post_title, post_filePath, post_content, post_regr_id, post_modr_id, post_proj_num, tag_name, tag_post_num)
+				SELECT
+				p1.post_title, p1.post_filePath, p1.post_content, p1.post_regr_id, p1.post_modr_id, p1.post_proj_num,
+				p2.tag_num, p2.tag_post_num
+		FROM PROJ_POST_BOARD p1
+		JOIN PROJ_POST_TAG p2 on p2.tag_post_num = p1.post_num
+		

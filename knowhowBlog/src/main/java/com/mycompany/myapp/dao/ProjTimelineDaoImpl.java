@@ -19,4 +19,9 @@ public class ProjTimelineDaoImpl implements ProjTimelineDao{
 		List<ProjTimelineDto> list = session.selectList("projTimeline.getList", num);
 		return list;
 	}
+
+	@Override
+	public void insert(ProjTimelineDto dto) {
+		session.insert("projTimelineBoard.insert", dto);
+	}
 }

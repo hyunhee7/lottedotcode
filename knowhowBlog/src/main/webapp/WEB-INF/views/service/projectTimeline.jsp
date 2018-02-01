@@ -62,8 +62,8 @@
 	          </div>
 	        </div>
 	        <div class="card-footer text-muted">
-	          Posted on ${tmp.post_date } by
-	          <a href="#">${tmp.post_writer }</a>
+	          Posted on ${tmp.post_reg_dtime } by
+	          <a href="#">${tmp.post_regr_id }</a>
 	        </div>
 	      </div>
       </c:forEach>
