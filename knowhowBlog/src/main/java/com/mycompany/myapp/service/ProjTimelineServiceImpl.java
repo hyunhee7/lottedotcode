@@ -20,8 +20,6 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	
 	@Autowired
 	private ProjTimelineDao projTimelineDao;
-	@Autowired
-	private PostTagDao postTagDao;
 	
 	@Override
 	public ModelAndView list(int num) {
@@ -66,24 +64,10 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
             }        	
             dto.setPost_filePath(saveFileName);
         }
-        
-        String[] tags = dto.getTags();
-        int post_num = (Integer)dto.getPost_num();
-        ProjPostTagDto tagDto = new ProjPostTagDto();
-
-        for(int i=0;i<tags.length;i++) {
-            tagDto.setTag_post_num(post_num);
-            tagDto.setTag_name(tags[i]);
-        	postTagDao.insert(tagDto);
-        }
-        
-       
-        //FileDto 객체에 추가 정보를 담는다.
-
-        //FileDao 객체를 이용해서 DB 에 저장하기		
 		
 		projTimelineDao.insert(dto);		
 		
+
 	}
 	
 }

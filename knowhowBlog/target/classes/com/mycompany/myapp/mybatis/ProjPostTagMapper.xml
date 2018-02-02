@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="projPostTag">
 	<insert id="insert" parameterType="ProjPostTagDto"> 
-		INSERT INTO proj_post_tag (tag_name, tag_post_num) 
-		VALUES(#{tag_name},#{tag_post_num}) 
+		INSERT INTO proj_post_tag (tag_name, tag_post_num, tag_proj_num) 
+		VALUES(#{tag_name},#{tag_post_num}, #{tag_proj_num}) 
 	</insert>
 </mapper>
 

@@ -8,8 +8,8 @@
 		ORDER BY post_num DESC 
 	</select>
  	<insert id="insert" parameterType="projTimelineDto"> 
-		INSERT INTO proj_post_board (post_title, post_filePath, post_content, regr_id, modr_id) 
-		VALUES(#{post_title},#{post_filePath},#{post_content},#{proj_imagePath}, #{regr_id}, #{modr_id}) 
+		INSERT INTO proj_post_board (post_title, post_filePath, post_content, post_regr_id, post_modr_id, post_proj_num) 
+		VALUES(#{post_title},#{post_filePath},#{post_content}, #{post_regr_id}, #{post_modr_id}, #{post_proj_num}) 
 	</insert>	
 		
 

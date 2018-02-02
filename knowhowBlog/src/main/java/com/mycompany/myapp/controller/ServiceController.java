@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 import com.mycompany.myapp.service.ProjBoardService;
+import com.mycompany.myapp.service.ProjPostTagService;
 import com.mycompany.myapp.service.ProjTimelineService;
 import com.mycompany.myapp.service.ProjTimelineServiceImpl;
 
@@ -28,6 +29,8 @@ public class ServiceController {
 	private ProjBoardService projboardService;
 	@Autowired
 	private ProjTimelineService projTimelineService;
+	@Autowired
+	private ProjPostTagService projPostTagService;
 	
 	@RequestMapping("/service/main.do")
 	public ModelAndView login(){
@@ -120,15 +123,27 @@ public class ServiceController {
 			@ModelAttribute ProjTimelineDto dto){
 		System.out.println("오잉 들어옴");
 		String post_regr_id = (String)session.getAttribute("id");
-		System.out.println(post_regr_id);
-		System.out.println(request.getAttribute("proj_num"));
+		System.out.println("등록자:"+post_regr_id);
+		System.out.println(dto.getPost_proj_num()); 
 		//int post_proj_num = (Integer)request.getAttribute("proj_num");
-		System.out.println();
+		int post_proj_num = dto.getPost_proj_num();
+		int post_num = dto.getPost_num();
+		dto.setPost_proj_num(post_proj_num);
+		System.out.println("프로젝트넘:"+dto.getPost_proj_num());		
 		dto.setPost_regr_id(post_regr_id);
 		dto.setPost_modr_id(post_regr_id);
-		projTimelineService.insert(dto,request);
+		dto.setPost_num(post_num);
 		
-		return "redirect:/service/projectTimeline.do";
+		try {
+			projTimelineService.insert(dto,request);
+		}catch(Exception ex){
+			
+		}finally {
+			projPostTagService.insert(dto);
+		}
+		
+		
+		return "redirect:/service/projectTimeline.do?num="+post_proj_num;
 	}
 	
 }

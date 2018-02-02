@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String proj_num = request.getParameter("num");
+<%  String proj_num = request.getParameter("num");
+	String post_num = request.getParameter("post_num");
 	request.setAttribute("proj_num", Integer.parseInt(proj_num));
-	System.out.println(request.getAttribute("proj_num"));
+	request.setAttribute("post_num", post_num);
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -44,11 +46,14 @@
     <!-- Navigation -->
     <jsp:include page="navigationBar.jsp"></jsp:include>
 
-    <!-- Page Content --><!-- submit폼안에 정보넣어보기!! -->
+    <!-- Page Content -->
     <div class="container">
     	<h1 class="my-4 col-xs-12">Post Write</h1>
 		<form action="projPostInsert.do" method="post" enctype="multipart/form-data" id="postForm">
-		  <input type=hidden name="post_proj_num" value="<%=proj_num%>"> 
+		  <div class="form-group">
+		  	<input type=hidden name="post_proj_num" value="<%=proj_num%>"> 
+		  	<input type=hidden name="post_num" value="<%=post_num%>"> 
+		  </div>
 		  <div class="form-group">
 		    <input type="text" class="form-control" id="post_title" name="post_title" placeholder="포스트 명">
 		  </div>

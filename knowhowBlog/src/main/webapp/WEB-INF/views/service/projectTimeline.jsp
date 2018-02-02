@@ -2,7 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% String proj_num = (String)request.getParameter("num"); %>
+<%
+	String proj_num = (String)request.getParameter("num"); 
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,14 +42,16 @@
         <li class="breadcrumb-item">
           <a href="projectBoard.do">Project Board</a>
         </li>
+        
         <c:forEach var="tmp" items="${list }">
-        	<li class="breadcrumb-item active">${tmp.post_num }</li>
+		   <li class="breadcrumb-item active">${tmp.post_num }</li>
+		   <c:set var="count" value="${count+1}" /> 
         </c:forEach>
       </ol>
-      
+
       <!-- Post Insert Btn -->
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
-      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">글쓰기</button> 
+      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>&post_num=${count+1 }'">글쓰기</button> 
       </div>	 
       
       <br />
