@@ -21,6 +21,10 @@
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+ 	<!-- Editor -->
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	
     <style>
     	.menu1 { font-weight : bold;}
     </style>    
@@ -65,7 +69,7 @@
 	
 	            <div class="col-lg-12">
 	              <h2 class="card-title">${tmp.post_title }</h2>
-	              <p class="card-text">${tmp.post_content }</p>
+	              <p class="card-text" id="post_content">${tmp.post_content }</p>
 	              <a href="projectDetail.do" class="btn btn-primary">Read More &rarr;</a>
 	            </div>
 	          </div>
@@ -124,5 +128,11 @@
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+	<script>
+		var simplemde = new SimpleMDE({		
+		});
+		
+		simplemde.codemirror.ondoc.markText();
+	</script>
 </body>
 </html>

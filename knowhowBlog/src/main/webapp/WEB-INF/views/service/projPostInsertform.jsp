@@ -94,6 +94,7 @@
     <script src="${pageContext.request.contextPath }/resources/js/tagsinput.js"></script>  
 	<script>
 		var simplemde = new SimpleMDE();
+		simplemde.value("이곳에 `code`를 입력해보세요!");
 	</script>
 </body>
 </html>
