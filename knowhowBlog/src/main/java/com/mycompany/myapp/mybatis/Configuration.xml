@@ -5,11 +5,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mycompany.myapp.dto.MembersDto" alias="membersDto"/>
+		<typeAlias type="com.mycompany.myapp.dto.ProjBoardDto" alias="ProjBoardDto"/>
+		<typeAlias type="com.mycompany.myapp.dto.ProjTimelineDto" alias="ProjTimelineDto"/>
+		<typeAlias type="com.mycompany.myapp.dto.ProjPostTagDto" alias="ProjPostTagDto"/>
 	</typeAliases>
 	
 	<!-- sql 문을 정의하고 있는 xml 문서 -->
 	<mappers>		
 		<mapper resource="com/mycompany/myapp/mybatis/MembersMapper.xml"/>
+		<mapper resource="com/mycompany/myapp/mybatis/ProjBoardMapper.xml"/>
+		<mapper resource="com/mycompany/myapp/mybatis/ProjTimelineMapper.xml"/>
+		<mapper resource="com/mycompany/myapp/mybatis/ProjPostTagMapper.xml"/>
 	</mappers>	
 </configuration>
 

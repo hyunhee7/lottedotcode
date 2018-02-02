@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projBoard">
+	<insert id="insert" parameterType="projBoardDto"> 
+		INSERT INTO proj_board (proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf) 
+		VALUES(#{proj_title},#{proj_writer},#{proj_content},#{proj_imagePath}, now(), #{proj_disp_tf}) 
+	</insert>
+	<select id="getList" resultType="projBoardDto"> 
+		SELECT proj_num, proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf 
+		FROM proj_board 
+		ORDER BY proj_num DESC 
+	</select>
+</mapper>
+
+

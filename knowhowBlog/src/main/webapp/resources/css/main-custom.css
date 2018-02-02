@@ -12,3 +12,29 @@
 	font-family: 'Ubuntu', sans-serif;
 	font-size : 26px;
 }
+.mini-button-white {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #518ddd;
+  background-color: white;
+  display: inline;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: 100px;
+  border: solid 1px #518ddd; 
+}
+
+.writeBtn-move {
+	display : right;
+}
+
+.centerBox {
+	text-align: center;
+}
+.centered {
+	display: table; 
+	margin-left: auto; 
+	margin-right: auto; 
+	display: inline-block;
+}

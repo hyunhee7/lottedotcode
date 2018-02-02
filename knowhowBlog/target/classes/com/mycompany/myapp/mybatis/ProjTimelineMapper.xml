@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projTimeline">
+	<select id="getList" parameterType="int" resultType="projTimelineDto"> 
+		SELECT post_num, post_title, post_content, post_regr_id, post_reg_dtime, post_disp_tf 
+		FROM proj_post_board 
+		WHERE post_proj_num=#{num} 
+		ORDER BY post_num DESC 
+	</select>
+ 	<insert id="insert" parameterType="projTimelineDto"> 
+		INSERT INTO proj_post_board (post_title, post_filePath, post_content, post_regr_id, post_modr_id, post_proj_num) 
+		VALUES(#{post_title},#{post_filePath},#{post_content}, #{post_regr_id}, #{post_modr_id}, #{post_proj_num}) 
+	</insert>	
+		
+
+
+</mapper>
+
+
