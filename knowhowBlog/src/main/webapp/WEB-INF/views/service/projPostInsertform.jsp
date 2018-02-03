@@ -63,8 +63,8 @@
 		  </div>
 		  <br /><br />
 		  <div class="form-group">
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" style="margin-top:17px;" name="post_content"
-		    placeholder="포스트 부가 설명" ></textarea>
+		    <textarea class="form-control" id="post_code_content" rows="13" style="margin-top:17px;" name="post_content"
+		    placeholder="포스트 내용" ></textarea>
 		  </div>
           <div class="form-group bs-example">
             <input type="text" value="java,spring,javascript" data-role="tagsinput" name="tags" />
@@ -93,7 +93,11 @@
     <script src="${pageContext.request.contextPath }/resources/assets/app_bs3.js"></script>    
     <script src="${pageContext.request.contextPath }/resources/js/tagsinput.js"></script>  
 	<script>
-		var simplemde = new SimpleMDE();
+		var simplemde = new SimpleMDE({
+/* 			previewRender: function(plainText) {
+				return customMarkdownParser(plainText); // Returns HTML from a custom parser
+			}	 */		
+		});
 		simplemde.value("이곳에 `code`를 입력해보세요!");
 	</script>
 </body>

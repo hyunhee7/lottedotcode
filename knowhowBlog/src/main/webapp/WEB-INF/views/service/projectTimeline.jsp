@@ -22,11 +22,17 @@
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
- 	<!-- Editor -->
+	<link href="${pageContext.request.contextPath }/resources/css/prism.css" rel="stylesheet">
+
+	<!-- Editor -->
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/prism.js"></script>
     <style>
     	.menu1 { font-weight : bold;}
+    	.CodeMirror, .CodeMirror-scroll {
+			min-height: 50px;
+		}
     </style>    
 </head>
 <body>
@@ -69,7 +75,13 @@
 	
 	            <div class="col-lg-12">
 	              <h2 class="card-title">${tmp.post_title }</h2>
-	              <p class="card-text" id="post_content">${tmp.post_content }</p>
+
+
+	              <div class="">
+	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+		   			 >${tmp.post_content }</textarea>
+	              </div>
+	              
 	              <a href="projectDetail.do" class="btn btn-primary">Read More &rarr;</a>
 	            </div>
 	          </div>
@@ -127,12 +139,21 @@
     <!-- Bootstrap core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<!-- 	<script>
+		document.getElementById('post_content').innerHTML = marked($("#post_content").val());
+	</script> -->
 	<script>
-		var simplemde = new SimpleMDE({		
-		});
-		
-		simplemde.codemirror.ondoc.markText();
+
+	
+	$('textarea').each(function() {
+	    var simplemde = new SimpleMDE({
+	        element: this,
+	        toolbar: false,
+			tabSize: 1
+	    });
+	    simplemde.togglePreview();
+	})
+	
 	</script>
 </body>
 </html>
