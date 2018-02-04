@@ -22,11 +22,15 @@
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
- 	<!-- Editor -->
+
+	<!-- Editor -->
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
     <style>
     	.menu1 { font-weight : bold;}
+    	.CodeMirror, .CodeMirror-scroll {
+			min-height: 50px;
+		}
     </style>    
 </head>
 <body>
@@ -46,16 +50,14 @@
         <li class="breadcrumb-item">
           <a href="projectBoard.do">Project Board</a>
         </li>
-        
-        <c:forEach var="tmp" items="${list }">
-		   <li class="breadcrumb-item active">${tmp.post_num }</li>
-		   <c:set var="count" value="${count+1}" /> 
-        </c:forEach>
+
+		   <li class="breadcrumb-item active">yet</li>  
+
       </ol>
 
       <!-- Post Insert Btn -->
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
-      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>&post_num=${count+1 }'">글쓰기</button> 
+      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">글쓰기</button> 
       </div>	 
       
       <br />
@@ -69,8 +71,14 @@
 	
 	            <div class="col-lg-12">
 	              <h2 class="card-title">${tmp.post_title }</h2>
-	              <p class="card-text" id="post_content">${tmp.post_content }</p>
-	              <a href="projectDetail.do" class="btn btn-primary">Read More &rarr;</a>
+
+
+	              <div class="">
+	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+		   			 >${tmp.post_content }</textarea>
+	              </div>
+	              
+	              <a href="projPostDetail.do?proj_num=${tmp.post_proj_num }&post_num=${tmp.post_num}" class="btn btn-primary">Read More &rarr;</a>
 	            </div>
 	          </div>
 	        </div>
@@ -127,12 +135,21 @@
     <!-- Bootstrap core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<!-- 	<script>
+		document.getElementById('post_content').innerHTML = marked($("#post_content").val());
+	</script> -->
 	<script>
-		var simplemde = new SimpleMDE({		
-		});
-		
-		simplemde.codemirror.ondoc.markText();
+
+	
+	$('textarea').each(function() {
+	    var simplemde = new SimpleMDE({
+	        element: this,
+	        toolbar: false,
+			tabSize: 1
+	    });
+	    simplemde.togglePreview();
+	})
+	
 	</script>
 </body>
 </html>

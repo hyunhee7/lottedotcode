@@ -30,11 +30,11 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	}
 
 	@Override
-	public void insert(ProjTimelineDto dto, HttpServletRequest request) {
+	public int insert(ProjTimelineDto dto, HttpServletRequest request) {
         //파일을 저장할 폴더의 절대 경로를 얻어온다.
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
         System.out.println(realPath);
-        
+        int post_num;
         //MultipartFile 객체의 참조값 얻어오기
         //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
         if( dto.getUploadImage().isEmpty() ) {
@@ -63,11 +63,39 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
                 e.printStackTrace();
             }        	
             dto.setPost_filePath(saveFileName);
+    		dto.setPost_fileOrgName(orgFileName);
+    		dto.setPost_fileSize(fileSize);            
         }
-		
-		projTimelineDao.insert(dto);		
-		
+        
 
+		post_num=projTimelineDao.insert(dto);
+		System.out.println("post_num:"+post_num);
+
+		return post_num;
+	}
+	
+	@Override
+	public ModelAndView detail(ProjTimelineDto dtoNum) {
+
+		ProjTimelineDto dto = projTimelineDao.getDetail(dtoNum);
+		List<ProjPostTagDto> tags = projTimelineDao.getTags(dtoNum);
+		dto.setPost_tag(tags);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", dto);
+		return mView;
+	}	
+
+	@Override
+	public ModelAndView getFile(ProjTimelineDto dtoNum) {
+
+		//다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
+		ProjTimelineDto dto=projTimelineDao.getFile(dtoNum);
+		//ModelAndView 객체에 담아서
+		System.out.println(dto.getPost_fileOrgName());
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("dto",dto);
+		//리턴해준다.
+		return mView;
 	}
 	
 }

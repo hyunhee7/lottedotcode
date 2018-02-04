@@ -8,6 +8,8 @@ import com.mycompany.myapp.dto.ProjTimelineDto;
 
 
 public interface ProjTimelineService {
-	public void insert(ProjTimelineDto dto,HttpServletRequest request);
+	public int insert(ProjTimelineDto dto,HttpServletRequest request);
 	ModelAndView list(int num);
+	public ModelAndView detail(ProjTimelineDto dto);
+	public ModelAndView getFile(ProjTimelineDto dtoNum);	
 }

@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%  String proj_num = request.getParameter("num");
-	String post_num = request.getParameter("post_num");
+<%  
+	String proj_num = request.getParameter("num");
 	request.setAttribute("proj_num", Integer.parseInt(proj_num));
-	request.setAttribute("post_num", post_num);
-
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -52,7 +50,6 @@
 		<form action="projPostInsert.do" method="post" enctype="multipart/form-data" id="postForm">
 		  <div class="form-group">
 		  	<input type=hidden name="post_proj_num" value="<%=proj_num%>"> 
-		  	<input type=hidden name="post_num" value="<%=post_num%>"> 
 		  </div>
 		  <div class="form-group">
 		    <input type="text" class="form-control" id="post_title" name="post_title" placeholder="포스트 명">
@@ -63,8 +60,8 @@
 		  </div>
 		  <br /><br />
 		  <div class="form-group">
-		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" style="margin-top:17px;" name="post_content"
-		    placeholder="포스트 부가 설명" ></textarea>
+		    <textarea class="form-control" id="post_code_content" rows="13" style="margin-top:17px;" name="post_content"
+		    placeholder="포스트 내용" ></textarea>
 		  </div>
           <div class="form-group bs-example">
             <input type="text" value="java,spring,javascript" data-role="tagsinput" name="tags" />
@@ -93,7 +90,11 @@
     <script src="${pageContext.request.contextPath }/resources/assets/app_bs3.js"></script>    
     <script src="${pageContext.request.contextPath }/resources/js/tagsinput.js"></script>  
 	<script>
-		var simplemde = new SimpleMDE();
+		var simplemde = new SimpleMDE({
+/* 			previewRender: function(plainText) {
+				return customMarkdownParser(plainText); // Returns HTML from a custom parser
+			}	 */		
+		});
 		simplemde.value("이곳에 `code`를 입력해보세요!");
 	</script>
 </body>
