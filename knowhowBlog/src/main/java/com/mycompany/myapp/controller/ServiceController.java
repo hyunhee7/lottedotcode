@@ -126,8 +126,9 @@ public class ServiceController {
 		dto.setPost_modr_id(post_regr_id);
 		
 		try {
-			int post_num = projTimelineService.insert(dto,request);
+			int post_num = projTimelineService.insert(dto, request);
 			dto.setPost_num(post_num);
+			System.out.println("post_num직후:"+dto.getPost_num());
 		}catch(Exception ex){
 			
 		}finally {
@@ -155,6 +156,23 @@ public class ServiceController {
 		ModelAndView mView=projTimelineService.detail(dtoNum);
 		mView.setViewName("service/projPostDetail");
 		return mView;
+	}
+	
+	@RequestMapping("/service/FileDownload")
+	public ModelAndView download(HttpServletRequest request){
+		//다운로드할 파일의 정보를 ModelAndView 객체에 담아서 리턴 받는다.
+    	int post_proj_num=Integer.parseInt(request.getParameter("proj_num"));
+    	int post_num=Integer.parseInt(request.getParameter("post_num"));
+		ProjTimelineDto dtoNum = new ProjTimelineDto();
+		dtoNum.setPost_proj_num(post_proj_num);
+		dtoNum.setPost_num(post_num);
+		ModelAndView mView=projTimelineService.getFile(dtoNum);
+		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
+		System.out.println("fileDoawnload여긴 옴.");
+		mView.setViewName("fileDownView");
+		//리턴해준다.
+		return mView;
+		
 	}	
 	
 }

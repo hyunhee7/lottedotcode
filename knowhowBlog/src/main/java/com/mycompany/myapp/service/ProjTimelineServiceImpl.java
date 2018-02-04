@@ -63,6 +63,8 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
                 e.printStackTrace();
             }        	
             dto.setPost_filePath(saveFileName);
+    		dto.setPost_fileOrgName(orgFileName);
+    		dto.setPost_fileSize(fileSize);            
         }
         
 
@@ -70,10 +72,6 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 		System.out.println("post_num:"+post_num);
 
 		return post_num;
-		
-		
-	
-
 	}
 	
 	@Override
@@ -86,5 +84,18 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 		mView.addObject("dto", dto);
 		return mView;
 	}	
+
+	@Override
+	public ModelAndView getFile(ProjTimelineDto dtoNum) {
+
+		//다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
+		ProjTimelineDto dto=projTimelineDao.getFile(dtoNum);
+		//ModelAndView 객체에 담아서
+		System.out.println(dto.getPost_fileOrgName());
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("dto",dto);
+		//리턴해준다.
+		return mView;
+	}
 	
 }

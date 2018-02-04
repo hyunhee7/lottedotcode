@@ -11,4 +11,5 @@ public interface ProjTimelineDao {
 	public List<ProjTimelineDto> getList(int num);
 	public ProjTimelineDto getDetail(ProjTimelineDto dto);
 	public List<ProjPostTagDto> getTags(ProjTimelineDto tagDto);
+	public ProjTimelineDto getFile(ProjTimelineDto dtoNum);
 }

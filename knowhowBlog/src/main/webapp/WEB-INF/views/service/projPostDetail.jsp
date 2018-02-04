@@ -25,6 +25,9 @@
     <!-- Editor -->
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
+   	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+   	
     <style>
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
@@ -67,6 +70,21 @@
           <p>Posted on ${dto.post_reg_dtime}</p>
 
           <hr>
+          <c:choose>
+	          <c:when test="${!empty dto.post_filePath}">
+					<div style="border:1px solid #e9e9e9">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> <a href="FileDownload.do?proj_num=${dto.post_proj_num}&post_num=${dto.post_num}">${dto.post_filePath}</a></p>
+					</div> 
+					<br />         
+	          </c:when> 
+	          <c:when test="${empty dto.post_filePath}">
+					<div style="display:none">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> ${dto.post_filePath}</p>
+					</div>          
+	          </c:when> 	                   
+          </c:choose>
+          
+		  
 
           <!-- Post Content -->
           <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"

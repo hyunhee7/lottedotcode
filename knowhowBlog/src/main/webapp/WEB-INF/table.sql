@@ -49,6 +49,8 @@ CREATE TABLE PROJ_POST_BOARD (
 	post_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	post_title  		VARCHAR(50)		NOT NULL DEFAULT "포스팅",
 	post_filePath		VARCHAR(50),
+	post_fileOrgName	VARCHAR(100),
+	post_fileSize		FLOAT, 
 	post_content		VARCHAR(2000),
 	post_regr_id		VARCHAR(50)		NOT NULL,	
 	post_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,

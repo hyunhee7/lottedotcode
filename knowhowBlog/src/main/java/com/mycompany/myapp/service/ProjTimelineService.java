@@ -11,4 +11,5 @@ public interface ProjTimelineService {
 	public int insert(ProjTimelineDto dto,HttpServletRequest request);
 	ModelAndView list(int num);
 	public ModelAndView detail(ProjTimelineDto dto);
+	public ModelAndView getFile(ProjTimelineDto dtoNum);	
 }
