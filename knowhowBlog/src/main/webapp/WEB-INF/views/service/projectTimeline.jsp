@@ -22,12 +22,10 @@
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-	<link href="${pageContext.request.contextPath }/resources/css/prism.css" rel="stylesheet">
 
 	<!-- Editor -->
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/prism.js"></script>
     <style>
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
@@ -52,16 +50,14 @@
         <li class="breadcrumb-item">
           <a href="projectBoard.do">Project Board</a>
         </li>
-        
-        <c:forEach var="tmp" items="${list }">
-		   <li class="breadcrumb-item active">${tmp.post_num }</li>
-		   <c:set var="count" value="${count+1}" /> 
-        </c:forEach>
+
+		   <li class="breadcrumb-item active">yet</li>  
+
       </ol>
 
       <!-- Post Insert Btn -->
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
-      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>&post_num=${count+1 }'">글쓰기</button> 
+      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">글쓰기</button> 
       </div>	 
       
       <br />
@@ -82,7 +78,7 @@
 		   			 >${tmp.post_content }</textarea>
 	              </div>
 	              
-	              <a href="projectDetail.do" class="btn btn-primary">Read More &rarr;</a>
+	              <a href="projPostDetail.do?proj_num=${tmp.post_proj_num }&post_num=${tmp.post_num}" class="btn btn-primary">Read More &rarr;</a>
 	            </div>
 	          </div>
 	        </div>

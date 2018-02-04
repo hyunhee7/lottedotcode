@@ -46,7 +46,7 @@ select * from proj_board;
 
 /* POST 테이블 생성 */
 CREATE TABLE PROJ_POST_BOARD (
-	post_num			INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
+	post_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	post_title  		VARCHAR(50)		NOT NULL DEFAULT "포스팅",
 	post_filePath		VARCHAR(50),
 	post_content		VARCHAR(2000),

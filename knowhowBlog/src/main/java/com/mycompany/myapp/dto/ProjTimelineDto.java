@@ -14,13 +14,14 @@ public class ProjTimelineDto {
 	private List<ProjPostTagDto> post_tag;
 	private String[] tags;
 	private int tmpPostNum;
+	private int lastPostNum;
 	
 	public ProjTimelineDto() {}
 
 	public ProjTimelineDto(int post_num, int post_proj_num, String post_title, String post_filePath,
 			String post_content, String post_regr_id, String post_reg_dtime, String post_modr_id, String post_mod_dtime,
 			boolean post_disp_tf, MultipartFile uploadImage, List<ProjPostTagDto> post_tag, String[] tags,
-			int tmpPostNum) {
+			int tmpPostNum, int lastPostNum) {
 		super();
 		this.post_num = post_num;
 		this.post_proj_num = post_proj_num;
@@ -36,6 +37,7 @@ public class ProjTimelineDto {
 		this.post_tag = post_tag;
 		this.tags = tags;
 		this.tmpPostNum = tmpPostNum;
+		this.lastPostNum = lastPostNum;
 	}
 
 	public int getPost_num() {
@@ -149,6 +151,16 @@ public class ProjTimelineDto {
 	public void setTmpPostNum(int tmpPostNum) {
 		this.tmpPostNum = tmpPostNum;
 	}
+
+	public int getLastPostNum() {
+		return lastPostNum;
+	}
+
+	public void setLastPostNum(int lastPostNum) {
+		this.lastPostNum = lastPostNum;
+	}
+
+
 
 	
 }
