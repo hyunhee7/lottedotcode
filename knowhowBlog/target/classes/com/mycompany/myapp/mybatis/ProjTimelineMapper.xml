@@ -16,11 +16,7 @@
 		FROM proj_post_board
 		WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
 	</select>		
-	<select id="getTags" resultType="projTimelineDto" parameterType="projTimelineDto"> 
-		SELECT tag_num, tag_name, tag_proj_num, tag_post_num
-		FROM proj_post_tag
-		WHERE tag_proj_num=#{post_proj_num} AND tag_post_num=#{post_num}
-	</select>	
+
 
 </mapper>
 

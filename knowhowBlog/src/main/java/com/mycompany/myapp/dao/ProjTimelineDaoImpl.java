@@ -37,7 +37,7 @@ public class ProjTimelineDaoImpl implements ProjTimelineDao{
 	
 	@Override
 	public List<ProjPostTagDto> getTags(ProjTimelineDto dtoNum){
-		List<ProjPostTagDto> tagDto = session.selectList("projTimeline.getTags", dtoNum);
+		List<ProjPostTagDto> tagDto = session.selectList("projPostTag.getTags", dtoNum);
 		return tagDto;
 	}	
 }
