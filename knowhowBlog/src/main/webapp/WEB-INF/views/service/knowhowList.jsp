@@ -30,8 +30,15 @@
       <h1 class="my-4">Develop Knowhow</h1>
       
       <br />
+      
+      <!-- Post Insert Btn -->
+      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
+      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='knowhowInsertform.do'">글쓰기</button> 
+      </div>	      
       <!-- Marketing Icons Section -->
       <div class="row">
+      
+      	<!-- 카드1 -->
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
             <h4 class="card-header">Card Title</h4>
@@ -44,30 +51,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
+        <!-- 카드1 fin. -->
+        
       </div>
       <!-- /.row -->
 

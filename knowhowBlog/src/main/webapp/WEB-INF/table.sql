@@ -89,5 +89,32 @@ INSERT INTO PROJ_POST_BOARD (post_title, post_content, post_regr_id, post_modr_i
 		FROM PROJ_POST_BOARD p1
 		JOIN PROJ_POST_TAG p2 on p2.tag_post_num = p1.post_num*/
 
+/* knowhow 테이블  */
+CREATE TABLE KH_BOARD (
+	kh_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	kh_title  		VARCHAR(50)		NOT NULL DEFAULT "노하우",
+	kh_filePath		VARCHAR(50),
+	kh_fileOrgName	VARCHAR(100),
+	kh_fileSize		FLOAT, 
+	kh_content		VARCHAR(2000),
+	kh_regr_id		VARCHAR(50)		NOT NULL,	
+	kh_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	kh_modr_id		VARCHAR(50)		NOT NULL,	
+	kh_mod_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,	
+	kh_disp_tf		BOOLEAN			NOT NULL DEFAULT false
+) ENGINE = InnoDB;
+	
+/* knowhow 태그 테이블 */
+CREATE TABLE KH_TAG (
+	tag_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
+	tag_name			VARCHAR(50)		NOT NULL,
+	tag_kh_num		INT,
+	INDEX(tag_num),
+	FOREIGN KEY(tag_kh_num) REFERENCES KH_BOARD(kh_num) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
 
-		
+
+/* knowhow 테이블 삭제 */
+DROP TABLE KH_BOARD;
+/* knowhow TAG 테이블 삭제 */
+DROP TABLE KH_TAG;	

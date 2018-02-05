@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="knowhow">
+	<select id="getList" parameterType="int" resultType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board 
+		ORDER BY post_num DESC 
+	</select>
+ 	<insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
+		INSERT INTO kh_board (kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_modr_id) 
+		VALUES(#{kh_title}, #{kh_filePath}, #{kh_fileOrgName}, #{kh_fileSize}, #{kh_content}, #{kh_regr_id}, #{kh_modr_id}) 
+	</insert>	
+	<select id="getDetail" resultType="knowhowDto" parameterType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board
+		WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
+	</select>		
+	<select id="getFile" resultType="knowhowDto" parameterType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM knowhow_board
+		WHERE kh_num=#{kh_num}
+	</select>	
+
+</mapper>
+
+
