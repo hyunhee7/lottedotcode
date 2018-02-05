@@ -5,26 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-@Repository
+
 public class KnowhowDto {
-	private int kh_num, post_proj_num;
+	private int kh_num;
 	private String kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_modr_id, kh_mod_dtime;
 	private boolean kh_disp_tf;
 	private MultipartFile uploadImage;
-	private List<ProjPostTagDto> post_tag;
+	private List<KnowhowTagDto> post_tag;
 	private String[] tags;
 	private String kh_fileOrgName;
 	private long kh_fileSize;	
 	
 	public KnowhowDto() {}
 
-	public KnowhowDto(int kh_num, int post_proj_num, String kh_title, String kh_filePath, String kh_content,
-			String kh_regr_id, String kh_reg_dtime, String kh_modr_id, String kh_mod_dtime, boolean kh_disp_tf,
-			MultipartFile uploadImage, List<ProjPostTagDto> post_tag, String[] tags, String kh_fileOrgName,
-			long kh_fileSize) {
+	public KnowhowDto(int kh_num, String kh_title, String kh_filePath, String kh_content, String kh_regr_id,
+			String kh_reg_dtime, String kh_modr_id, String kh_mod_dtime, boolean kh_disp_tf, MultipartFile uploadImage,
+			List<KnowhowTagDto> post_tag, String[] tags, String kh_fileOrgName, long kh_fileSize) {
 		super();
 		this.kh_num = kh_num;
-		this.post_proj_num = post_proj_num;
 		this.kh_title = kh_title;
 		this.kh_filePath = kh_filePath;
 		this.kh_content = kh_content;
@@ -46,14 +44,6 @@ public class KnowhowDto {
 
 	public void setKh_num(int kh_num) {
 		this.kh_num = kh_num;
-	}
-
-	public int getPost_proj_num() {
-		return post_proj_num;
-	}
-
-	public void setPost_proj_num(int post_proj_num) {
-		this.post_proj_num = post_proj_num;
 	}
 
 	public String getKh_title() {
@@ -128,11 +118,11 @@ public class KnowhowDto {
 		this.uploadImage = uploadImage;
 	}
 
-	public List<ProjPostTagDto> getPost_tag() {
+	public List<KnowhowTagDto> getPost_tag() {
 		return post_tag;
 	}
 
-	public void setPost_tag(List<ProjPostTagDto> post_tag) {
+	public void setPost_tag(List<KnowhowTagDto> post_tag) {
 		this.post_tag = post_tag;
 	}
 
@@ -159,6 +149,7 @@ public class KnowhowDto {
 	public void setKh_fileSize(long kh_fileSize) {
 		this.kh_fileSize = kh_fileSize;
 	}
+
 
 
 }

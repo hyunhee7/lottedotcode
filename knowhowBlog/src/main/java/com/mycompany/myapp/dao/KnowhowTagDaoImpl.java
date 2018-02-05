@@ -18,4 +18,5 @@ public class KnowhowTagDaoImpl implements KnowhowTagDao {
 		session.insert("knowhowTag.insert", dto);
 	}
 	
+	
 }

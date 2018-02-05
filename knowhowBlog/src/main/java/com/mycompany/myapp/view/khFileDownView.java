@@ -13,22 +13,22 @@ import javax.servlet.jsp.PageContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractView;
 
-import com.mycompany.myapp.dto.ProjTimelineDto;
+import com.mycompany.myapp.dto.KnowhowDto;
 
 
 //component 스캔 되었을 때 bean으로 만들고 bean의 이름을 "fileDownView"
-@Component("fileDownView")
-public class FileDownView extends AbstractView{
+@Component("khfileDownView")
+public class khFileDownView extends AbstractView{
 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		//Map 객체에 담긴 FileDto 객체를 얻어온다.
-		ProjTimelineDto dto=(ProjTimelineDto)model.get("dto");
+		KnowhowDto dto=(KnowhowDto)model.get("dto");
 		//다운로드 시켜줄 파일의 정보를 얻어온다.
-		String orgFileName=dto.getPost_fileOrgName(); //원본 파일명
-		String saveFileName=dto.getPost_filePath(); //저장된 파일명
-		long fileSize=dto.getPost_fileSize();  //파일의 크기
+		String orgFileName=dto.getKh_fileOrgName(); //원본 파일명
+		String saveFileName=dto.getKh_filePath(); //저장된 파일명
+		long fileSize=dto.getKh_fileSize();  //파일의 크기
 		//다운로드 시켜줄 파일의 실제 경로 구성하기
 /*		String path=request.getServletContext().getRealPath("/upload")+
 				File.separator+saveFileName;*/

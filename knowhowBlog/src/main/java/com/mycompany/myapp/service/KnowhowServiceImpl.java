@@ -1,21 +1,35 @@
 package com.mycompany.myapp.service;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dao.KnowhowDao;
 import com.mycompany.myapp.dto.KnowhowDto;
+import com.mycompany.myapp.dto.KnowhowTagDto;
+import com.mycompany.myapp.dto.ProjPostTagDto;
+import com.mycompany.myapp.dto.ProjTimelineDto;
 
 @Service
 public class KnowhowServiceImpl implements KnowhowService {
 
 	@Autowired
 	private KnowhowDao knowhowDao;
+	
+	@Override
+	public ModelAndView list() {
+		List<KnowhowDto> list = knowhowDao.getList();
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("list", list);
+		return mView;
+	}	
+	
 	
 	@Override
 	public int insert(KnowhowDto dto, HttpServletRequest request) {
@@ -60,6 +74,30 @@ public class KnowhowServiceImpl implements KnowhowService {
 		System.out.println("post_num:"+post_num);
 
 		return post_num;
+	}
+
+	@Override
+	public ModelAndView detail(KnowhowDto dtoNum) {
+
+		KnowhowDto dto = knowhowDao.getDetail(dtoNum);
+		List<KnowhowTagDto> tags = knowhowDao.getTags(dtoNum);
+		dto.setPost_tag(tags);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", dto);
+		return mView;
+	}	
+
+	@Override
+	public ModelAndView getFile(KnowhowDto dtoNum) {
+
+		//다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
+		KnowhowDto dto=knowhowDao.getFile(dtoNum);
+		//ModelAndView 객체에 담아서
+		System.out.println(dto.getKh_fileOrgName());
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("dto",dto);
+		//리턴해준다.
+		return mView;
 	}
 
 }

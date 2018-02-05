@@ -50,11 +50,9 @@ public class ServiceController {
 	/* 노하우 리스트 */
 	@RequestMapping("/service/knowhowList.do")
 	public ModelAndView knowhowList(){
-		List<String> list=new ArrayList<String>();
-		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
+		ModelAndView mView=knowhowService.list();
 		mView.setViewName("service/knowhowList");
-		return mView;
+		return mView;		
 	}	
 	
 	/* 노하우 등록 form */
@@ -95,13 +93,29 @@ public class ServiceController {
 	
 	/* 노하우 상세보기 */
 	@RequestMapping("/service/knowhowDetail.do")
-	public ModelAndView knowhowDetail(){
-		List<String> list=new ArrayList<String>();
-		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
+	public ModelAndView knowhowDetail(HttpServletRequest request, HttpSession session){
+
+	    int kh_num=Integer.parseInt(request.getParameter("kh_num"));
+		System.out.println("detailPROJ_NUM:"+kh_num);
+		KnowhowDto dtoNum = new KnowhowDto();
+		dtoNum.setKh_num(kh_num);
+		ModelAndView mView=knowhowService.detail(dtoNum);
 		mView.setViewName("service/knowhowDetail");
 		return mView;
-	}	
+	}
+	@RequestMapping("/service/khFileDownload")
+	public ModelAndView khdownload(HttpServletRequest request){
+		//다운로드할 파일의 정보를 ModelAndView 객체에 담아서 리턴 받는다.
+    	int kh_num=Integer.parseInt(request.getParameter("kh_num"));
+		KnowhowDto dtoNum = new KnowhowDto();
+		dtoNum.setKh_num(kh_num);
+		ModelAndView mView=knowhowService.getFile(dtoNum);
+		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
+		System.out.println("fileDoawnload여긴 옴.");
+		mView.setViewName("khfileDownView");
+		//리턴해준다.
+		return mView;
+	}		
 	
 	/* 프로젝트 등록 form */
 	@RequestMapping("/service/projectInsertform.do")
