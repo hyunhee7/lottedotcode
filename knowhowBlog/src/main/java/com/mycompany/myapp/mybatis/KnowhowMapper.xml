@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="knowhow">
+	<select id="getList" resultType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board 
+		WHERE kh_disp_tf=0
+		ORDER BY kh_num DESC 
+	</select>
+ 	<insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
+		INSERT INTO kh_board (kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_modr_id) 
+		VALUES(#{kh_title}, #{kh_filePath}, #{kh_fileOrgName}, #{kh_fileSize}, #{kh_content}, #{kh_regr_id}, #{kh_modr_id}) 
+	</insert>	
+	<select id="getDetail" resultType="knowhowDto" parameterType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board
+		WHERE kh_num=#{kh_num}
+	</select>		
+	<select id="getFile" resultType="knowhowDto" parameterType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board
+		WHERE kh_num=#{kh_num}
+	</select>	
+	<update id="update" parameterType="knowhowDto"> 
+		UPDATE kh_board
+		SET kh_title=#{kh_title},kh_filePath=#{kh_filePath}, kh_fileOrgName=#{kh_fileOrgName}, kh_fileSize=#{kh_fileSize}, kh_content=#{kh_content},
+		kh_modr_id=#{kh_modr_id}
+		WHERE kh_num=#{kh_num} 
+	</update>	
+	<update id="delete" parameterType="int"> 
+		UPDATE kh_board
+		SET kh_disp_tf=1
+		WHERE kh_num=#{kh_num} 
+	</update>	
+
+</mapper>
+
+

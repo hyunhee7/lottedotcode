@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="knowhowTag">
+	<insert id="insert" parameterType="knowhowTagDto"> 
+		INSERT INTO kh_tag (tag_name, tag_kh_num) 
+		VALUES(#{tag_name},#{tag_kh_num}) 
+	</insert>
+	<select id="getTags" resultType="knowhowTagDto" parameterType="knowhowTagDto"> 
+		SELECT tag_num, tag_name, tag_kh_num
+		FROM kh_tag
+		WHERE tag_kh_num=#{kh_num}
+	</select>	
+	<select id="findTag" resultType="int" parameterType="knowhowTagDto"> 
+		SELECT COUNT(*) FROM kh_tag
+		WHERE tag_name=#{tag_name} AND tag_kh_num=#{tag_kh_num}
+	</select>		
+</mapper>
+
+

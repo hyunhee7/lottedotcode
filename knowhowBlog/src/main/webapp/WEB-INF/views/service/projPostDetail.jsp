@@ -31,7 +31,7 @@
     <style>
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
-			min-height: 50px;
+			min-height: 250px;
 		}    	
     </style>    
 </head>

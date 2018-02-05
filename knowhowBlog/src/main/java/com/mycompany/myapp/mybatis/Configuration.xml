@@ -8,6 +8,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.mycompany.myapp.dto.ProjBoardDto" alias="ProjBoardDto"/>
 		<typeAlias type="com.mycompany.myapp.dto.ProjTimelineDto" alias="ProjTimelineDto"/>
 		<typeAlias type="com.mycompany.myapp.dto.ProjPostTagDto" alias="ProjPostTagDto"/>
+		<typeAlias type="com.mycompany.myapp.dto.KnowhowDto" alias="KnowhowDto"/>
+		<typeAlias type="com.mycompany.myapp.dto.KnowhowTagDto" alias="KnowhowTagDto"/>
 	</typeAliases>
 	
 	<!-- sql 문을 정의하고 있는 xml 문서 -->
@@ -16,6 +18,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/mycompany/myapp/mybatis/ProjBoardMapper.xml"/>
 		<mapper resource="com/mycompany/myapp/mybatis/ProjTimelineMapper.xml"/>
 		<mapper resource="com/mycompany/myapp/mybatis/ProjPostTagMapper.xml"/>
+		<mapper resource="com/mycompany/myapp/mybatis/KnowhowMapper.xml"/>
+		<mapper resource="com/mycompany/myapp/mybatis/KnowhowTagMapper.xml"/>
 	</mappers>	
 </configuration>
 

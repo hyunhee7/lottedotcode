@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
+import com.mycompany.myapp.service.KnowhowService;
+import com.mycompany.myapp.service.KnowhowTagService;
 import com.mycompany.myapp.service.ProjBoardService;
 import com.mycompany.myapp.service.ProjPostTagService;
 import com.mycompany.myapp.service.ProjTimelineService;
-import com.mycompany.myapp.service.ProjTimelineServiceImpl;
 
 
 
@@ -31,6 +33,10 @@ public class ServiceController {
 	private ProjTimelineService projTimelineService;
 	@Autowired
 	private ProjPostTagService projPostTagService;
+	@Autowired
+	private KnowhowService knowhowService;
+	@Autowired
+	private KnowhowTagService knowhowTagService;	
 	
 	@RequestMapping("/service/main.do")
 	public ModelAndView login(){
@@ -41,24 +47,124 @@ public class ServiceController {
 		return mView;
 	}
 
-
-
+	/* 노하우 리스트 */
 	@RequestMapping("/service/knowhowList.do")
 	public ModelAndView knowhowList(){
-		List<String> list=new ArrayList<String>();
-		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
+		ModelAndView mView=knowhowService.list();
 		mView.setViewName("service/knowhowList");
-		return mView;
+		return mView;		
 	}	
-	@RequestMapping("/service/knowhowDetail.do")
-	public ModelAndView knowhowDetail(){
+	
+	/* 노하우 등록 form */
+	@RequestMapping("/service/knowhowInsertform.do")
+	public ModelAndView knowhowInsertform(){
 		List<String> list=new ArrayList<String>();
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("list", list);
+		mView.setViewName("service/knowhowInsertform");
+		return mView;
+	}
+	
+	/*	노하우 등록 */ 
+	@RequestMapping("/service/knowhowInsert")
+	public String knowhowInsert(HttpSession session, HttpServletRequest request,
+			@ModelAttribute KnowhowDto dto){
+		System.out.println("노하우 들어옴");
+		String kh_regr_id = (String)session.getAttribute("id");
+		System.out.println("등록자:"+kh_regr_id);
+	
+		dto.setKh_regr_id(kh_regr_id);
+		dto.setKh_modr_id(kh_regr_id);
+		
+		/* autoIncrement 이후에 kh_num을 가져와 넣은 후 Tag 넣는 작업을 한다 */
+		try {
+			int post_num = knowhowService.insert(dto, request);
+			dto.setKh_num(post_num);
+			System.out.println("post_num직후:"+dto.getKh_num());
+		}catch(Exception ex){
+			
+		}finally {
+			knowhowTagService.insert(dto);
+		}
+		
+		
+		return "redirect:/service/knowhowList.do";
+	}	
+	
+	/* 노하우 상세보기 */
+	@RequestMapping("/service/knowhowDetail.do")
+	public ModelAndView knowhowDetail(HttpServletRequest request, HttpSession session){
+
+	    int kh_num=Integer.parseInt(request.getParameter("kh_num"));
+		System.out.println("detailPROJ_NUM:"+kh_num);
+		KnowhowDto dtoNum = new KnowhowDto();
+		dtoNum.setKh_num(kh_num);
+		ModelAndView mView=knowhowService.detail(dtoNum);
 		mView.setViewName("service/knowhowDetail");
 		return mView;
-	}	
+	}
+	
+	/* 노하우 파일 다운로드 */
+	@RequestMapping("/service/khFileDownload")
+	public ModelAndView khdownload(HttpServletRequest request){
+		//다운로드할 파일의 정보를 ModelAndView 객체에 담아서 리턴 받는다.
+    	int kh_num=Integer.parseInt(request.getParameter("kh_num"));
+		KnowhowDto dtoNum = new KnowhowDto();
+		dtoNum.setKh_num(kh_num);
+		ModelAndView mView=knowhowService.getFile(dtoNum);
+		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
+		System.out.println("fileDoawnload여긴 옴.");
+		mView.setViewName("khfileDownView");
+		//리턴해준다.
+		return mView;
+	}		
+	
+	/* 노하우 수정 form */
+	@RequestMapping("/service/knowhowUpdateform.do")
+	public ModelAndView knowhowUpdateform(HttpServletRequest request){
+		int kh_num = Integer.parseInt(request.getParameter("kh_num"));
+		KnowhowDto dtoNum = new KnowhowDto();
+		dtoNum.setKh_num(kh_num);
+		ModelAndView mView=knowhowService.detail(dtoNum);
+		mView.setViewName("service/knowhowUpdateform");
+		return mView;
+	}
+	
+	/*	노하우 수정 */ 
+	@RequestMapping("/service/knowhowUpdate.do")
+	public String knowhowUpdate(HttpSession session, HttpServletRequest request,
+			@ModelAttribute KnowhowDto dto){
+		System.out.println("노하우 들어옴");
+		
+		// 수정한 사람 id 가져와서 modr_id 변경
+		String kh_modr_id = (String)session.getAttribute("id");
+		System.out.println("변경자:"+kh_modr_id);
+		dto.setKh_modr_id(kh_modr_id);
+		int kh_num = dto.getKh_num();
+		System.out.println("수정할때 khnum:"+kh_num);
+		try {
+			knowhowService.update(dto, request);
+			dto.setKh_num(kh_num);
+			System.out.println("post_num직후:"+dto.getKh_num());
+		}catch(Exception ex){
+			
+		}finally {
+			knowhowTagService.update(dto);
+		}
+		
+		
+		return "redirect:/service/knowhowDetail.do?kh_num="+kh_num;
+	}
+	
+	/* 노하우 삭제 */
+	@RequestMapping("/service/knowhowDelete.do")
+	public String knowhowDelete(HttpSession session,HttpServletRequest request) {
+		int kh_num = Integer.parseInt(request.getParameter("kh_num"));
+		knowhowService.delete(kh_num);
+		
+		return "redirect:/service/knowhowList.do";
+	}
+	
 	
 	/* 프로젝트 등록 form */
 	@RequestMapping("/service/projectInsertform.do")
@@ -172,7 +278,6 @@ public class ServiceController {
 		mView.setViewName("fileDownView");
 		//리턴해준다.
 		return mView;
-		
 	}	
 	
 }

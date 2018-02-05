@@ -1,5 +1,11 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String regr_id = (String)session.getAttribute("id");
+	System.out.println(regr_id);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +22,14 @@
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
+    
+    <!-- Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    
+    <!-- Editor -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>    
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
     <style>
     	.menu2 { font-weight : bold;}
     </style>    
@@ -29,17 +43,17 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Post Title
-        <small>by
-          <a href="#">Start Bootstrap</a>
+      <h1 class="mt-4 mb-3">${dto.kh_title }
+        <small style="font-size:25px;"> by
+          <a href="#" >${dto.kh_regr_id}</a>
         </small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
+          <a href="${pageContext.request.contextPath }/service/knowhowList.do?num=${dto.kh_num}">Knowhow List</a>
         </li>
-        <li class="breadcrumb-item active">Blog Home 2</li>
+        <li class="breadcrumb-item active">${dto.kh_title }</li>
       </ol>
 
       <div class="row">
@@ -47,21 +61,39 @@
         <!-- Post Content Column -->
         <div class="col-lg-8">
 
-          <!-- Preview Image -->
-          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
+<!--           Preview Image
+          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt=""> -->
+	
           <hr>
+          <c:set value="${dto.kh_regr_id }" var="kh_regr_id"/>
+          <% String kh_reg = (String)pageContext.getAttribute("kh_regr_id"); %>
 
+		  <% if (kh_reg.equals(regr_id) ){ %>
+		  <!-- Post Insert Btn -->
+      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button>
+      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='knowhowDelete.do?kh_num=${dto.kh_num}'">삭제</button>  
+		  <%} %>
           <!-- Date/Time -->
-          <p>Posted on January 1, 2017 at 12:00 PM</p>
+          <p>Posted on ${dto.kh_reg_dtime }</p>
 
           <hr>
-
+          <c:choose>
+	          <c:when test="${!empty dto.kh_filePath}">
+					<div style="border:1px solid #e9e9e9">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> <a href="khFileDownload.do?kh_num=${dto.kh_num}">${dto.kh_filePath}</a></p>
+					</div> 
+					<br />         
+	          </c:when> 
+	          
+	          <c:when test="${empty dto.kh_filePath}">
+					<div style="display:none">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> ${dto.kh_filePath}</p>
+					</div>          
+	          </c:when> 		                             
+          </c:choose>
           <!-- Post Content -->
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-
+          <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+			 >${dto.kh_content }</textarea>
 
           <hr>
 
@@ -124,28 +156,11 @@
               <div class="row">
                 <div class="col-lg-6">
                   <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Web Design</a>
-                    </li>
-                    <li>
-                      <a href="#">HTML</a>
-                    </li>
-                    <li>
-                      <a href="#">Freebies</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">JavaScript</a>
-                    </li>
-                    <li>
-                      <a href="#">CSS</a>
-                    </li>
-                    <li>
-                      <a href="#">Tutorials</a>
-                    </li>
+					<c:forEach items="${dto.post_tag}" var="TagList">
+		                    <li>
+		                      <a href="#">${TagList.tag_name}</a>
+		                    </li>
+					</c:forEach>   
                   </ul>
                 </div>
               </div>
@@ -179,6 +194,11 @@
     <!-- Bootstrap core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	<script>
+	    var simplemde = new SimpleMDE({
+	        toolbar: false
+	    });
+	    simplemde.togglePreview();
+	</script>
 </body>
 </html>
