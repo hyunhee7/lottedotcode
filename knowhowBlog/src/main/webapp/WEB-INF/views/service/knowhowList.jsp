@@ -26,7 +26,7 @@
     <style>
     	.menu2 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
-			min-height: 50px;
+			min-height: 148px;
 			
 		}    	
     </style>    
@@ -97,7 +97,8 @@
 	    var simplemde = new SimpleMDE({
 	        element: this,
 	        toolbar: false,
-			tabSize: 1
+			tabSize: 1,
+			status: false
 	    });
 	    simplemde.togglePreview();
 	})
