@@ -2,6 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String regr_id = (String)session.getAttribute("id");
+	System.out.println(regr_id);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,10 +65,13 @@
           <img class="img-fluid rounded" src="http://placehold.it/900x300" alt=""> -->
 	
           <hr>
-      
+          <c:set value="${dto.kh_regr_id }" var="kh_regr_id"/>
+          <% String kh_reg = (String)pageContext.getAttribute("kh_regr_id"); %>
+
+		  <% if (kh_reg.equals(regr_id) ){ %>
 		  <!-- Post Insert Btn -->
       	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button> 
-
+		  <%} %>
           <!-- Date/Time -->
           <p>Posted on ${dto.kh_reg_dtime }</p>
 
