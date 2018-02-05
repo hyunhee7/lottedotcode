@@ -12,4 +12,5 @@ public interface KnowhowService {
 	public ModelAndView detail(KnowhowDto dtoNum);
 	public ModelAndView getFile(KnowhowDto dtoNum);
 	public void update(KnowhowDto dto, HttpServletRequest request);	
+	public void delete(int kh_num);
 }

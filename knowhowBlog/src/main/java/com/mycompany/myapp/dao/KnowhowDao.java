@@ -13,4 +13,5 @@ public interface KnowhowDao {
 	public KnowhowDto getFile(KnowhowDto dtoNum);
 	public List<KnowhowTagDto> getTags(KnowhowDto dtoNum);
 	public void update(KnowhowDto dto) ;
+	public void delete(int kh_num);
 }

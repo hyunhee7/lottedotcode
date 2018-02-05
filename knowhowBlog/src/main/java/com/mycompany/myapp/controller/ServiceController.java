@@ -131,7 +131,7 @@ public class ServiceController {
 	}
 	
 	/*	노하우 수정 */ 
-	@RequestMapping("/service/knowhowUpdate")
+	@RequestMapping("/service/knowhowUpdate.do")
 	public String knowhowUpdate(HttpSession session, HttpServletRequest request,
 			@ModelAttribute KnowhowDto dto){
 		System.out.println("노하우 들어옴");
@@ -154,7 +154,16 @@ public class ServiceController {
 		
 		
 		return "redirect:/service/knowhowDetail.do?kh_num="+kh_num;
-	}		
+	}
+	
+	/* 노하우 삭제 */
+	@RequestMapping("/service/knowhowDelete.do")
+	public String knowhowDelete(HttpSession session,HttpServletRequest request) {
+		int kh_num = Integer.parseInt(request.getParameter("kh_num"));
+		knowhowService.delete(kh_num);
+		
+		return "redirect:/service/knowhowList.do";
+	}
 	
 	
 	/* 프로젝트 등록 form */

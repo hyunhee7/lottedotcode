@@ -4,6 +4,7 @@
 	<select id="getList" resultType="knowhowDto"> 
 		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
 		FROM kh_board 
+		WHERE kh_disp_tf=0
 		ORDER BY kh_num DESC 
 	</select>
  	<insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
@@ -24,6 +25,11 @@
 		UPDATE kh_board
 		SET kh_title=#{kh_title},kh_filePath=#{kh_filePath}, kh_fileOrgName=#{kh_fileOrgName}, kh_fileSize=#{kh_fileSize}, kh_content=#{kh_content},
 		kh_modr_id=#{kh_modr_id}
+		WHERE kh_num=#{kh_num} 
+	</update>	
+	<update id="delete" parameterType="int"> 
+		UPDATE kh_board
+		SET kh_disp_tf=1
 		WHERE kh_num=#{kh_num} 
 	</update>	
 

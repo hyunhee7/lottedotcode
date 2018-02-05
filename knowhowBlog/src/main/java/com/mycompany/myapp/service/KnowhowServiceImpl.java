@@ -140,5 +140,10 @@ public class KnowhowServiceImpl implements KnowhowService {
         
         knowhowDao.update(dto);
 	}	
+	
+	@Override
+	public void delete(int kh_num) {
+		knowhowDao.delete(kh_num);
+	}	
 
 }

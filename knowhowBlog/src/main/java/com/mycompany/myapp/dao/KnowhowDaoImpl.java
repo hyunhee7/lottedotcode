@@ -56,4 +56,9 @@ public class KnowhowDaoImpl implements KnowhowDao {
 		session.insert("knowhow.update", dto);
 	}
 	
+	@Override
+	public void delete(int kh_num) {
+		session.delete("knowhow.delete", kh_num);
+	}
+	
 }
