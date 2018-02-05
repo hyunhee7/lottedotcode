@@ -4,4 +4,5 @@ import com.mycompany.myapp.dto.KnowhowTagDto;
 
 public interface KnowhowTagDao {
 	public void insert(KnowhowTagDto dto);
+	public boolean findTag(KnowhowTagDto dto);
 }

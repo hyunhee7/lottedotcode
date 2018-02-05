@@ -19,4 +19,5 @@ public class PostTagDaoImp implements PostTagDao {
 		session.insert("projPostTag.insert", dto);
 	}
 	
+
 }

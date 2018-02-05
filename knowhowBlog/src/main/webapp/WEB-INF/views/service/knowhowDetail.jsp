@@ -59,8 +59,11 @@
 
 <!--           Preview Image
           <img class="img-fluid rounded" src="http://placehold.it/900x300" alt=""> -->
-
+	
           <hr>
+      
+		  <!-- Post Insert Btn -->
+      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button> 
 
           <!-- Date/Time -->
           <p>Posted on ${dto.kh_reg_dtime }</p>

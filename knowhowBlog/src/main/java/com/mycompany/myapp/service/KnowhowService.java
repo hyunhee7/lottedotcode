@@ -11,4 +11,5 @@ public interface KnowhowService {
 	public int insert(KnowhowDto dto,HttpServletRequest request);
 	public ModelAndView detail(KnowhowDto dtoNum);
 	public ModelAndView getFile(KnowhowDto dtoNum);
+	public void update(KnowhowDto dto, HttpServletRequest request);	
 }

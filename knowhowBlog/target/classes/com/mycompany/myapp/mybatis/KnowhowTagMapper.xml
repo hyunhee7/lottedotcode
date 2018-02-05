@@ -9,6 +9,10 @@
 		SELECT tag_num, tag_name, tag_kh_num
 		FROM kh_tag
 		WHERE tag_kh_num=#{kh_num}
+	</select>	
+	<select id="findTag" resultType="int" parameterType="knowhowTagDto"> 
+		SELECT COUNT(*) FROM kh_tag
+		WHERE tag_name=#{tag_name} AND tag_kh_num=#{tag_kh_num}
 	</select>		
 </mapper>
 

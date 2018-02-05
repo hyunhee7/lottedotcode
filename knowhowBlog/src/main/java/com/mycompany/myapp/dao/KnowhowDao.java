@@ -12,4 +12,5 @@ public interface KnowhowDao {
 	public KnowhowDto getDetail(KnowhowDto dtoNum);
 	public KnowhowDto getFile(KnowhowDto dtoNum);
 	public List<KnowhowTagDto> getTags(KnowhowDto dtoNum);
+	public void update(KnowhowDto dto) ;
 }

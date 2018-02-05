@@ -18,5 +18,13 @@ public class KnowhowTagDaoImpl implements KnowhowTagDao {
 		session.insert("knowhowTag.insert", dto);
 	}
 	
-	
+	@Override
+	public boolean findTag(KnowhowTagDto dto) {
+		System.out.println("노하우태그find전"+dto.getTag_name());
+		int cnt=session.selectOne("knowhowTag.findTag", dto);
+		if(cnt==0) {
+			return false;
+		}else
+			return true;
+	}		
 }

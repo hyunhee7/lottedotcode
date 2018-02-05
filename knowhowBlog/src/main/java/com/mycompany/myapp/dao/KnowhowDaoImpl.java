@@ -50,5 +50,10 @@ public class KnowhowDaoImpl implements KnowhowDao {
 		List<KnowhowTagDto> tagDto = session.selectList("knowhowTag.getTags", dtoNum);
 		return tagDto;
 	}		
+
+	@Override
+	public void update(KnowhowDto dto) {
+		session.insert("knowhow.update", dto);
+	}
 	
 }

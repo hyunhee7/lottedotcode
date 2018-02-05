@@ -103,6 +103,8 @@ public class ServiceController {
 		mView.setViewName("service/knowhowDetail");
 		return mView;
 	}
+	
+	/* 노하우 파일 다운로드 */
 	@RequestMapping("/service/khFileDownload")
 	public ModelAndView khdownload(HttpServletRequest request){
 		//다운로드할 파일의 정보를 ModelAndView 객체에 담아서 리턴 받는다.
@@ -116,6 +118,44 @@ public class ServiceController {
 		//리턴해준다.
 		return mView;
 	}		
+	
+	/* 노하우 수정 form */
+	@RequestMapping("/service/knowhowUpdateform.do")
+	public ModelAndView knowhowUpdateform(HttpServletRequest request){
+		int kh_num = Integer.parseInt(request.getParameter("kh_num"));
+		KnowhowDto dtoNum = new KnowhowDto();
+		dtoNum.setKh_num(kh_num);
+		ModelAndView mView=knowhowService.detail(dtoNum);
+		mView.setViewName("service/knowhowUpdateform");
+		return mView;
+	}
+	
+	/*	노하우 수정 */ 
+	@RequestMapping("/service/knowhowUpdate")
+	public String knowhowUpdate(HttpSession session, HttpServletRequest request,
+			@ModelAttribute KnowhowDto dto){
+		System.out.println("노하우 들어옴");
+		
+		// 수정한 사람 id 가져와서 modr_id 변경
+		String kh_modr_id = (String)session.getAttribute("id");
+		System.out.println("변경자:"+kh_modr_id);
+		dto.setKh_modr_id(kh_modr_id);
+		int kh_num = dto.getKh_num();
+		System.out.println("수정할때 khnum:"+kh_num);
+		try {
+			knowhowService.update(dto, request);
+			dto.setKh_num(kh_num);
+			System.out.println("post_num직후:"+dto.getKh_num());
+		}catch(Exception ex){
+			
+		}finally {
+			knowhowTagService.update(dto);
+		}
+		
+		
+		return "redirect:/service/knowhowDetail.do?kh_num="+kh_num;
+	}		
+	
 	
 	/* 프로젝트 등록 form */
 	@RequestMapping("/service/projectInsertform.do")
