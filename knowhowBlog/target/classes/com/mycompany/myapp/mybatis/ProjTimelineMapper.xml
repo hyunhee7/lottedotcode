@@ -21,7 +21,17 @@
 		FROM proj_post_board
 		WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
 	</select>	
-
+	<update id="update" parameterType="projTimelineDto"> 
+		UPDATE proj_post_board
+		SET post_title=#{post_title},post_filePath=#{post_filePath}, post_fileOrgName=#{post_fileOrgName}, post_fileSize=#{post_fileSize}, post_content=#{kh_content},
+		post_modr_id=#{post_modr_id}
+		WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
+	</update>	
+	<update id="delete" parameterType="projTimelineDto"> 
+		UPDATE proj_post_board
+		SET post_disp_tf=1
+		WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
+	</update>	
 </mapper>
 
 

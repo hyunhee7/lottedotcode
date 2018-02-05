@@ -10,6 +10,10 @@
 		FROM proj_post_tag
 		WHERE tag_proj_num=#{post_proj_num} AND tag_post_num=#{post_num}
 	</select>		
+	<select id="findTag" resultType="int" parameterType="projPostTagDto"> 
+		SELECT COUNT(*) FROM proj_post_tag
+		WHERE tag_name=#{tag_name} AND tag_post_num=#{tag_post_num} AND tag_proj_num=#{tag_proj_num} 
+	</select>	
 </mapper>
 
 

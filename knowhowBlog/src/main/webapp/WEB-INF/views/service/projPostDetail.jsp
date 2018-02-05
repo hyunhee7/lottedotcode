@@ -2,6 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String regr_id = (String)session.getAttribute("id");
+	System.out.println(regr_id);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,7 +69,14 @@
           <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
  -->
           <hr>
+          <c:set value="${dto.post_regr_id }" var="post_regr_id"/>
+          <% String post_regr_id = (String)pageContext.getAttribute("post_regr_id"); %>
 
+		  <% if (post_regr_id.equals(regr_id) ){ %>
+		  <!-- Post Insert Btn -->
+      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='postUpdateform.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">수정</button>
+      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='postDelete.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">삭제</button>  
+		  <%} %>
           <!-- Date/Time -->
           <p>Posted on ${dto.post_reg_dtime}</p>
 

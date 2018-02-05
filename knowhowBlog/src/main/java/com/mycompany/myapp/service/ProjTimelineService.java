@@ -12,4 +12,6 @@ public interface ProjTimelineService {
 	ModelAndView list(int num);
 	public ModelAndView detail(ProjTimelineDto dto);
 	public ModelAndView getFile(ProjTimelineDto dtoNum);	
+	public void update(ProjTimelineDto dto, HttpServletRequest request);
+	public void delete(ProjTimelineDto dto);
 }

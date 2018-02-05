@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
@@ -48,5 +49,15 @@ public class ProjTimelineDaoImpl implements ProjTimelineDao{
 	public List<ProjPostTagDto> getTags(ProjTimelineDto dtoNum){
 		List<ProjPostTagDto> tagDto = session.selectList("projPostTag.getTags", dtoNum);
 		return tagDto;
+	}	
+	
+	@Override
+	public void update(ProjTimelineDto dto) {
+		session.insert("projTimeline.update", dto);
+	}
+	
+	@Override
+	public void delete(ProjTimelineDto dto) {
+		session.delete("projTimeline.delete", dto);
 	}	
 }

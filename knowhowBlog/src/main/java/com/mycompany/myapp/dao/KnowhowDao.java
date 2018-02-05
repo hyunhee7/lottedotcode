@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
+import com.mycompany.myapp.dto.ProjTimelineDto;
 
 
 public interface KnowhowDao {

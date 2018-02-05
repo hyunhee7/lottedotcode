@@ -264,6 +264,61 @@ public class ServiceController {
 		return mView;
 	}
 	
+	/* 포스트 수정 form */
+	@RequestMapping("/service/postUpdateform.do")
+	public ModelAndView postUpdateform(HttpServletRequest request){
+		int post_num = Integer.parseInt(request.getParameter("post_num"));
+		int proj_num = Integer.parseInt(request.getParameter("proj_num"));
+		ProjTimelineDto dtoNum = new ProjTimelineDto();
+		dtoNum.setPost_num(post_num);
+		dtoNum.setPost_proj_num(proj_num);
+		ModelAndView mView=projTimelineService.detail(dtoNum);
+		mView.setViewName("service/postUpdateform");
+		return mView;
+	}
+	
+	/* 포스트 수정 */ 
+	@RequestMapping("/service/postUpdate.do")
+	public String postUpdate(HttpSession session, HttpServletRequest request,
+			@ModelAttribute ProjTimelineDto dto){
+		System.out.println("포스트update 들어옴");
+		
+		// 수정한 사람 id 가져와서 modr_id 변경
+		String post_modr_id = (String)session.getAttribute("id");
+		System.out.println("변경자:"+post_modr_id);
+		dto.setPost_modr_id(post_modr_id);
+		int post_num = dto.getPost_num();
+		int post_proj_num = dto.getPost_proj_num();
+		System.out.println("수정할때 post_num:"+post_num+post_proj_num);
+		try {
+			projTimelineService.update(dto, request);
+			dto.setPost_num(post_num);
+			dto.setPost_proj_num(post_proj_num);
+			System.out.println("post_num직후:"+dto.getPost_num());
+		}catch(Exception ex){
+			
+		}finally {
+			projPostTagService.update(dto);
+		}
+		
+		
+		return "redirect:/service/projPostDetail.do?post_proj_num="+post_proj_num+"&post_num="+post_num;
+	}
+	
+	/* 포스트 삭제 */
+	@RequestMapping("/service/postDelete.do")
+	public String postDelete(HttpSession session,HttpServletRequest request) {
+		int post_num = Integer.parseInt(request.getParameter("post_num"));
+		int post_proj_num = Integer.parseInt(request.getParameter("post_proj_num"));
+		ProjTimelineDto dto = new ProjTimelineDto();
+		dto.setPost_num(post_num);
+		dto.setPost_proj_num(post_proj_num);
+		projTimelineService.delete(dto);
+		
+		return "redirect:/service/projectTimeline.do?num="+post_proj_num;
+	}	
+
+	/* 포스트 파일 다운로드 */
 	@RequestMapping("/service/FileDownload")
 	public ModelAndView download(HttpServletRequest request){
 		//다운로드할 파일의 정보를 ModelAndView 객체에 담아서 리턴 받는다.

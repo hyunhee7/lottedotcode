@@ -12,4 +12,6 @@ public interface ProjTimelineDao {
 	public ProjTimelineDto getDetail(ProjTimelineDto dto);
 	public List<ProjPostTagDto> getTags(ProjTimelineDto tagDto);
 	public ProjTimelineDto getFile(ProjTimelineDto dtoNum);
+	public void update(ProjTimelineDto dto);
+	public void delete(ProjTimelineDto dto);
 }
