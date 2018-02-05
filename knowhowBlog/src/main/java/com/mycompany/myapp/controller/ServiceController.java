@@ -273,7 +273,7 @@ public class ServiceController {
 		dtoNum.setPost_num(post_num);
 		dtoNum.setPost_proj_num(proj_num);
 		ModelAndView mView=projTimelineService.detail(dtoNum);
-		mView.setViewName("service/postUpdateform");
+		mView.setViewName("service/projPostUpdateform");
 		return mView;
 	}
 	
@@ -309,7 +309,7 @@ public class ServiceController {
 	@RequestMapping("/service/postDelete.do")
 	public String postDelete(HttpSession session,HttpServletRequest request) {
 		int post_num = Integer.parseInt(request.getParameter("post_num"));
-		int post_proj_num = Integer.parseInt(request.getParameter("post_proj_num"));
+		int post_proj_num = Integer.parseInt(request.getParameter("proj_num"));
 		ProjTimelineDto dto = new ProjTimelineDto();
 		dto.setPost_num(post_num);
 		dto.setPost_proj_num(post_proj_num);

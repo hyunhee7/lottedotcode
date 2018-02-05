@@ -4,7 +4,7 @@
 	<select id="getList" parameterType="int" resultType="projTimelineDto"> 
 		SELECT post_num, post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num 
 		FROM proj_post_board 
-		WHERE post_proj_num=#{num} 
+		WHERE post_proj_num=#{num} AND post_disp_tf=0
 		ORDER BY post_num DESC 
 	</select>
  	<insert id="insert" parameterType="projTimelineDto" useGeneratedKeys="true" keyProperty="post_num"> 
