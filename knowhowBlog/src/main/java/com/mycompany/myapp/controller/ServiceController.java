@@ -340,4 +340,33 @@ public class ServiceController {
 		return mView;
 	}	
 	
+	/*	포스트 등록 */ 
+	@RequestMapping("/service/commentInsert")
+	public String postComment(HttpSession session, HttpServletRequest request,
+			@ModelAttribute ProjTimelineDto dto){
+		System.out.println("오잉 들어옴");
+		String post_regr_id = (String)session.getAttribute("id");
+		System.out.println("등록자:"+post_regr_id);
+		System.out.println(dto.getPost_proj_num()); 
+		//int post_proj_num = (Integer)request.getAttribute("proj_num");
+		int post_proj_num = dto.getPost_proj_num();
+		dto.setPost_proj_num(post_proj_num);
+		System.out.println("프로젝트넘:"+dto.getPost_proj_num());		
+		dto.setPost_regr_id(post_regr_id);
+		dto.setPost_modr_id(post_regr_id);
+		
+		try {
+			int post_num = projTimelineService.insert(dto, request);
+			dto.setPost_num(post_num);
+			System.out.println("post_num직후:"+dto.getPost_num());
+		}catch(Exception ex){
+			
+		}finally {
+			projPostTagService.insert(dto);
+		}
+		
+		
+		return "redirect:/service/projectTimeline.do?num="+post_proj_num;
+	}	
+	
 }
