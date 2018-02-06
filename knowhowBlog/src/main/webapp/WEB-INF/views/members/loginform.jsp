@@ -37,8 +37,8 @@
 				<div class="img-mockup">
 					<img src="${pageContext.request.contextPath }/resources/images/logo.png">
 				</div>
-				<div class="logo">LOEEE'D</div>
-				<p class="login-sublogo">LOEEEEE Developer 공간</p>
+				<div class="logo">LOTTE.CODE</div>
+				<p class="login-sublogo" style="font-size:13px">LOTTE.COM의 CODE를 공유하는 공간</p>
 				
 				<form action="login.do">
 					<div class="form-login">
