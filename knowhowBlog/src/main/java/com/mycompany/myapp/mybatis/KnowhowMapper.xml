@@ -24,7 +24,7 @@
 	<update id="update" parameterType="knowhowDto"> 
 		UPDATE kh_board
 		SET kh_title=#{kh_title},kh_filePath=#{kh_filePath}, kh_fileOrgName=#{kh_fileOrgName}, kh_fileSize=#{kh_fileSize}, kh_content=#{kh_content},
-		kh_modr_id=#{kh_modr_id}
+		kh_modr_id=#{kh_modr_id}, kh_mod_dtime=CURRENT_TIMESTAMP
 		WHERE kh_num=#{kh_num} 
 	</update>	
 	<update id="delete" parameterType="int"> 

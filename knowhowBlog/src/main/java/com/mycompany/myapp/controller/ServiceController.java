@@ -286,6 +286,11 @@ public class ServiceController {
 		// 수정한 사람 id 가져와서 modr_id 변경
 		String post_modr_id = (String)session.getAttribute("id");
 		System.out.println("변경자:"+post_modr_id);
+		System.out.println("변경자:"+dto.getPost_title());
+		System.out.println("변경자:"+dto.getPost_content());
+		System.out.println("변경자:"+dto.getPost_num());
+		System.out.println(dto.getPost_proj_num());
+		System.out.println(dto.getTags());
 		dto.setPost_modr_id(post_modr_id);
 		int post_num = dto.getPost_num();
 		int post_proj_num = dto.getPost_proj_num();
@@ -302,7 +307,7 @@ public class ServiceController {
 		}
 		
 		
-		return "redirect:/service/projPostDetail.do?post_proj_num="+post_proj_num+"&post_num="+post_num;
+		return "redirect:/service/projPostDetail.do?proj_num="+post_proj_num+"&post_num="+post_num;
 	}
 	
 	/* 포스트 삭제 */
