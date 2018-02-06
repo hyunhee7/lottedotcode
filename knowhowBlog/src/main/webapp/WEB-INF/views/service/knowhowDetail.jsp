@@ -115,7 +115,7 @@
 
           <!-- Single Comment -->
           <c:forEach items="${dto.cmts}" var="cmtList">
-          <div class="media mb-4">
+          <div class="media mb-4" style="padding:0 0 5px 0; border-bottom:1px solid #e9e9e9;">
             <img class="d-flex mr-3 rounded-circle" id="profile-preview" src="${pageContext.request.contextPath }/upload/${cmtList.cmt_imgPath}" style="width:50px;height:50px;">
             <div class="media-body">
               <h5 class="mt-0">${cmtList.cmt_regr_id}</h5>
@@ -190,12 +190,7 @@
 	        toolbar: false
 	    });
 	    simplemde.togglePreview();
-	    
-		$("#profile-preview")
-		 .css("width","50px")
-		 .css("height","50px")
-		 .css("border-radius", "50%")
-		 .css("border","1px solid #e5e5e5");
+
 			    
 	</script>
 </body>
