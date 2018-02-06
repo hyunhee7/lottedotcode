@@ -118,3 +118,21 @@ CREATE TABLE KH_TAG (
 DROP TABLE KH_BOARD;
 /* knowhow TAG 테이블 삭제 */
 DROP TABLE KH_TAG;	
+
+/* post 댓글 테이블 */
+CREATE TABLE POST_CMT (
+	cmt_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
+	cmt_id			VARCHAR(50)		NOT NULL,
+	cmt_img		INT, /* 여기부터 */
+	INDEX(tag_num),
+	FOREIGN KEY(tag_kh_num) REFERENCES KH_BOARD(kh_num) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+/* knowhow 태그 테이블 */
+CREATE TABLE KH_TAG (
+	tag_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
+	tag_name			VARCHAR(50)		NOT NULL,
+	tag_kh_num		INT,
+	INDEX(tag_num),
+	FOREIGN KEY(tag_kh_num) REFERENCES KH_BOARD(kh_num) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;

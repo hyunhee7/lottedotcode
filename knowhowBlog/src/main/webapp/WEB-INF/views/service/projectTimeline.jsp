@@ -4,6 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String proj_num = (String)request.getParameter("num"); 
+	String id = (String)session.getAttribute("id");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,15 +52,20 @@
           <a href="projectBoard.do">Project Board</a>
         </li>
 
-		   <li class="breadcrumb-item active">yet</li>  
+		   <li class="breadcrumb-item active">프로젝트 내용 추가되면 좋겠다</li>  
 
       </ol>
 
       <!-- Post Insert Btn -->
-      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
-      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">글쓰기</button> 
-      </div>	 
-      
+      <% if (id!=null ){ %>    
+      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
+      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
+      </div>
+      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
+      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
+      </div>      	 
+      <% } %>
+
       <br />
       <br />
       

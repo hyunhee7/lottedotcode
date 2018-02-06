@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 

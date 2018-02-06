@@ -273,7 +273,7 @@ public class ServiceController {
 		dtoNum.setPost_num(post_num);
 		dtoNum.setPost_proj_num(proj_num);
 		ModelAndView mView=projTimelineService.detail(dtoNum);
-		mView.setViewName("service/postUpdateform");
+		mView.setViewName("service/projPostUpdateform");
 		return mView;
 	}
 	
@@ -286,6 +286,11 @@ public class ServiceController {
 		// 수정한 사람 id 가져와서 modr_id 변경
 		String post_modr_id = (String)session.getAttribute("id");
 		System.out.println("변경자:"+post_modr_id);
+		System.out.println("변경자:"+dto.getPost_title());
+		System.out.println("변경자:"+dto.getPost_content());
+		System.out.println("변경자:"+dto.getPost_num());
+		System.out.println(dto.getPost_proj_num());
+		System.out.println(dto.getTags());
 		dto.setPost_modr_id(post_modr_id);
 		int post_num = dto.getPost_num();
 		int post_proj_num = dto.getPost_proj_num();
@@ -302,14 +307,14 @@ public class ServiceController {
 		}
 		
 		
-		return "redirect:/service/projPostDetail.do?post_proj_num="+post_proj_num+"&post_num="+post_num;
+		return "redirect:/service/projPostDetail.do?proj_num="+post_proj_num+"&post_num="+post_num;
 	}
 	
 	/* 포스트 삭제 */
 	@RequestMapping("/service/postDelete.do")
 	public String postDelete(HttpSession session,HttpServletRequest request) {
 		int post_num = Integer.parseInt(request.getParameter("post_num"));
-		int post_proj_num = Integer.parseInt(request.getParameter("post_proj_num"));
+		int post_proj_num = Integer.parseInt(request.getParameter("proj_num"));
 		ProjTimelineDto dto = new ProjTimelineDto();
 		dto.setPost_num(post_num);
 		dto.setPost_proj_num(post_proj_num);
@@ -333,6 +338,35 @@ public class ServiceController {
 		mView.setViewName("fileDownView");
 		//리턴해준다.
 		return mView;
+	}	
+	
+	/*	포스트 등록 */ 
+	@RequestMapping("/service/commentInsert")
+	public String postComment(HttpSession session, HttpServletRequest request,
+			@ModelAttribute ProjTimelineDto dto){
+		System.out.println("오잉 들어옴");
+		String post_regr_id = (String)session.getAttribute("id");
+		System.out.println("등록자:"+post_regr_id);
+		System.out.println(dto.getPost_proj_num()); 
+		//int post_proj_num = (Integer)request.getAttribute("proj_num");
+		int post_proj_num = dto.getPost_proj_num();
+		dto.setPost_proj_num(post_proj_num);
+		System.out.println("프로젝트넘:"+dto.getPost_proj_num());		
+		dto.setPost_regr_id(post_regr_id);
+		dto.setPost_modr_id(post_regr_id);
+		
+		try {
+			int post_num = projTimelineService.insert(dto, request);
+			dto.setPost_num(post_num);
+			System.out.println("post_num직후:"+dto.getPost_num());
+		}catch(Exception ex){
+			
+		}finally {
+			projPostTagService.insert(dto);
+		}
+		
+		
+		return "redirect:/service/projectTimeline.do?num="+post_proj_num;
 	}	
 	
 }

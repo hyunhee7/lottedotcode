@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%  
-	String proj_num = request.getParameter("num");
-	request.setAttribute("proj_num", Integer.parseInt(proj_num));
-%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,9 +44,9 @@
     <!-- Page Content -->
     <div class="container">
     	<h1 class="my-4 col-xs-12">Post Write</h1>
-		<form action="projPostUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
+		<form action="postUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
 		  <div class="form-group">
-		  	<input type=hidden name="post_proj_num" value="<%=proj_num%>"> 
+		  	<input type=hidden name="post_proj_num" value="${dto.post_proj_num }"> 
 		  	<input type=hidden name="post_num" value="${dto.post_num }">
 		  </div>
 		  <div class="form-group">
@@ -57,7 +54,7 @@
 		  </div>
 		  <div class="custom-file">
 		 	<input type="file" class="custom-file-input" id="post_file" name="uploadImage">
-			<label class="custom-file-label" for="customFile">Choose file</label>
+			<label class="custom-file-label" for="customFile">${dto.post_filePath }</label>
 		  </div>
 		  <br /><br />
 		  <div class="form-group">
@@ -65,7 +62,7 @@
 		    >${dto.post_content }</textarea>
 		  </div>
           <div class="form-group bs-example">
-            <input type="text" value="java,spring,javascript" data-role="tagsinput" name="tags" id="tags" />
+            <input type="text" data-role="tagsinput" name="tags" id="tags" />
           </div>	
             	
 	  	  <br /><br /> 
@@ -73,7 +70,7 @@
 		  <div style="text-align: center;">
 	      <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
 	      		<button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" id="submitBtn">수정</button>
-	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='projectTimeline.do?num=<%=proj_num%>'">취소</button> 
+	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='projectTimeline.do?num=${dto.post_proj_num}'">취소</button> 
 	      </div>    
     	</div>
 		</form> 
@@ -90,7 +87,7 @@
     <script src="${pageContext.request.contextPath }/resources/assets/app.js"></script>
     <script src="${pageContext.request.contextPath }/resources/assets/app_bs3.js"></script>    
     <script src="${pageContext.request.contextPath }/resources/js/tagsinput.js"></script>  
-	<script>
+	<script type="text/javascript">
 		var simplemde = new SimpleMDE({
 /* 			previewRender: function(plainText) {
 				return customMarkdownParser(plainText); // Returns HTML from a custom parser

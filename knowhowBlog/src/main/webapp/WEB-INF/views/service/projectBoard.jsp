@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% 
+	String id = (String)session.getAttribute("id");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,9 +41,11 @@
 	 <h1 class="my-4 col-xs-12">Project Board</h1>
 
       <div class="row">
-      	<div class="mobile-hidden write col-lg-12">
-      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projectInsertform.do'">글쓰기</button> 
-      	</div>
+		<% if (id!=null ){ %>      
+	      	<div class="mobile-hidden write col-lg-12">
+	      		<button type="button" class="btn btn-primary" style="float:right; margin-bottom:10px" onclick="location.href='projectInsertform.do'">프로젝트 생성</button> 
+	      	</div>
+      	<%} %>
       	<br />
       	
       	<!-- card1 -->
