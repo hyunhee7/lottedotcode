@@ -12,4 +12,5 @@ public interface MembersService {
 	public ModelAndView signup(MembersDto dto, HttpServletRequest request);
 	public boolean canUseId(String id);	
 	public ModelAndView signin(MembersDto dto, HttpServletRequest request);
+	public String getPath(String id);
 }

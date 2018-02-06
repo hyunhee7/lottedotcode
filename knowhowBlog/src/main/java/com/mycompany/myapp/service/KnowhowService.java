@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 
 public interface KnowhowService {
@@ -13,4 +14,5 @@ public interface KnowhowService {
 	public ModelAndView getFile(KnowhowDto dtoNum);
 	public void update(KnowhowDto dto, HttpServletRequest request);	
 	public void delete(int kh_num);
+	public void cmtInsert(KnowhowCommentDto dto);
 }

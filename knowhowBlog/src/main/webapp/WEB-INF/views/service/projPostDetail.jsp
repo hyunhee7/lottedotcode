@@ -108,7 +108,7 @@
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
               <form action="commentInsert.do" method="post">
-                <div class="form-group" name="comment_content">
+                <div class="form-group" name="cmt_content">
                   <textarea class="form-control" rows="3"></textarea>
                 </div>
 			    <div class="form-group">

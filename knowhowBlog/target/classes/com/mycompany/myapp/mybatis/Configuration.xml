@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.mycompany.myapp.dto.ProjPostTagDto" alias="ProjPostTagDto"/>
 		<typeAlias type="com.mycompany.myapp.dto.KnowhowDto" alias="KnowhowDto"/>
 		<typeAlias type="com.mycompany.myapp.dto.KnowhowTagDto" alias="KnowhowTagDto"/>
+		<typeAlias type="com.mycompany.myapp.dto.KnowhowCommentDto" alias="KnowhowCommentDto"/>
 	</typeAliases>
 	
 	<!-- sql 문을 정의하고 있는 xml 문서 -->

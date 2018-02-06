@@ -6,4 +6,5 @@ public interface MembersDao {
 	public void insert(MembersDto dto);
 	public boolean canUseId(String id);
 	public boolean isValid(MembersDto dto);
+	public String getPath(String id);
 }

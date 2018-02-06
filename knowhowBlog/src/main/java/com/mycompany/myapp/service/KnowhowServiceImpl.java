@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dao.KnowhowDao;
+import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
@@ -145,5 +146,10 @@ public class KnowhowServiceImpl implements KnowhowService {
 	public void delete(int kh_num) {
 		knowhowDao.delete(kh_num);
 	}	
+	
+	@Override
+	public void cmtInsert(KnowhowCommentDto dto) {
+		knowhowDao.cmtInsert(dto);
+	}
 
 }

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 import com.mycompany.myapp.service.KnowhowService;
 import com.mycompany.myapp.service.KnowhowTagService;
+import com.mycompany.myapp.service.MembersService;
 import com.mycompany.myapp.service.ProjBoardService;
 import com.mycompany.myapp.service.ProjPostTagService;
 import com.mycompany.myapp.service.ProjTimelineService;
@@ -36,7 +38,9 @@ public class ServiceController {
 	@Autowired
 	private KnowhowService knowhowService;
 	@Autowired
-	private KnowhowTagService knowhowTagService;	
+	private KnowhowTagService knowhowTagService;
+	@Autowired
+	private MembersService membersService;
 	
 	@RequestMapping("/service/main.do")
 	public ModelAndView login(){
@@ -340,33 +344,24 @@ public class ServiceController {
 		return mView;
 	}	
 	
-	/*	포스트 등록 */ 
+	/*	노하우 Comment 댓글 등록 */ 
 	@RequestMapping("/service/commentInsert")
 	public String postComment(HttpSession session, HttpServletRequest request,
-			@ModelAttribute ProjTimelineDto dto){
-		System.out.println("오잉 들어옴");
-		String post_regr_id = (String)session.getAttribute("id");
-		System.out.println("등록자:"+post_regr_id);
-		System.out.println(dto.getPost_proj_num()); 
-		//int post_proj_num = (Integer)request.getAttribute("proj_num");
-		int post_proj_num = dto.getPost_proj_num();
-		dto.setPost_proj_num(post_proj_num);
-		System.out.println("프로젝트넘:"+dto.getPost_proj_num());		
-		dto.setPost_regr_id(post_regr_id);
-		dto.setPost_modr_id(post_regr_id);
+			@ModelAttribute KnowhowCommentDto dto){
 		
-		try {
-			int post_num = projTimelineService.insert(dto, request);
-			dto.setPost_num(post_num);
-			System.out.println("post_num직후:"+dto.getPost_num());
-		}catch(Exception ex){
-			
-		}finally {
-			projPostTagService.insert(dto);
-		}
+		String id = (String)session.getAttribute("id");
+		dto.setCmt_modr_id(id);
+		dto.setCmt_regr_id(id);
 		
+		/* 해당 회원 이미지 가져오기 */
+		String imgPath = membersService.getPath(dto.getCmt_regr_id());
+		dto.setCmt_imgPath(imgPath);
 		
-		return "redirect:/service/projectTimeline.do?num="+post_proj_num;
+		System.out.println("댓글의 이미지 경로:"+dto.getCmt_imgPath());		
+
+		knowhowService.cmtInsert(dto);
+		
+		return "redirect:/service/knowhowDetail.do?kh_num="+dto.getCmt_kh_num();
 	}	
 	
 }

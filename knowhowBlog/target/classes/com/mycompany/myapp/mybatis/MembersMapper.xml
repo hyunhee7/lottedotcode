@@ -18,22 +18,12 @@
 		(id,pwd,name,imagePath)
 		VALUES(#{id},#{pwd},#{name},#{imagePath})
 	</insert>
-
-	<select id="isMember" parameterType="string"
-		resultType="membersDto">
-		SELECT id,pwd,name,phone,email
+	<select id="getPath" parameterType="string" 
+				resultType="string">
+		SELECT imagePath 
 		FROM members
-		WHERE id=#{id}	
-	</select>
-	<update id="update" parameterType="membersDto">
-		UPDATE members
-		SET pwd=#{pwd},name=#{name},phone=#{phone},email=#{email}
 		WHERE id=#{id}
-	</update>
-	<delete id="memberdelete" parameterType="string">
-		DELETE FROM members
-		WHERE id=#{id}
-	</delete>
+	</select>		
 </mapper>
 
 

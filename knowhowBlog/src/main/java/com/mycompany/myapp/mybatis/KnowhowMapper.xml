@@ -32,6 +32,10 @@
 		SET kh_disp_tf=1
 		WHERE kh_num=#{kh_num} 
 	</update>
+ 	<insert id="cmtinsert" parameterType="KnowhowCommentDto"> 
+		INSERT INTO KH_CMT (cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id, cmt_modr_id) 
+		VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_kh_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
+	</insert>		
 
 </mapper>
 

@@ -90,4 +90,10 @@ public class MembersServiceImpl implements MembersService {
 		
 		return mView;
 	}	
+	
+	@Override
+	public String getPath(String id) {
+		String imgPath = membersDao.getPath(id);
+		return imgPath;
+	}	
 }

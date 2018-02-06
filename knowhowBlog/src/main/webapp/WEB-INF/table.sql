@@ -122,17 +122,35 @@ DROP TABLE KH_TAG;
 /* post 댓글 테이블 */
 CREATE TABLE POST_CMT (
 	cmt_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
-	cmt_id			VARCHAR(50)		NOT NULL,
-	cmt_img		INT, /* 여기부터 */
-	INDEX(tag_num),
-	FOREIGN KEY(tag_kh_num) REFERENCES KH_BOARD(kh_num) ON DELETE CASCADE ON UPDATE CASCADE
+	cmt_imgPath			VARCHAR(50),
+	cmt_content			VARCHAR(500),
+	cmt_post_num		INT,
+	cmt_proj_num		INT,
+	cmt_regr_id			VARCHAR(50)		NOT NULL,	
+	cmt_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	cmt_modr_id			VARCHAR(50)		NOT NULL,	
+	cmt_mod_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,	
+	cmt_disp_tf			BOOLEAN			NOT NULL DEFAULT false,	
+	FOREIGN KEY(cmt_post_num) REFERENCES PROJ_POST_BOARD(post_num) ON DELETE CASCADE,
+	FOREIGN KEY(cmt_proj_num) REFERENCES PROJ_POST_BOARD(post_proj_num) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-/* knowhow 태그 테이블 */
-CREATE TABLE KH_TAG (
-	tag_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
-	tag_name			VARCHAR(50)		NOT NULL,
-	tag_kh_num		INT,
-	INDEX(tag_num),
-	FOREIGN KEY(tag_kh_num) REFERENCES KH_BOARD(kh_num) ON DELETE CASCADE ON UPDATE CASCADE
+/* knowhow 댓글 테이블 */
+CREATE TABLE KH_CMT (
+	cmt_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
+	cmt_imgPath			VARCHAR(50),
+	cmt_content			VARCHAR(500),
+	cmt_kh_num			INT,
+	cmt_regr_id			VARCHAR(50)		NOT NULL,	
+	cmt_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	cmt_modr_id			VARCHAR(50)		NOT NULL,	
+	cmt_mod_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,	
+	cmt_disp_tf			BOOLEAN			NOT NULL DEFAULT false,		
+	FOREIGN KEY(cmt_kh_num) REFERENCES KH_BOARD(kh_num) ON DELETE CASCADE
 ) ENGINE = InnoDB;
+
+
+/* post 댓글 삭제 */
+DROP TABLE POST_CMT;
+/* knowhow 댓글 삭제 */
+DROP TABLE KH_CMT;	

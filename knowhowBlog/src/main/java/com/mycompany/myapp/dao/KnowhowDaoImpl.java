@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
@@ -59,6 +60,11 @@ public class KnowhowDaoImpl implements KnowhowDao {
 	@Override
 	public void delete(int kh_num) {
 		session.delete("knowhow.delete", kh_num);
+	}
+	
+	@Override
+	public void cmtInsert(KnowhowCommentDto dto) {
+		session.insert("knowhow.cmtinsert", dto);
 	}
 	
 }

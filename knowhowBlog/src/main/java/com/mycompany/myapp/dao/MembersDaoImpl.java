@@ -38,4 +38,10 @@ public class MembersDaoImpl implements MembersDao {
 		}
 	}	
 	
+	@Override
+	public String getPath(String id) {
+		String imgPath = session.selectOne("members.getPath", id);
+		return imgPath;
+	}
+	
 }

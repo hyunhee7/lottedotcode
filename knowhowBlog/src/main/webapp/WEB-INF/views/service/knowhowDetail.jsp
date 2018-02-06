@@ -102,12 +102,11 @@
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
               <form action="commentInsert.do" method="post">
-                <div class="form-group" name="comment_content">
-                  <textarea class="form-control" rows="3"></textarea>
+                <div class="form-group">
+                  <textarea class="form-control" name="cmt_content" rows="3"></textarea>
                 </div>
 			    <div class="form-group">
-			  		<input type=hidden name="post_cmt_id" value="<%=regr_id%>"> 
-			  		<input type=hidden name="post_cmt_num" value="${dto.kh_num }"> 
+			  		<input type=hidden name="cmt_kh_num" value="${dto.kh_num }"> 
 			    </div>                
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
