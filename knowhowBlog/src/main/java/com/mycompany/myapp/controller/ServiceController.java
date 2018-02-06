@@ -364,4 +364,5 @@ public class ServiceController {
 		return "redirect:/service/knowhowDetail.do?kh_num="+dto.getCmt_kh_num();
 	}	
 	
+	
 }

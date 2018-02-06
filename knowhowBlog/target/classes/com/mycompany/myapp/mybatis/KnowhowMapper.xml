@@ -36,6 +36,11 @@
 		INSERT INTO KH_CMT (cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id, cmt_modr_id) 
 		VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_kh_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
 	</insert>		
+	<select id="getCmts" resultType="KnowhowCommentDto" parameterType="knowhowDto"> 
+		SELECT cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id
+		FROM KH_CMT
+		WHERE cmt_kh_num=#{kh_num}
+	</select>		
 
 </mapper>
 

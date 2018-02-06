@@ -83,6 +83,8 @@ public class KnowhowServiceImpl implements KnowhowService {
 		KnowhowDto dto = knowhowDao.getDetail(dtoNum);
 		List<KnowhowTagDto> tags = knowhowDao.getTags(dtoNum);
 		dto.setPost_tag(tags);
+		List<KnowhowCommentDto> cmts = knowhowDao.getCmts(dtoNum);
+		dto.setCmts(cmts);
 		ModelAndView mView = new ModelAndView();
 		mView.addObject("dto", dto);
 		return mView;

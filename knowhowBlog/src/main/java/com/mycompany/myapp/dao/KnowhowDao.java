@@ -16,4 +16,5 @@ public interface KnowhowDao {
 	public void update(KnowhowDto dto) ;
 	public void delete(int kh_num);
 	public void cmtInsert(KnowhowCommentDto dto);
+	public List<KnowhowCommentDto> getCmts(KnowhowDto dtoNum);
 }

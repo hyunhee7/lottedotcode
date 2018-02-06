@@ -67,4 +67,10 @@ public class KnowhowDaoImpl implements KnowhowDao {
 		session.insert("knowhow.cmtinsert", dto);
 	}
 	
+	@Override
+	public List<KnowhowCommentDto> getCmts(KnowhowDto dtoNum){
+		List<KnowhowCommentDto> cmtDto = session.selectList("knowhow.getCmts",dtoNum);
+		return cmtDto;
+	}
+	
 }

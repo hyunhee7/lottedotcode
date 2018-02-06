@@ -5,7 +5,7 @@
 		INSERT INTO kh_tag (tag_name, tag_kh_num) 
 		VALUES(#{tag_name},#{tag_kh_num}) 
 	</insert>
-	<select id="getTags" resultType="knowhowTagDto" parameterType="knowhowTagDto"> 
+	<select id="getTags" resultType="knowhowTagDto" parameterType="knowhowTagDto"> <!-- knowhowDto 아님? -->
 		SELECT tag_num, tag_name, tag_kh_num
 		FROM kh_tag
 		WHERE tag_kh_num=#{kh_num}
