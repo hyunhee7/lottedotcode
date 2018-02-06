@@ -31,7 +31,7 @@
 		UPDATE kh_board
 		SET kh_disp_tf=1
 		WHERE kh_num=#{kh_num} 
-	</update>	
+	</update>
 
 </mapper>
 
