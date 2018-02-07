@@ -52,19 +52,28 @@
           <a href="projectBoard.do">Project Board</a>
         </li>
 
-		   <li class="breadcrumb-item active">현재 프로젝트 번호</li>  
-
+		   <li class="breadcrumb-item active">${pdto.proj_title }</li>  
+ 			 <li class="breadcrumb-item active">: ${pdto.proj_content }</li>  
       </ol>
 
       <!-- Post Insert Btn -->
       <% if (id!=null ){ %>    
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
       		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
-      </div>
-      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
-      </div>      	 
+      </div>    	 
       <% } %>
+
+       <c:set value="${pdto.proj_writer }" var="proj_writer"/>
+       <% String proj_writer = (String)pageContext.getAttribute("proj_writer"); %>
+ 
+ 	   <% if (proj_writer.equals(id) ){ %>
+	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
+	      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
+	      </div>      
+	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
+	      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectDelete.do?num=<%=proj_num%>'">프로젝트 삭제</button> 
+	      </div>    
+	    <%} %>
 
       <br />
       <br />

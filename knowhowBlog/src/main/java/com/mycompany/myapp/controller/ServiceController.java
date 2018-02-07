@@ -229,6 +229,15 @@ public class ServiceController {
 		return "redirect:/service/projectBoard.do";
 	}	
 	
+	/* 프로젝트 삭제 */
+	@RequestMapping("/service/projectDelete.do")
+	public String projDelete(HttpSession session,HttpServletRequest request) {
+		int proj_num = Integer.parseInt(request.getParameter("num"));
+		projboardService.delete(proj_num);
+		
+		return "redirect:/service/projectBoard.do";
+	}		
+	
 	/* 프로젝트 Timeline 목록 */
 	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(@RequestParam int num, HttpSession session){

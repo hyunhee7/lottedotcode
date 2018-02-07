@@ -127,4 +127,9 @@ public class ProjBoardServiceImpl implements ProjBoardService {
 		
 		projboardDao.update(dto);
 	}
+	
+	@Override
+	public void delete(int proj_num) {
+		projboardDao.delete(proj_num);
+	}
 }

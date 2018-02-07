@@ -37,4 +37,8 @@ public class ProjBoardDaoImpl implements ProjBoardDao {
 	public void update(ProjBoardDto dto) {
 		session.update("projBoard.update", dto);
 	}
+	@Override
+	public void delete(int proj_num) {
+		session.delete("projBoard.delete", proj_num);
+	}	
 }

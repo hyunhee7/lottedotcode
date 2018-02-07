@@ -14,4 +14,5 @@ public interface ProjBoardService {
 	public List<ProjBoardDto> recentList();
 	public ModelAndView detail(int num);
 	public void update(ProjBoardDto dto, HttpServletRequest request);
+	public void delete(int proj_num);
 }
