@@ -122,10 +122,13 @@ a:link { color: white; text-decoration: none;}
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 50%;
-}        
-             
+} 
+ 
+          
 @media (max-width: 750px) {   
-
+ .mobile-hidden{
+ 	display:none;!important;
+ }
  .signup-wrapper {
     height:100% }
   .signup-wrapper .popup-container {

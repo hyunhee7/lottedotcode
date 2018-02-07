@@ -23,7 +23,7 @@ SELECT * FROM MEMBERS;
 /* PROJECT 테이블 생성 */
 CREATE TABLE PROJ_BOARD (
 	proj_num		INT		    	NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
-	proj_title		VARCHAR(50) 	NOT NULL DEFAULT "프로젝트",
+	proj_title		VARCHAR(50) 	NOT NULL DEFAULT '프로젝트',
 	proj_writer		VARCHAR(50)		NOT NULL,
 	proj_content	VARCHAR(500),
 	proj_imagePath	VARCHAR(50),
@@ -47,7 +47,7 @@ select * from proj_board;
 /* POST 테이블 생성 */
 CREATE TABLE PROJ_POST_BOARD (
 	post_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	post_title  		VARCHAR(50)		NOT NULL DEFAULT "포스팅",
+	post_title  		VARCHAR(50)		NOT NULL DEFAULT '포스팅',
 	post_filePath		VARCHAR(50),
 	post_fileOrgName	VARCHAR(100),
 	post_fileSize		FLOAT, 

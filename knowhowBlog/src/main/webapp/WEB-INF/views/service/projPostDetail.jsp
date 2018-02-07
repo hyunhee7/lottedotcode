@@ -36,7 +36,17 @@
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
 			min-height: 250px;
-		}    	
+		} 
+    	@media (max-width: 750px) {   
+			 .mobile-hidden{
+			 	display:none;!important;
+			 }
+		}
+		@media (min-width: 768px) {         
+			 .web-hidden{
+			 	display:none;!important;
+			 }
+		}		   	
     </style>    
 </head>
 <body>
@@ -71,7 +81,7 @@
           <hr>
           <c:set value="${dto.post_regr_id }" var="post_regr_id"/>
           <% String post_regr_id = (String)pageContext.getAttribute("post_regr_id"); %>
-
+		  
 		  <% if (post_regr_id.equals(regr_id) ){ %>
 		  <!-- Post Insert Btn -->
       	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='postUpdateform.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">수정</button>
@@ -83,9 +93,12 @@
           <hr>
           <c:choose>
 	          <c:when test="${!empty dto.post_filePath}">
-					<div style="border:1px solid #e9e9e9">
+					<div style="border:1px solid #e9e9e9" class="mobile-hidden">
 						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> <a href="FileDownload.do?proj_num=${dto.post_proj_num}&post_num=${dto.post_num}">${dto.post_filePath}</a></p>
-					</div> 
+					</div>
+					<div style="border:1px solid #e9e9e9" class="web-hidden">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> 첨부파일은 PC에서만 확인 가능합니다.</p>
+					</div> 					 
 					<br />         
 	          </c:when> 
 	          <c:when test="${empty dto.post_filePath}">
@@ -107,15 +120,16 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-              <form action="PostCommentInsert.do" method="post">
+              <form action="PostCommentInsert.do" method="post" id="postCmt">
                 <div class="form-group">
                   <textarea class="form-control" name="cmt_content" rows="3"></textarea>
                 </div>
 			    <div class="form-group">
 			  		<input type=hidden name="cmt_post_num" value="${dto.post_num }"> 
 			  		<input type=hidden name="cmt_proj_num" value="${dto.post_proj_num }"> 
-			    </div>                
-                <button type="submit" class="btn btn-primary">Submit</button>
+			  		<input type=hidden id="cmt_writer" value="${sessionScope.id}"> 
+			    </div>   
+                	<button type="submit" class="btn btn-primary" id="cmtSubmit">Submit</button>
               </form>
             </div>
           </div>
@@ -193,6 +207,15 @@
 	        toolbar: false
 	    });
 	    simplemde.togglePreview();
+	    
+	    $("#postCmt").submit(function(){
+	    	 var cmt_writer = $('#cmt_writer').val();
+	    	 console.log(cmt_writer);
+	    	 if(cmt_writer==""){
+	    		  alert( "로그인이 필요합니다!" );
+	    		  event.preventDefault();
+	    	 }
+	    });
 	</script>
 </body>
 </html>

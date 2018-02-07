@@ -19,6 +19,20 @@
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
     <!-- Angular.js -->
     <script src="${pageContext.request.contextPath }/resources/js/angular.min.js"></script> 
+    <style>
+    	@media (max-width: 750px) {   
+			 .mobile-hidden{
+			 	display:none;!important;
+			 }
+		}
+		@media (min-width: 768px) {         
+			 .web-hidden{
+			 	display:none;!important;
+			 }
+		}
+   
+    
+    </style>
 </head>
 <body class="background-color">
 	<div class="signup-wrapper">
@@ -30,14 +44,26 @@
 
            <form action="signup.do" method="post" class="form-signup" enctype="multipart/form-data">
                <div class="row">
-                   <div class="col-md-4">
-                       <div class="photo-wrap">
-                           <img alt="profile picture css" class="pic-circle-corner" id="profile-preview"
-                                src="${pageContext.request.contextPath }/resources/images/img-profile-empty.png"/>
-                            <button class="main-line-button">사진등록</button>
-                            <input type="file" id="image" accept="image/*" class="file_input_hidden" name="uploadImage">
-                        </div>
+               		<div class="mobile-hidden">
+	                   <div class="col-md-4">
+	                       <div class="photo-wrap">
+	                           <img alt="profile picture css" class="pic-circle-corner" id="profile-preview"
+	                                src="${pageContext.request.contextPath }/resources/images/img-profile-empty.png"/>
+	                            <button class="main-line-button">사진등록</button>
+	                            <input type="file" id="image" accept="image/*" class="file_input_hidden" name="uploadImage">
+	                        </div>
+	                    </div>
+	                </div>    
+                    <div class="web-hidden">
+                   		<div class="col-md-4">
+	                       <div class="photo-wrap  ">
+	                           <img alt="profile picture css" class="pic-circle-corner" id="profile-preview"
+	                                src="${pageContext.request.contextPath }/resources/images/logo.png"/>
+	                        </div>
+                   		 </div>                          
                     </div>
+              
+                    
                     <div class="col-md-8">
                         <input id="id" name="id" type="text" class="line-input-main" placeholder="아이디"
                                autofocus>
