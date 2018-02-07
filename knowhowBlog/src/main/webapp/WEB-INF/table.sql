@@ -15,7 +15,7 @@ CREATE TABLE MEMBERS (
 )
 
 /* member 컬럼 생성 */
-INSERT INTO MEMBERS (id, pwd, name, imagePath) VALUES('hyunhi7', 'gusgml12', 'kim', 'logo.png');
+INSERT INTO MEMBERS (id, pwd, name, imagePath) VALUES('hhkim20', 'gusgml12', 'kim', 'logo.png');
 
 /* member 컬럼 탐색 */
 SELECT * FROM MEMBERS;
@@ -124,10 +124,10 @@ CREATE TABLE POST_CMT (
 	cmt_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
 	cmt_imgPath			VARCHAR(50),
 	cmt_content			VARCHAR(500),
-	cmt_post_num		INT,
-	cmt_proj_num		INT,
+	cmt_post_num		INT				NOT NULL,
+	cmt_proj_num		INT				NOT NULL,
 	cmt_regr_id			VARCHAR(50)		NOT NULL,	
-	cmt_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	cmt_reg_dtime		DATETIME		NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	cmt_modr_id			VARCHAR(50)		NOT NULL,	
 	cmt_mod_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,	
 	cmt_disp_tf			BOOLEAN			NOT NULL DEFAULT false,	
