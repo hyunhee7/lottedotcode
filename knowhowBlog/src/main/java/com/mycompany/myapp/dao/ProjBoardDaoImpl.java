@@ -23,4 +23,9 @@ public class ProjBoardDaoImpl implements ProjBoardDao {
 		List<ProjBoardDto> list=session.selectList("projBoard.getList");
 		return list;
 	}
+	@Override
+	public List<ProjBoardDto> getRecentList() {
+		List<ProjBoardDto> list=session.selectList("projBoard.getRecentList");
+		return list;
+	}	
 }

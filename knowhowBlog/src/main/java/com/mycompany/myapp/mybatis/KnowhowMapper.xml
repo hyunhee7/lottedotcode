@@ -40,7 +40,13 @@
 		SELECT cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id
 		FROM KH_CMT
 		WHERE cmt_kh_num=#{kh_num}
-	</select>		
+	</select>	
+	<select id="getRecentList" resultType="knowhowDto"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board 
+		WHERE kh_disp_tf=0
+		ORDER BY kh_num DESC LIMIT 0, 3
+	</select>			
 
 </mapper>
 

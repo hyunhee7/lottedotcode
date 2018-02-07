@@ -21,6 +21,7 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	@Autowired
 	private ProjTimelineDao projTimelineDao;
 	
+	
 	@Override
 	public ModelAndView list(int num) {
 		List<ProjTimelineDto> list = projTimelineDao.getList(num);

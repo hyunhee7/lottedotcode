@@ -44,10 +44,12 @@ public class ServiceController {
 	private MembersService membersService;
 	
 	@RequestMapping("/service/main.do")
-	public ModelAndView login(){
-		List<String> list=new ArrayList<String>();
+	public ModelAndView recentList(){
+		List<ProjBoardDto> projList=projboardService.recentList();
+		List<KnowhowDto> KhList=knowhowService.recentList();
 		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
+		mView.addObject("projList", projList);
+		mView.addObject("KhList", KhList);
 		mView.setViewName("service/main");
 		return mView;
 	}

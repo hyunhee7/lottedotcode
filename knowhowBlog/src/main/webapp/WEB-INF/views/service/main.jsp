@@ -1,6 +1,7 @@
 <%@page import="com.mycompany.myapp.dto.MembersDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +18,16 @@
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath }/resources/css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/css/main-custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+	<!-- Editor -->
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<style>
+    	.CodeMirror, .CodeMirror-scroll {
+			min-height: 50px;
+		}	
+	</style>    
+    
 </head>
 <body>
     <!-- Navigation -->
@@ -31,116 +42,57 @@
       <h1 class="my-4">Recent Project</h1>
 
       <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="projectTimeline.do">Project One</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Two</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-            </div>
-          </div>
-        </div>
+      	<!-- card1 -->
+      	<c:forEach var="tmp" items="${projList }">
+	        <div class="col-lg-4 col-sm-6 portfolio-item">
+	          <div class="card h-100">
+	          	<c:if test="${empty tmp.proj_imagePath}">
+	            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
+	            </c:if>
+	          	<c:if test="${!empty tmp.proj_imagePath}"> 
+	            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="width:348px;height:200px;"></a>
+	            </c:if>	            
+	            <div class="card-body">
+	              <h4 class="card-title">
+	                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
+	              </h4>
+	              <p class="card-text">${tmp.proj_content }</p>
+	            </div>
+	          </div>
+	        </div>
+        </c:forEach>
+        <!-- card1 fin. -->
       </div>
       <!-- /.row -->
 
-      <h2>Develop Know-how</h2>
+      <h1>Recent Knowhow</h1>
       
       <br />
       <!-- Marketing Icons Section -->
       <div class="row">
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <a href="knowhowDetail.do"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="projectDetail.do" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h4 class="card-header">Card Title</h4>
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-          </div>
-        </div>
+
+      	<!-- 카드1 -->
+      	<c:forEach var="tmp" items="${KhList }">
+	        <div class="col-lg-4 mb-4">
+	          <div class="card h-100">
+	            <h4 class="card-header">${tmp.kh_title }</h4>
+	          	<c:if test="${empty tmp.kh_filePath}">
+	            	<a style="border-bottom:1px solid #e9e9e9;" href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
+	            </c:if>
+	          	<c:if test="${!empty tmp.kh_filePath}"> 
+	            	<a href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
+	            </c:if>	            
+	            <div class="">
+	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+		   			 >${tmp.kh_content }</textarea>
+	            </div>	            
+	            <div class="card-footer">
+	              <a href="knowhowDetail.do?kh_num=${tmp.kh_num }" class="btn btn-primary">Learn More</a>
+	            </div>
+	          </div>
+	        </div>
+        </c:forEach>
+        <!-- 카드1 fin. -->
       </div>
       <!-- /.row -->
 
@@ -158,6 +110,16 @@
     <!-- Bootstrap core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	<script>
+		$('textarea').each(function() {
+		    var simplemde = new SimpleMDE({
+		        element: this,
+		        toolbar: false,
+				tabSize: 1,
+				status: false
+		    });
+		    simplemde.togglePreview();
+		});	
+	</script>
 </body>
 </html>

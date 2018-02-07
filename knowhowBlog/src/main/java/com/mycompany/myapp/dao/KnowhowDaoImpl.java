@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
+import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
-import com.mycompany.myapp.dto.ProjTimelineDto;
 
 @Repository
 public class KnowhowDaoImpl implements KnowhowDao {
@@ -72,5 +72,11 @@ public class KnowhowDaoImpl implements KnowhowDao {
 		List<KnowhowCommentDto> cmtDto = session.selectList("knowhow.getCmts",dtoNum);
 		return cmtDto;
 	}
+	
+	@Override
+	public List<KnowhowDto> getRecentList() {
+		List<KnowhowDto> list=session.selectList("knowhow.getRecentList");
+		return list;
+	}		
 	
 }

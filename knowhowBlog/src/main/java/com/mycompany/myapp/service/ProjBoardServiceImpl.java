@@ -69,5 +69,10 @@ public class ProjBoardServiceImpl implements ProjBoardService {
 		mView.addObject("list", list);
 		return mView;
 	}	
-
+	
+	@Override
+	public List<ProjBoardDto> recentList() {
+		List<ProjBoardDto> list=projboardDao.getRecentList();
+		return list;
+	}	
 }

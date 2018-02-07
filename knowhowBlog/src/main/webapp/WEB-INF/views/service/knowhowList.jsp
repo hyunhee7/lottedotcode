@@ -43,8 +43,6 @@
 
       <h1 class="my-4">Knowhow Board</h1>
       
-      <br />
-      
       <!-- Post Insert Btn -->
       <% if (id!=null ){ %>    
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;margin-top:5px;">
@@ -62,10 +60,10 @@
 	          <div class="card h-100">
 	            <h4 class="card-header">${tmp.kh_title }</h4>
 	          	<c:if test="${empty tmp.kh_filePath}">
-	            	<a href="knowhowDetail.do"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+	            	<a href="knowhowDetail.do?kh_num=${tmp.kh_num }" style="border-bottom:1px solid #e9e9e9;"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
 	            </c:if>
 	          	<c:if test="${!empty tmp.kh_filePath}"> 
-	            	<a href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
+	            	<a href="knowhowDetail.do?kh_num=${tmp.kh_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
 	            </c:if>	            
 	            <div class="">
 	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"

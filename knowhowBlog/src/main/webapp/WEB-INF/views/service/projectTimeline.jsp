@@ -30,7 +30,7 @@
     <style>
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
-			min-height: 50px;
+			min-height: 90px;
 		}
     </style>    
 </head>
@@ -83,6 +83,7 @@
 	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
 		   			 >${tmp.post_content }</textarea>
 	              </div>
+	              <br />
 	              
 	              <a href="projPostDetail.do?proj_num=${tmp.post_proj_num }&post_num=${tmp.post_num}" class="btn btn-primary">Read More &rarr;</a>
 	            </div>
@@ -96,23 +97,6 @@
       </c:forEach>
       <!-- Blog Post1 fin. -->
       
-      
-      <!-- Default Post -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="card-title">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-              <a href="#" class="btn btn-primary">Read More &rarr;</a>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer text-muted">
-          Posted on January 1, 2017 by
-          <a href="#">Start Bootstrap</a>
-        </div>
-      </div>
 
 
       <!-- Pagination -->
@@ -151,7 +135,8 @@
 	    var simplemde = new SimpleMDE({
 	        element: this,
 	        toolbar: false,
-			tabSize: 1
+			tabSize: 1,
+			status: false
 	    });
 	    simplemde.togglePreview();
 	})

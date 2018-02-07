@@ -10,6 +10,12 @@
 		FROM proj_board 
 		ORDER BY proj_num DESC 
 	</select>
+	<select id="getRecentList" resultType="projBoardDto"> 
+		SELECT proj_num, proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf 
+		FROM proj_board 
+		WHERE proj_disp_tf=0
+		ORDER BY proj_num DESC LIMIT 0, 3
+	</select>	
 
 </mapper>
 
