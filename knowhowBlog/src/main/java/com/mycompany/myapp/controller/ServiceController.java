@@ -205,6 +205,30 @@ public class ServiceController {
 		return mView;
 	}	
 	
+	/* 프로젝트 수정 form */
+	@RequestMapping("/service/projectUpdateform.do")
+	public ModelAndView ProjectUpdateform(HttpServletRequest request){
+		int proj_num = Integer.parseInt(request.getParameter("num"));
+		System.out.println("프로젝트번호"+proj_num);
+		ModelAndView mView=projboardService.detail(proj_num);
+		mView.setViewName("service/projectUpdateform");
+		return mView;
+	}		
+	
+	/* 프로젝트 수정 */
+	@RequestMapping("/service/projectUpdate")
+	public String projectUpdate(HttpSession session,HttpServletRequest request,
+			@ModelAttribute ProjBoardDto dto){
+		String proj_writer = (String)session.getAttribute("id");
+		System.out.println("작성자:"+proj_writer);
+		dto.setProj_writer(proj_writer);
+		System.out.println(dto.getProj_num());
+
+		projboardService.update(dto,request);
+		
+		return "redirect:/service/projectBoard.do";
+	}	
+	
 	/* 프로젝트 Timeline 목록 */
 	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(@RequestParam int num, HttpSession session){

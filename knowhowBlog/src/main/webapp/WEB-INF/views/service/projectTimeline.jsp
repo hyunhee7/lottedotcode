@@ -52,7 +52,7 @@
           <a href="projectBoard.do">Project Board</a>
         </li>
 
-		   <li class="breadcrumb-item active">프로젝트 내용 추가되면 좋겠다</li>  
+		   <li class="breadcrumb-item active">현재 프로젝트 번호</li>  
 
       </ol>
 
@@ -62,12 +62,13 @@
       		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
       </div>
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
+      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
       </div>      	 
       <% } %>
 
       <br />
       <br />
+      
       
       <!-- Blog Post1 -->
       <c:forEach var="tmp" items="${list }">

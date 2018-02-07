@@ -12,4 +12,6 @@ public interface ProjBoardService {
 	public void insert(ProjBoardDto dto,HttpServletRequest request);
 	public ModelAndView list();
 	public List<ProjBoardDto> recentList();
+	public ModelAndView detail(int num);
+	public void update(ProjBoardDto dto, HttpServletRequest request);
 }

@@ -28,4 +28,13 @@ public class ProjBoardDaoImpl implements ProjBoardDao {
 		List<ProjBoardDto> list=session.selectList("projBoard.getRecentList");
 		return list;
 	}	
+	@Override
+	public ProjBoardDto getDetail(int proj_num) {
+		ProjBoardDto dto = session.selectOne("projBoard.getDetail", proj_num);
+		return dto;
+	}
+	@Override
+	public void update(ProjBoardDto dto) {
+		session.update("projBoard.update", dto);
+	}
 }
