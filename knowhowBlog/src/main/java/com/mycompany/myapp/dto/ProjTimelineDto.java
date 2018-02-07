@@ -17,13 +17,15 @@ public class ProjTimelineDto {
 	private int lastPostNum;
 	private String post_fileOrgName;
 	private long post_fileSize;	
+	private List<ProjPostCommentDto> cmts;
 	
 	public ProjTimelineDto() {}
 
 	public ProjTimelineDto(int post_num, int post_proj_num, String post_title, String post_filePath,
 			String post_content, String post_regr_id, String post_reg_dtime, String post_modr_id, String post_mod_dtime,
 			boolean post_disp_tf, MultipartFile uploadImage, List<ProjPostTagDto> post_tag, String[] tags,
-			int tmpPostNum, int lastPostNum, String post_fileOrgName, long post_fileSize) {
+			int tmpPostNum, int lastPostNum, String post_fileOrgName, long post_fileSize,
+			List<ProjPostCommentDto> cmts) {
 		super();
 		this.post_num = post_num;
 		this.post_proj_num = post_proj_num;
@@ -42,6 +44,7 @@ public class ProjTimelineDto {
 		this.lastPostNum = lastPostNum;
 		this.post_fileOrgName = post_fileOrgName;
 		this.post_fileSize = post_fileSize;
+		this.cmts = cmts;
 	}
 
 	public int getPost_num() {
@@ -179,6 +182,16 @@ public class ProjTimelineDto {
 	public void setPost_fileSize(long post_fileSize) {
 		this.post_fileSize = post_fileSize;
 	}
+
+	public List<ProjPostCommentDto> getCmts() {
+		return cmts;
+	}
+
+	public void setCmts(List<ProjPostCommentDto> cmts) {
+		this.cmts = cmts;
+	}
+
+
 
 	
 

@@ -101,7 +101,7 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-              <form action="commentInsert.do" method="post">
+              <form action="KHcommentInsert.do" method="post">
                 <div class="form-group">
                   <textarea class="form-control" name="cmt_content" rows="3"></textarea>
                 </div>

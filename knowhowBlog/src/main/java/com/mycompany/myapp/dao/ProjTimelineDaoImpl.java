@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mycompany.myapp.dto.KnowhowCommentDto;
+import com.mycompany.myapp.dto.KnowhowDto;
+import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
@@ -58,5 +61,16 @@ public class ProjTimelineDaoImpl implements ProjTimelineDao{
 	@Override
 	public void delete(ProjTimelineDto dto) {
 		session.delete("projTimeline.delete", dto);
+	}	
+	
+	@Override
+	public void cmtInsert(ProjPostCommentDto dto) {
+		session.insert("projTimeline.cmtinsert", dto);
+	}
+	
+	@Override
+	public List<ProjPostCommentDto> getCmts(ProjTimelineDto dtoNum){
+		List<ProjPostCommentDto> cmtDto = session.selectList("projTimeline.getCmts",dtoNum);
+		return cmtDto;
 	}	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjBoardDto;
+import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 import com.mycompany.myapp.service.KnowhowService;
 import com.mycompany.myapp.service.KnowhowTagService;
@@ -345,8 +346,8 @@ public class ServiceController {
 	}	
 	
 	/*	노하우 Comment 댓글 등록 */ 
-	@RequestMapping("/service/commentInsert")
-	public String postComment(HttpSession session, HttpServletRequest request,
+	@RequestMapping("/service/KHcommentInsert")
+	public String KHComment(HttpSession session, HttpServletRequest request,
 			@ModelAttribute KnowhowCommentDto dto){
 		
 		String id = (String)session.getAttribute("id");
@@ -364,5 +365,25 @@ public class ServiceController {
 		return "redirect:/service/knowhowDetail.do?kh_num="+dto.getCmt_kh_num();
 	}	
 	
+	
+	/*	Post Comment 댓글 등록 */ 
+	@RequestMapping("/service/PostCommentInsert")
+	public String PostComment(HttpSession session, HttpServletRequest request,
+			@ModelAttribute ProjPostCommentDto dto){
+		
+		String id = (String)session.getAttribute("id");
+		dto.setCmt_modr_id(id);
+		dto.setCmt_regr_id(id);
+		
+		/* 해당 회원 이미지 가져오기 */
+		String imgPath = membersService.getPath(dto.getCmt_regr_id());
+		dto.setCmt_imgPath(imgPath);
+		
+		System.out.println("댓글의 이미지 경로:"+dto.getCmt_imgPath());		
+
+		projTimelineService.cmtInsert(dto);
+		
+		return "redirect:/service/projPostDetail.do?proj_num="+dto.getCmt_proj_num()+"&post_num="+dto.getCmt_post_num();
+	}		
 	
 }

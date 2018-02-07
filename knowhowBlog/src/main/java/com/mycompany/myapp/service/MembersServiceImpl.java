@@ -91,6 +91,8 @@ public class MembersServiceImpl implements MembersService {
 		return mView;
 	}	
 	
+	
+	/* 프로필 사진 가져오기 */
 	@Override
 	public String getPath(String id) {
 		String imgPath = membersDao.getPath(id);

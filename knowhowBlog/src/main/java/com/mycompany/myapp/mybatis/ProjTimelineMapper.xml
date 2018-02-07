@@ -32,6 +32,15 @@
 		SET post_disp_tf=1
 		WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
 	</update>	
+ 	<insert id="cmtinsert" parameterType="projPostCommentDto"> 
+		INSERT INTO POST_CMT (cmt_imgPath, cmt_content, cmt_proj_num, cmt_post_num, cmt_regr_id, cmt_modr_id) 
+		VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_proj_num},#{cmt_post_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
+	</insert>		
+	<select id="getCmts" resultType="projPostCommentDto" parameterType="projTimelineDto"> 
+		SELECT cmt_imgPath, cmt_content, cmt_proj_num, cmt_post_num, cmt_regr_id
+		FROM POST_CMT
+		WHERE cmt_post_num=#{post_num} AND cmt_proj_num=#{post_proj_num}
+	</select>			
 </mapper>
 
 

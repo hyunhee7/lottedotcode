@@ -2,6 +2,7 @@ package com.mycompany.myapp.dao;
 
 import java.util.List;
 
+import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
@@ -14,4 +15,6 @@ public interface ProjTimelineDao {
 	public ProjTimelineDto getFile(ProjTimelineDto dtoNum);
 	public void update(ProjTimelineDto dto);
 	public void delete(ProjTimelineDto dto);
+	public void cmtInsert(ProjPostCommentDto dto);
+	public List<ProjPostCommentDto> getCmts(ProjTimelineDto dtoNum);
 }
