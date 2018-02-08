@@ -65,13 +65,14 @@
 			            	<a href="projectTimeline.do?num=${tmp.proj_num }" style="border-bottom:1px solid #e9e9e9;"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
 			            </c:if>
 			          	<c:if test="${!empty tmp.proj_imagePath}"> 
-			            	<a href="projectTimeline.do?num=${tmp.proj_num }" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="height:100%;"></a>
+			            	<a href="projectTimeline.do?num=${tmp.proj_num }" ><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" style="height:185px;" alt=""></a>
 			            </c:if>	            
 			            <div class="card-body">
 			              <h4 class="card-title">
 			                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
 			              </h4>
 			              <p class="card-text"><a href="projectTimeline.do?num=${tmp.proj_num }" style="text-decoration:none;color:#000000;">${tmp.proj_content }</a></p>
+
 			            </div>
 			          </div>
 			        </div>

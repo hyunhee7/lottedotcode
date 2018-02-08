@@ -24,6 +24,9 @@
 			 .mobile-hidden{
 			 	display:none;!important;
 			 }
+			 .background-color{
+			 	background-color:#ffffff; !important;
+			 }
 		}
 		@media (min-width: 768px) {         
 			 .web-hidden{
@@ -73,6 +76,7 @@
                                placeholder="비밀번호">
                         <input id="pwd2" name="pwd2" type="password" class="line-input-main"
                                placeholder="비밀번호 확인">
+                        <p style="color:#999999; font-size:10px;">* 비밀번호는 4자리 이상 입력해주세요.</p>
                     </div>
                 </div>
                 <div id="login-link">
