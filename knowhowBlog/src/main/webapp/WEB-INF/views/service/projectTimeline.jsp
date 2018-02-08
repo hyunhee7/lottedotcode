@@ -30,7 +30,7 @@
     <style>
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
-			min-height: 90px;
+			min-height: 50px;
 		}
     	@media (max-width: 750px) {   
 			 .mobile-hidden{
@@ -64,7 +64,7 @@
 
 		     <li class="breadcrumb-item active">${pdto.proj_title }</li>  
         </ol>
- 		<div  style="border:1px solid #e9e9e9;width:100%;height:70px;padding:10px;margin-bottom:5px;">
+ 		<div  style="border:1px solid #e9e9e9;width:100%;height: auto;padding:10px;margin-bottom:5px;">
  			<li>프로젝트 명: ${pdto.proj_title }</li>
  			<li>내용 : ${pdto.proj_content }</li>
  		</div>
@@ -92,38 +92,47 @@
       <br />
       <br />
       
+        <c:choose>
+        	<c:when test="${empty list}">
+        		<div class="default-img" style="border:1px solid #e9e9e9;width:100%;height:250px;">
+        			<p style="text-align: center;line-height: 250px;">등록된 포스트가 없습니다.</p>
+        		</div>
+        		<br /><br />
+        	</c:when> 
+        	<c:when test="${list ne null }">     
+			      <!-- Blog Post1 -->
+			      <c:forEach var="tmp" items="${list }">
+				      <div class="card mb-4">
+				        <div class="card-body">
+				          <div class="row">
+				
+				            <div class="col-lg-12">
+				              <h2 class="card-title">${tmp.post_title }</h2>
+			
+			
+				              <div class="">
+				              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+					   			 >${tmp.post_content }</textarea>
+				              </div>
+				              <br />
+				              
+				              <a href="projPostDetail.do?proj_num=${tmp.post_proj_num }&post_num=${tmp.post_num}" class="btn btn-primary">Read More &rarr;</a>
+				            </div>
+				          </div>
+				        </div>
+				        <div class="card-footer text-muted">
+				          Posted on ${tmp.post_reg_dtime } by
+				          <a href="#">${tmp.post_regr_id }</a>
+				        </div>
+				      </div>
+			      </c:forEach>
+			      <!-- Blog Post1 fin. -->
+			   </c:when>
+		</c:choose>
       
-      <!-- Blog Post1 -->
-      <c:forEach var="tmp" items="${list }">
-	      <div class="card mb-4">
-	        <div class="card-body">
-	          <div class="row">
-	
-	            <div class="col-lg-12">
-	              <h2 class="card-title">${tmp.post_title }</h2>
 
 
-	              <div class="">
-	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
-		   			 >${tmp.post_content }</textarea>
-	              </div>
-	              <br />
-	              
-	              <a href="projPostDetail.do?proj_num=${tmp.post_proj_num }&post_num=${tmp.post_num}" class="btn btn-primary">Read More &rarr;</a>
-	            </div>
-	          </div>
-	        </div>
-	        <div class="card-footer text-muted">
-	          Posted on ${tmp.post_reg_dtime } by
-	          <a href="#">${tmp.post_regr_id }</a>
-	        </div>
-	      </div>
-      </c:forEach>
-      <!-- Blog Post1 fin. -->
-      
-
-
-      <!-- Pagination -->
+<!--       Pagination
       <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
           <a class="page-link" href="#">&larr; Older</a>
@@ -131,7 +140,7 @@
         <li class="page-item disabled">
           <a class="page-link" href="#">Newer &rarr;</a>
         </li>
-      </ul>
+      </ul> -->
 
     </div>
 

@@ -241,6 +241,7 @@ public class ServiceController {
 	/* 프로젝트 Timeline 목록 */
 	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(@RequestParam int num, HttpSession session){
+
 		ModelAndView mView=projTimelineService.list(num);
 		mView.setViewName("service/projectTimeline");
 		return mView;

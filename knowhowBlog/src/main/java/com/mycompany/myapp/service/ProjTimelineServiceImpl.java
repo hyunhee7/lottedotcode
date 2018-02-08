@@ -27,6 +27,7 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	
 	@Override
 	public ModelAndView list(int num) {
+
 		List<ProjTimelineDto> list = projTimelineDao.getList(num);
 		ProjBoardDto pdto= projBoardDao.getDetail(num);
 		ModelAndView mView = new ModelAndView();

@@ -43,7 +43,7 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h1 class="my-4 col-xs-12">Post Write</h1>
+    	<h1 class="my-4 col-xs-12">Post Update</h1>
 		<form action="postUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
 		  <div class="form-group">
 		  	<input type=hidden name="post_proj_num" value="${dto.post_proj_num }"> 
