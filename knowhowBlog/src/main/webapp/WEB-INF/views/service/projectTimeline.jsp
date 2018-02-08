@@ -32,6 +32,16 @@
     	.CodeMirror, .CodeMirror-scroll {
 			min-height: 90px;
 		}
+    	@media (max-width: 750px) {   
+			 .mobile-hidden{
+			 	display:none;!important;
+			 }
+		}
+		@media (min-width: 768px) {         
+			 .web-hidden{
+			 	display:none;!important;
+			 }
+		}  		
     </style>    
 </head>
 <body>
@@ -41,25 +51,29 @@
     <!-- Page Content -->
     <div class="container">
 
-      <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Project Timeline
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Project Timeline
         <!-- <small>PC</small> -->
-      </h1>
+        </h1>
  	  
- 	  <!-- Current location -->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="projectBoard.do">Project Board</a>
-        </li>
+ 	    <!-- Current location -->
+        <ol class="breadcrumb">
+	         <li class="breadcrumb-item">
+	          	<a href="projectBoard.do">Project Board</a>
+	         </li>
 
-		   <li class="breadcrumb-item active">${pdto.proj_title }</li>  
- 			 <li class="breadcrumb-item active">: ${pdto.proj_content }</li>  
-      </ol>
-
+		     <li class="breadcrumb-item active">${pdto.proj_title }</li>  
+        </ol>
+ 		<div  style="border:1px solid #e9e9e9;width:100%;height:70px;padding:10px;margin-bottom:5px;">
+ 			<li>프로젝트 명: ${pdto.proj_title }</li>
+ 			<li>내용 : ${pdto.proj_content }</li>
+ 		</div>
+ 		
+ 		
       <!-- Post Insert Btn -->
       <% if (id!=null ){ %>    
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
+      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right;" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
       </div>    	 
       <% } %>
 
@@ -68,10 +82,10 @@
  
  	   <% if (proj_writer.equals(id) ){ %>
 	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-	      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
+	      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
 	      </div>      
 	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-	      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectDelete.do?num=<%=proj_num%>'">프로젝트 삭제</button> 
+	      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectDelete.do?num=<%=proj_num%>'">프로젝트 삭제</button> 
 	      </div>    
 	    <%} %>
 

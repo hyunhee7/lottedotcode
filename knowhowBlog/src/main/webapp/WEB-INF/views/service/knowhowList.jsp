@@ -53,36 +53,46 @@
       <br /> 
       <!-- Marketing Icons Section -->
       <div class="row">
-     
-      	<!-- 카드1 -->
-      	<c:forEach var="tmp" items="${list }">
-	        <div class="col-lg-4 mb-4">
-	          <div class="card h-100">
-	            <h4 class="card-header">${tmp.kh_title }</h4>
-	          	<c:if test="${empty tmp.kh_filePath}">
-	            	<a href="knowhowDetail.do?kh_num=${tmp.kh_num }" style="border-bottom:1px solid #e9e9e9;"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
-	            </c:if>
-	          	<c:if test="${!empty tmp.kh_filePath}"> 
-	            	<a href="knowhowDetail.do?kh_num=${tmp.kh_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
-	            </c:if>	            
-	            <div class="">
-	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
-		   			 >${tmp.kh_content }</textarea>
-	            </div>	            
-	            <div class="card-footer">
-	              <a href="knowhowDetail.do?kh_num=${tmp.kh_num }" class="btn btn-primary">Learn More</a>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
-        <!-- 카드1 fin. -->
-        
+
+      	<c:choose>
+      		<c:when test="${empty KhList}">
+        		<div class="default-img" style="border:1px solid #e9e9e9;width:100%;height:250px;">
+        			<p style="text-align: center;line-height: 250px;">등록된 포스트가 없습니다.</p>
+        		</div>
+        		<br /><br />      		
+      		</c:when>
+      		<c:when test="${KhList ne null }">
+		      	<!-- 카드1 -->
+		      	<c:forEach var="tmp" items="${list }">
+			        <div class="col-lg-4 mb-4">
+			          <div class="card h-100">
+			            <h4 class="card-header">${tmp.kh_title }</h4>
+			          	<c:if test="${empty tmp.kh_filePath}">
+			            	<a href="knowhowDetail.do?kh_num=${tmp.kh_num }" style="border-bottom:1px solid #e9e9e9;"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
+			            </c:if>
+			          	<c:if test="${!empty tmp.kh_filePath}"> 
+			            	<a href="knowhowDetail.do?kh_num=${tmp.kh_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
+			            </c:if>	            
+			            <div class="">
+			              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+				   			 >${tmp.kh_content }</textarea>
+			            </div>	            
+			            <div class="card-footer">
+			              <a href="knowhowDetail.do?kh_num=${tmp.kh_num }" class="btn btn-primary">Learn More</a>
+			            </div>
+			          </div>
+			        </div>
+		        </c:forEach>
+		        <!-- 카드1 fin. -->
+      		</c:when>
+      	</c:choose>
+      	<br />    <br />    
       </div>
       <!-- /.row -->
 
     </div>
     <!-- /.container -->
-
+<br /><br /><br />
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

@@ -84,8 +84,8 @@
 		  
 		  <% if (post_regr_id.equals(regr_id) ){ %>
 		  <!-- Post Insert Btn -->
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='postUpdateform.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">수정</button>
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='postDelete.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">삭제</button>  
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='postUpdateform.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">수정</button>
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='postDelete.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">삭제</button>  
 		  <%} %>
           <!-- Date/Time -->
           <p>Posted on ${dto.post_reg_dtime}</p>

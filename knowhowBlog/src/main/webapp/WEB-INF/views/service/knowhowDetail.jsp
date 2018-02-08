@@ -80,8 +80,8 @@
 
 		  <% if (kh_reg.equals(regr_id) ){ %>
 		  <!-- Post Insert Btn -->
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button>
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='knowhowDelete.do?kh_num=${dto.kh_num}'">삭제</button>  
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button>
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='knowhowDelete.do?kh_num=${dto.kh_num}'">삭제</button>  
 		  <%} %>
           <!-- Date/Time -->
           <p>Posted on ${dto.kh_reg_dtime }</p>

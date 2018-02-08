@@ -40,7 +40,7 @@
     <!-- Page Content -->
     <div class="container">
     	<h1 class="my-4 col-xs-12">Project Write</h1>
-		<form action="projectInsert.do" method="post" enctype="multipart/form-data" id="postForm">
+		<form action="projectInsert.do" method="post" enctype="multipart/form-data" id="projForm">
 		  <div class="form-group">
 		    <input type="text" class="form-control" id="proj_title" name="proj_title" placeholder="프로젝트 명">
 		  </div>
@@ -61,6 +61,14 @@
 		</form>    
 
     </div>
-
+	<script>
+	    $("#projForm").submit(function(){
+	   	 var proj_title = $('#proj_title').val();
+	   	 if(proj_title==""){
+	   		  alert( "프로젝트 제목을 써주세요!" );
+	   		  event.preventDefault();
+	   	 }
+	   });	
+	</script>
 </body>
 </html>

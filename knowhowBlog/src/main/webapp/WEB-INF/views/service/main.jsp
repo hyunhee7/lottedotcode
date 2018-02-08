@@ -42,29 +42,42 @@
       <h1 class="my-4">Recent Project</h1>
 
       <div class="row">
-      	<!-- card1 -->
-      	<c:forEach var="tmp" items="${projList }">
-	        <div class="col-lg-4 col-sm-6 portfolio-item">
-	          <div class="card h-100">
-	          	<c:if test="${empty tmp.proj_imagePath}">
-	            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
-	            </c:if>
-	          	<c:if test="${!empty tmp.proj_imagePath}"> 
-	            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="width:348px;height:200px;"></a>
-	            </c:if>	            
-	            <div class="card-body">
-	              <h4 class="card-title">
-	                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
-	              </h4>
-	              <p class="card-text">${tmp.proj_content }</p>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
-        <!-- card1 fin. -->
+      
+        <c:choose>
+        	<c:when test="${empty projList}">
+        		<div class="default-img" style="border:1px solid #e9e9e9;width:100%;height:250px;">
+        			<p style="text-align: center;line-height: 250px;">등록된 포스트가 없습니다.</p>
+        		</div>
+        		<br /><br />
+        	</c:when>
+        	<c:when test="${projList ne null }">
+		      	<!-- card1 -->
+		      	<c:forEach var="tmp" items="${projList }">
+			        <div class="col-lg-4 col-sm-6 portfolio-item">
+			          <div class="card h-100">
+			          	<c:if test="${empty tmp.proj_imagePath}">
+			            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
+			            </c:if>
+			          	<c:if test="${!empty tmp.proj_imagePath}"> 
+			            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="width:348px;height:200px;"></a>
+			            </c:if>	            
+			            <div class="card-body">
+			              <h4 class="card-title">
+			                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
+			              </h4>
+			              <p class="card-text">${tmp.proj_content }</p>
+			            </div>
+			          </div>
+			        </div>
+		        </c:forEach>
+		        <!-- card1 fin. -->        	
+        	
+        	</c:when>        
+        </c:choose>
+
       </div>
       <!-- /.row -->
-
+		<br />
       <h1>Recent Knowhow</h1>
       
       <br />
@@ -72,30 +85,42 @@
       <div class="row">
 
       	<!-- 카드1 -->
-      	<c:forEach var="tmp" items="${KhList }">
-	        <div class="col-lg-4 mb-4">
-	          <div class="card h-100">
-	            <h4 class="card-header">${tmp.kh_title }</h4>
-	          	<c:if test="${empty tmp.kh_filePath}">
-	            	<a style="border-bottom:1px solid #e9e9e9;" href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
-	            </c:if>
-	          	<c:if test="${!empty tmp.kh_filePath}"> 
-	            	<a href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
-	            </c:if>	            
-	            <div class="">
-	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
-		   			 >${tmp.kh_content }</textarea>
-	            </div>	            
-	            <div class="card-footer">
-	              <a href="knowhowDetail.do?kh_num=${tmp.kh_num }" class="btn btn-primary">Learn More</a>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
-        <!-- 카드1 fin. -->
+      	<c:choose>
+      		<c:when test="${empty KhList}">
+        		<div class="default-img" style="border:1px solid #e9e9e9;width:100%;height:250px;">
+        			<p style="text-align: center;line-height: 250px;">등록된 포스트가 없습니다.</p>
+        		</div>
+        		<br /><br />      		
+      		</c:when>
+      		<c:when test="${KhList ne null }">
+      			<!-- 카드1  -->
+		       	<c:forEach var="tmp" items="${KhList }">
+			        <div class="col-lg-4 mb-4">
+			          <div class="card h-100">
+			            <h4 class="card-header">${tmp.kh_title }</h4>
+			          	<c:if test="${empty tmp.kh_filePath}">
+			            	<a style="border-bottom:1px solid #e9e9e9;" href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
+			            </c:if>
+			          	<c:if test="${!empty tmp.kh_filePath}"> 
+			            	<a href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
+			            </c:if>	            
+			            <div class="">
+			              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
+				   			 >${tmp.kh_content }</textarea>
+			            </div>	            
+			            <div class="card-footer">
+			              <a href="knowhowDetail.do?kh_num=${tmp.kh_num }" class="btn btn-primary">Learn More</a>
+			            </div>
+			          </div>
+			        </div>
+		        </c:forEach>
+		        <!-- 카드1 fin. -->     		
+      		</c:when>
+      	</c:choose>
+		<br />
       </div>
       <!-- /.row -->
-
+      <br /><br />
     </div>
     <!-- /.container -->
 
