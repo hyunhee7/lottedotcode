@@ -7,6 +7,7 @@
 		WHERE kh_disp_tf=0
 		ORDER BY kh_num DESC 
 	</select>
+
  	<insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
 		INSERT INTO kh_board (kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_modr_id) 
 		VALUES(#{kh_title}, #{kh_filePath}, #{kh_fileOrgName}, #{kh_fileSize}, #{kh_content}, #{kh_regr_id}, #{kh_modr_id}) 
