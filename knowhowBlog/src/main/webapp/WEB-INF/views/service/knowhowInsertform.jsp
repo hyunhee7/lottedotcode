@@ -33,7 +33,7 @@
 	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 	
     <style>
-    	.menu1 { font-weight : bold;}
+    	.menu2 { font-weight : bold;}
     </style>
 </head>
 <body>

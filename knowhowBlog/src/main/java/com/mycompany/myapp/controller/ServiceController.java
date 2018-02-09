@@ -79,15 +79,15 @@ public class ServiceController {
 		System.out.println("노하우 들어옴");
 		String kh_regr_id = (String)session.getAttribute("id");
 		System.out.println("등록자:"+kh_regr_id);
-	
+		
 		dto.setKh_regr_id(kh_regr_id);
 		dto.setKh_modr_id(kh_regr_id);
 		
 		/* autoIncrement 이후에 kh_num을 가져와 넣은 후 Tag 넣는 작업을 한다 */
 		try {
-			int post_num = knowhowService.insert(dto, request);
-			dto.setKh_num(post_num);
-			System.out.println("post_num직후:"+dto.getKh_num());
+			int kh_num = knowhowService.insert(dto, request);
+			dto.setKh_num(kh_num);
+			System.out.println("kh_num직후:"+dto.getKh_num());
 		}catch(Exception ex){
 			
 		}finally {
@@ -271,9 +271,9 @@ public class ServiceController {
 		System.out.println("프로젝트넘:"+dto.getPost_proj_num());		
 		dto.setPost_regr_id(post_regr_id);
 		dto.setPost_modr_id(post_regr_id);
-		
+
 		try {
-			int post_num = projTimelineService.insert(dto, request);
+			int post_num=projTimelineService.insert(dto, request);
 			dto.setPost_num(post_num);
 			System.out.println("post_num직후:"+dto.getPost_num());
 		}catch(Exception ex){
