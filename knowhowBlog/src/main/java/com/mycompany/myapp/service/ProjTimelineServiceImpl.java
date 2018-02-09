@@ -115,7 +115,7 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
         //MultipartFile 객체의 참조값 얻어오기
         //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
         if( mFile.isEmpty() ) {
-        	dto.setPost_filePath("");
+        	dto.setPost_filePath(""); 
         }else {
             
             //원본 파일명
