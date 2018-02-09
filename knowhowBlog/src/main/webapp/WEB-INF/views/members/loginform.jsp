@@ -29,6 +29,12 @@
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
     <!-- Angular.js -->
     <script src="${pageContext.request.contextPath }/resources/js/angular.min.js"></script> 
+    <style>
+    	.hover-non:hover{
+    		color: #E0E0E0;
+    		transition: 0.5s;
+    	}
+    </style>
 </head>
 <body class="background-color">
 	<div class="login-wrapper">
@@ -37,7 +43,7 @@
 				<div class="img-mockup">
 					<img src="${pageContext.request.contextPath }/resources/images/logo.png">
 				</div>
-				<div class="logo">LOTTE.CODE</div>
+				<div style="text-align:center;"><a href="../service/main.do" class="logo hover-non" >LOTTE.CODE</a></div>
 				<p class="login-sublogo" style="font-size:13px">LOTTE.COM의 CODE를 공유하는 공간</p>
 				
 				<form action="login.do">

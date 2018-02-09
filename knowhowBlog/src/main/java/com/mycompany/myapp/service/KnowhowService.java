@@ -1,5 +1,7 @@
 package com.mycompany.myapp.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -15,4 +17,5 @@ public interface KnowhowService {
 	public void update(KnowhowDto dto, HttpServletRequest request);	
 	public void delete(int kh_num);
 	public void cmtInsert(KnowhowCommentDto dto);
+	public List<KnowhowDto> recentList();
 }

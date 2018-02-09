@@ -8,9 +8,31 @@
 	<select id="getList" resultType="projBoardDto"> 
 		SELECT proj_num, proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf 
 		FROM proj_board 
+		WHERE proj_disp_tf=0
 		ORDER BY proj_num DESC 
 	</select>
-
+	<select id="getRecentList" resultType="projBoardDto"> 
+		SELECT proj_num, proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf 
+		FROM proj_board 
+		WHERE proj_disp_tf=0
+		ORDER BY proj_num DESC LIMIT 0, 3
+	</select>	
+	<select id="getDetail" resultType="projBoardDto" parameterType="int">
+		SELECT proj_num, proj_writer, proj_title, proj_content, proj_imagePath, proj_disp_tf
+		FROM proj_board
+		WHERE proj_num=#{proj_num}
+	</select>
+	<update id="update" parameterType="projBoardDto"> 
+		UPDATE proj_board
+		SET proj_title=#{proj_title}, proj_imagePath=#{proj_imagePath}, proj_content=#{proj_content},
+		proj_date=CURRENT_TIMESTAMP
+		WHERE proj_num=#{proj_num} 
+	</update>
+	<update id="delete" parameterType="int"> 
+		UPDATE proj_board
+		SET proj_disp_tf=1
+		WHERE proj_num=#{kh_num} 
+	</update>		
 </mapper>
 
 

@@ -30,8 +30,18 @@
     <style>
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
-			min-height: 50px;
+			min-height: 90px;
 		}
+    	@media (max-width: 750px) {   
+			 .mobile-hidden{
+			 	display:none;!important;
+			 }
+		}
+		@media (min-width: 768px) {         
+			 .web-hidden{
+			 	display:none;!important;
+			 }
+		}  		
     </style>    
 </head>
 <body>
@@ -41,33 +51,47 @@
     <!-- Page Content -->
     <div class="container">
 
-      <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Project Timeline
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Project Timeline
         <!-- <small>PC</small> -->
-      </h1>
+        </h1>
  	  
- 	  <!-- Current location -->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="projectBoard.do">Project Board</a>
-        </li>
+ 	    <!-- Current location -->
+        <ol class="breadcrumb">
+	         <li class="breadcrumb-item">
+	          	<a href="projectBoard.do">Project Board</a>
+	         </li>
 
-		   <li class="breadcrumb-item active">프로젝트 내용 추가되면 좋겠다</li>  
-
-      </ol>
-
+		     <li class="breadcrumb-item active">${pdto.proj_title }</li>  
+        </ol>
+ 		<div  style="border:1px solid #e9e9e9;width:100%;height:70px;padding:10px;margin-bottom:5px;">
+ 			<li>프로젝트 명: ${pdto.proj_title }</li>
+ 			<li>내용 : ${pdto.proj_content }</li>
+ 		</div>
+ 		
+ 		
       <!-- Post Insert Btn -->
       <% if (id!=null ){ %>    
       <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-bottom:10px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
-      </div>
-      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
-      		<button type="button" class="btn btn-primary" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
-      </div>      	 
+      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right;" onclick="location.href='projPostInsertform.do?num=<%=proj_num%>'">Post쓰기</button> 
+      </div>    	 
       <% } %>
+
+       <c:set value="${pdto.proj_writer }" var="proj_writer"/>
+       <% String proj_writer = (String)pageContext.getAttribute("proj_writer"); %>
+ 
+ 	   <% if (proj_writer.equals(id) ){ %>
+	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
+	      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
+	      </div>      
+	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
+	      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectDelete.do?num=<%=proj_num%>'">프로젝트 삭제</button> 
+	      </div>    
+	    <%} %>
 
       <br />
       <br />
+      
       
       <!-- Blog Post1 -->
       <c:forEach var="tmp" items="${list }">
@@ -83,6 +107,7 @@
 	              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"
 		   			 >${tmp.post_content }</textarea>
 	              </div>
+	              <br />
 	              
 	              <a href="projPostDetail.do?proj_num=${tmp.post_proj_num }&post_num=${tmp.post_num}" class="btn btn-primary">Read More &rarr;</a>
 	            </div>
@@ -96,23 +121,6 @@
       </c:forEach>
       <!-- Blog Post1 fin. -->
       
-      
-      <!-- Default Post -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="card-title">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-              <a href="#" class="btn btn-primary">Read More &rarr;</a>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer text-muted">
-          Posted on January 1, 2017 by
-          <a href="#">Start Bootstrap</a>
-        </div>
-      </div>
 
 
       <!-- Pagination -->
@@ -151,7 +159,8 @@
 	    var simplemde = new SimpleMDE({
 	        element: this,
 	        toolbar: false,
-			tabSize: 1
+			tabSize: 1,
+			status: false
 	    });
 	    simplemde.togglePreview();
 	})

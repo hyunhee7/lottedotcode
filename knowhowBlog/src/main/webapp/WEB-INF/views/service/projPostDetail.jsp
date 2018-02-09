@@ -36,7 +36,17 @@
     	.menu1 { font-weight : bold;}
     	.CodeMirror, .CodeMirror-scroll {
 			min-height: 250px;
-		}    	
+		} 
+    	@media (max-width: 750px) {   
+			 .mobile-hidden{
+			 	display:none;!important;
+			 }
+		}
+		@media (min-width: 768px) {         
+			 .web-hidden{
+			 	display:none;!important;
+			 }
+		}		   	
     </style>    
 </head>
 <body>
@@ -71,11 +81,11 @@
           <hr>
           <c:set value="${dto.post_regr_id }" var="post_regr_id"/>
           <% String post_regr_id = (String)pageContext.getAttribute("post_regr_id"); %>
-
+		  
 		  <% if (post_regr_id.equals(regr_id) ){ %>
 		  <!-- Post Insert Btn -->
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='postUpdateform.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">수정</button>
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='postDelete.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">삭제</button>  
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='postUpdateform.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">수정</button>
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='postDelete.do?proj_num=${dto.post_proj_num }&post_num=${dto.post_num}'">삭제</button>  
 		  <%} %>
           <!-- Date/Time -->
           <p>Posted on ${dto.post_reg_dtime}</p>
@@ -83,9 +93,12 @@
           <hr>
           <c:choose>
 	          <c:when test="${!empty dto.post_filePath}">
-					<div style="border:1px solid #e9e9e9">
+					<div style="border:1px solid #e9e9e9" class="mobile-hidden">
 						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> <a href="FileDownload.do?proj_num=${dto.post_proj_num}&post_num=${dto.post_num}">${dto.post_filePath}</a></p>
-					</div> 
+					</div>
+					<div style="border:1px solid #e9e9e9" class="web-hidden">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> 첨부파일은 PC에서만 확인 가능합니다.</p>
+					</div> 					 
 					<br />         
 	          </c:when> 
 	          <c:when test="${empty dto.post_filePath}">
@@ -107,54 +120,31 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-              <form action="commentInsert.do" method="post">
-                <div class="form-group" name="cmt_content">
-                  <textarea class="form-control" rows="3"></textarea>
+              <form action="PostCommentInsert.do" method="post" id="postCmt">
+                <div class="form-group">
+                  <textarea class="form-control" name="cmt_content" rows="3"></textarea>
                 </div>
 			    <div class="form-group">
-			  		<input type=hidden name="cmt_id" value="<%=regr_id%>"> 
-			  		<input type=hidden name="cmt_num" value="${dto.post_num }"> 
-			  		<input type=hidden name="cmt_pjnum" value="${dto.post_proj_num }"> 
-			    </div>                
-                <button type="submit" class="btn btn-primary">Submit</button>
+			  		<input type=hidden name="cmt_post_num" value="${dto.post_num }"> 
+			  		<input type=hidden name="cmt_proj_num" value="${dto.post_proj_num }"> 
+			  		<input type=hidden id="cmt_writer" value="${sessionScope.id}"> 
+			    </div>   
+                	<button type="submit" class="btn btn-primary" id="cmtSubmit">Submit</button>
               </form>
             </div>
           </div>
 
           <!-- Single Comment -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <c:forEach items="${dto.cmts}" var="cmtList">
+          <div class="media mb-4" style="padding:0 0 5px 0; border-bottom:1px solid #e9e9e9;">
+            <img class="d-flex mr-3 rounded-circle" id="profile-preview" src="${pageContext.request.contextPath }/upload/${cmtList.cmt_imgPath}" style="width:50px;height:50px;">
             <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              <h5 class="mt-0">${cmtList.cmt_regr_id}</h5>
+              ${cmtList.cmt_content}
             </div>
           </div>
+          </c:forEach>
 
-          <!-- Comment with nested comments -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">김현희</h5>
-              	안녕하세요! 해당 API를 확인했습니다. 오류에 대해 확인하여 새로 포스팅하였으니 확인하시고 회신 부탁드립니다!
-
-<!--               <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-              </div>
-
-              <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-              </div> -->
-
-            </div>
-          </div>
 
         </div>
 
@@ -217,6 +207,15 @@
 	        toolbar: false
 	    });
 	    simplemde.togglePreview();
+	    
+	    $("#postCmt").submit(function(){
+	    	 var cmt_writer = $('#cmt_writer').val();
+	    	 console.log(cmt_writer);
+	    	 if(cmt_writer==""){
+	    		  alert( "로그인이 필요합니다!" );
+	    		  event.preventDefault();
+	    	 }
+	    });
 	</script>
 </body>
 </html>

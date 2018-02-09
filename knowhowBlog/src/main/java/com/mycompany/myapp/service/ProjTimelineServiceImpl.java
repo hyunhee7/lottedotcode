@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mycompany.myapp.dao.PostTagDao;
+import com.mycompany.myapp.dao.ProjBoardDao;
 import com.mycompany.myapp.dao.ProjTimelineDao;
+import com.mycompany.myapp.dto.ProjBoardDto;
+import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
@@ -20,12 +22,16 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	
 	@Autowired
 	private ProjTimelineDao projTimelineDao;
+	@Autowired
+	private ProjBoardDao projBoardDao;	
 	
 	@Override
 	public ModelAndView list(int num) {
 		List<ProjTimelineDto> list = projTimelineDao.getList(num);
+		ProjBoardDto pdto= projBoardDao.getDetail(num);
 		ModelAndView mView = new ModelAndView();
 		mView.addObject("list", list);
+		mView.addObject("pdto", pdto);
 		return mView;
 	}
 
@@ -80,6 +86,8 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 		ProjTimelineDto dto = projTimelineDao.getDetail(dtoNum);
 		List<ProjPostTagDto> tags = projTimelineDao.getTags(dtoNum);
 		dto.setPost_tag(tags);
+		List<ProjPostCommentDto> cmts = projTimelineDao.getCmts(dtoNum);
+		dto.setCmts(cmts);		
 		ModelAndView mView = new ModelAndView();
 		mView.addObject("dto", dto);
 		return mView;
@@ -143,6 +151,11 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	@Override
 	public void delete(ProjTimelineDto dto) {
 		projTimelineDao.delete(dto);
+	}	
+	
+	@Override
+	public void cmtInsert(ProjPostCommentDto dto) {
+		projTimelineDao.cmtInsert(dto);
 	}	
 	
 	

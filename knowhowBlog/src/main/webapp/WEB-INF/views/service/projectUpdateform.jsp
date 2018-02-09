@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String proj_num = (String)request.getParameter("proj_num"); %>    
+<% String proj_num = (String)request.getParameter("num"); %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,18 +40,21 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h1 class="my-4 col-xs-12">Project Write</h1>
-		<form action="projectInsert.do" method="post" enctype="multipart/form-data" id="projForm">
+    	<h1 class="my-4 col-xs-12">Project 수정</h1>
+		<form action="projectUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
 		  <div class="form-group">
-		    <input type="text" class="form-control" id="proj_title" name="proj_title" placeholder="프로젝트 명">
+		    <input type="text" class="form-control" id="proj_title" name="proj_title" value=${dto.proj_title }>
 		  </div>
+		  <div class="form-group">
+		    <input type="hidden" class="form-control" id="proj_num" name="proj_num" value=${dto.proj_num }>
+		  </div>			  	  
 		  <div class="custom-file">
 		 	<input type="file" class="custom-file-input" id="proj_file" name="uploadImage">
-			<label class="custom-file-label" for="customFile">Choose file</label>
+			<label class="custom-file-label" for="customFile">${dto.proj_imagePath}</label>
 		  </div>
 		  <div class="form-group">
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" style="margin-top:17px;" name="proj_content"
-		    placeholder="프로젝트 부가 설명" ></textarea>
+		    >${dto.proj_content }</textarea>
 		  </div>		  
 		  <div style="text-align: center;">
 	      <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
@@ -61,14 +65,6 @@
 		</form>    
 
     </div>
-	<script>
-	    $("#projForm").submit(function(){
-	   	 var proj_title = $('#proj_title').val();
-	   	 if(proj_title==""){
-	   		  alert( "프로젝트 제목을 써주세요!" );
-	   		  event.preventDefault();
-	   	 }
-	   });	
-	</script>
+
 </body>
 </html>

@@ -26,6 +26,7 @@
   
     <style>
     	.menu1 { font-weight : bold;}
+    	a {text-decoration:none;}
     </style>
 </head>
 <body>
@@ -48,41 +49,41 @@
       	<%} %>
       	<br />
       	
-      	<!-- card1 -->
-      	<c:forEach var="tmp" items="${list }">
-	        <div class="col-lg-4 col-sm-6 portfolio-item">
-	          <div class="card h-100">
-	          	<c:if test="${empty tmp.proj_imagePath}">
-	            	<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	            </c:if>
-	          	<c:if test="${!empty tmp.proj_imagePath}"> 
-	            	<a href="#" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="height:100%;"></a>
-	            </c:if>	            
-	            <div class="card-body">
-	              <h4 class="card-title">
-	                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
-	              </h4>
-	              <p class="card-text">${tmp.proj_content }</p>
-	            </div>
-	          </div>
-	        </div>
-        </c:forEach>
-        <!-- card1 fin. -->
-        
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-            </div>
-          </div>
-        </div>
+      	<c:choose>
+      		<c:when test="${empty list}">
+        		<div class="default-img" style="border:1px solid #e9e9e9;width:100%;height:250px;">
+        			<p style="text-align: center;line-height: 250px;">등록된 포스트가 없습니다.</p>
+        		</div>
+        		<br /><br />      		
+      		</c:when>
+      		<c:when test="${list ne null }">      	
+		      	<!-- card1 -->
+		      	<c:forEach var="tmp" items="${list }">
+			        <div class="col-lg-4 col-sm-6 portfolio-item">
+			          <div class="card h-100">
+			          	<c:if test="${empty tmp.proj_imagePath}">
+			            	<a href="projectTimeline.do?num=${tmp.proj_num }" style="border-bottom:1px solid #e9e9e9;"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
+			            </c:if>
+			          	<c:if test="${!empty tmp.proj_imagePath}"> 
+			            	<a href="projectTimeline.do?num=${tmp.proj_num }" ><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" style="height:185px;" alt=""></a>
+			            </c:if>	            
+			            <div class="card-body">
+			              <h4 class="card-title">
+			                <a href="projectTimeline.do?num=${tmp.proj_num }">${tmp.proj_title }</a>
+			              </h4>
+			              <p class="card-text"><a href="projectTimeline.do?num=${tmp.proj_num }" style="text-decoration:none;color:#000000;">${tmp.proj_content }</a></p>
+
+			            </div>
+			          </div>
+			        </div>
+		        </c:forEach>
+		        <!-- card1 fin. -->
+      		</c:when>
+      	</c:choose>		      
+       
       </div>
       <!-- /.row -->
-
+	  <br /><br />
 
     </div>
     <!-- /.container -->

@@ -32,6 +32,16 @@
     
     <style>
     	.menu2 { font-weight : bold;}
+    	@media (max-width: 750px) {   
+			 .mobile-hidden{
+			 	display:none;!important;
+			 }
+		}
+		@media (min-width: 768px) {         
+			 .web-hidden{
+			 	display:none;!important;
+			 }
+		}    	
     </style>    
 </head>
 <body>
@@ -70,8 +80,8 @@
 
 		  <% if (kh_reg.equals(regr_id) ){ %>
 		  <!-- Post Insert Btn -->
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button>
-      	  <button type="button" class="btn btn-primary" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='knowhowDelete.do?kh_num=${dto.kh_num}'">삭제</button>  
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; font-size:10px;" onclick="location.href='knowhowUpdateform.do?kh_num=${dto.kh_num}'">수정</button>
+      	  <button type="button" class="btn btn-primary mobile-hidden" style="float:right; margin-bottom:15px; margin-right:2px;font-size:10px;" onclick="location.href='knowhowDelete.do?kh_num=${dto.kh_num}'">삭제</button>  
 		  <%} %>
           <!-- Date/Time -->
           <p>Posted on ${dto.kh_reg_dtime }</p>
@@ -79,9 +89,12 @@
           <hr>
           <c:choose>
 	          <c:when test="${!empty dto.kh_filePath}">
-					<div style="border:1px solid #e9e9e9">
+					<div style="border:1px solid #e9e9e9" class="mobile-hidden">
 						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> <a href="khFileDownload.do?kh_num=${dto.kh_num}">${dto.kh_filePath}</a></p>
 					</div> 
+					<div style="border:1px solid #e9e9e9" class="web-hidden">
+						<p style="margin:2px 3px 0 3px "><i class="fas fa-file" style="margin-right:3px"></i> 첨부파일은 PC에서만 확인 가능합니다.</p>
+					</div> 					
 					<br />         
 	          </c:when> 
 	          
@@ -101,12 +114,13 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-              <form action="commentInsert.do" method="post">
+              <form action="KHcommentInsert.do" method="post" id="postCmt">
                 <div class="form-group">
                   <textarea class="form-control" name="cmt_content" rows="3"></textarea>
                 </div>
 			    <div class="form-group">
-			  		<input type=hidden name="cmt_kh_num" value="${dto.kh_num }"> 
+			  		<input type=hidden name="cmt_kh_num" value="${dto.kh_num }">
+			  		<input type=hidden id="cmt_writer" value="${sessionScope.id}">  
 			    </div>                
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
@@ -191,7 +205,14 @@
 	    });
 	    simplemde.togglePreview();
 
-			    
+	    $("#postCmt").submit(function(){
+	    	 var cmt_writer = $('#cmt_writer').val();
+	    	 console.log(cmt_writer);
+	    	 if(cmt_writer==""){
+	    		  alert( "로그인이 필요합니다!" );
+	    		  event.preventDefault();
+	    	 }
+	    });			    
 	</script>
 </body>
 </html>

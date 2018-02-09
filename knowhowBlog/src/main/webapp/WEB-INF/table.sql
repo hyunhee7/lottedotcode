@@ -15,7 +15,7 @@ CREATE TABLE MEMBERS (
 )
 
 /* member 컬럼 생성 */
-INSERT INTO MEMBERS (id, pwd, name, imagePath) VALUES('hyunhi7', 'gusgml12', 'kim', 'logo.png');
+INSERT INTO MEMBERS (id, pwd, name, imagePath) VALUES('hhkim20', 'gusgml12', 'kim', 'logo.png');
 
 /* member 컬럼 탐색 */
 SELECT * FROM MEMBERS;
@@ -23,7 +23,7 @@ SELECT * FROM MEMBERS;
 /* PROJECT 테이블 생성 */
 CREATE TABLE PROJ_BOARD (
 	proj_num		INT		    	NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
-	proj_title		VARCHAR(50) 	NOT NULL DEFAULT "프로젝트",
+	proj_title		VARCHAR(50) 	NOT NULL DEFAULT '프로젝트',
 	proj_writer		VARCHAR(50)		NOT NULL,
 	proj_content	VARCHAR(500),
 	proj_imagePath	VARCHAR(50),
@@ -47,7 +47,7 @@ select * from proj_board;
 /* POST 테이블 생성 */
 CREATE TABLE PROJ_POST_BOARD (
 	post_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	post_title  		VARCHAR(50)		NOT NULL DEFAULT "포스팅",
+	post_title  		VARCHAR(50)		NOT NULL DEFAULT '포스팅',
 	post_filePath		VARCHAR(50),
 	post_fileOrgName	VARCHAR(100),
 	post_fileSize		FLOAT, 
@@ -124,10 +124,10 @@ CREATE TABLE POST_CMT (
 	cmt_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
 	cmt_imgPath			VARCHAR(50),
 	cmt_content			VARCHAR(500),
-	cmt_post_num		INT,
-	cmt_proj_num		INT,
+	cmt_post_num		INT				NOT NULL,
+	cmt_proj_num		INT				NOT NULL,
 	cmt_regr_id			VARCHAR(50)		NOT NULL,	
-	cmt_reg_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	cmt_reg_dtime		DATETIME		NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	cmt_modr_id			VARCHAR(50)		NOT NULL,	
 	cmt_mod_dtime		DATETIME		DEFAULT CURRENT_TIMESTAMP,	
 	cmt_disp_tf			BOOLEAN			NOT NULL DEFAULT false,	

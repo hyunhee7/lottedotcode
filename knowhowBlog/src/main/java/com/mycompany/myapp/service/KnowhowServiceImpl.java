@@ -14,6 +14,7 @@ import com.mycompany.myapp.dao.KnowhowDao;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
+import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
@@ -153,5 +154,11 @@ public class KnowhowServiceImpl implements KnowhowService {
 	public void cmtInsert(KnowhowCommentDto dto) {
 		knowhowDao.cmtInsert(dto);
 	}
+	
+	@Override
+	public List<KnowhowDto> recentList() {
+		List<KnowhowDto> list=knowhowDao.getRecentList();
+		return list;
+	}		
 
 }

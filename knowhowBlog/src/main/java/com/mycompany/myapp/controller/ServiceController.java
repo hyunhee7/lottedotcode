@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjBoardDto;
+import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 import com.mycompany.myapp.service.KnowhowService;
 import com.mycompany.myapp.service.KnowhowTagService;
@@ -43,10 +44,12 @@ public class ServiceController {
 	private MembersService membersService;
 	
 	@RequestMapping("/service/main.do")
-	public ModelAndView login(){
-		List<String> list=new ArrayList<String>();
+	public ModelAndView recentList(){
+		List<ProjBoardDto> projList=projboardService.recentList();
+		List<KnowhowDto> KhList=knowhowService.recentList();
 		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
+		mView.addObject("projList", projList);
+		mView.addObject("KhList", KhList);
 		mView.setViewName("service/main");
 		return mView;
 	}
@@ -202,6 +205,39 @@ public class ServiceController {
 		return mView;
 	}	
 	
+	/* 프로젝트 수정 form */
+	@RequestMapping("/service/projectUpdateform.do")
+	public ModelAndView ProjectUpdateform(HttpServletRequest request){
+		int proj_num = Integer.parseInt(request.getParameter("num"));
+		System.out.println("프로젝트번호"+proj_num);
+		ModelAndView mView=projboardService.detail(proj_num);
+		mView.setViewName("service/projectUpdateform");
+		return mView;
+	}		
+	
+	/* 프로젝트 수정 */
+	@RequestMapping("/service/projectUpdate")
+	public String projectUpdate(HttpSession session,HttpServletRequest request,
+			@ModelAttribute ProjBoardDto dto){
+		String proj_writer = (String)session.getAttribute("id");
+		System.out.println("작성자:"+proj_writer);
+		dto.setProj_writer(proj_writer);
+		System.out.println(dto.getProj_num());
+
+		projboardService.update(dto,request);
+		
+		return "redirect:/service/projectBoard.do";
+	}	
+	
+	/* 프로젝트 삭제 */
+	@RequestMapping("/service/projectDelete.do")
+	public String projDelete(HttpSession session,HttpServletRequest request) {
+		int proj_num = Integer.parseInt(request.getParameter("num"));
+		projboardService.delete(proj_num);
+		
+		return "redirect:/service/projectBoard.do";
+	}		
+	
 	/* 프로젝트 Timeline 목록 */
 	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(@RequestParam int num, HttpSession session){
@@ -345,8 +381,8 @@ public class ServiceController {
 	}	
 	
 	/*	노하우 Comment 댓글 등록 */ 
-	@RequestMapping("/service/commentInsert")
-	public String postComment(HttpSession session, HttpServletRequest request,
+	@RequestMapping("/service/KHcommentInsert")
+	public String KHComment(HttpSession session, HttpServletRequest request,
 			@ModelAttribute KnowhowCommentDto dto){
 		
 		String id = (String)session.getAttribute("id");
@@ -364,5 +400,25 @@ public class ServiceController {
 		return "redirect:/service/knowhowDetail.do?kh_num="+dto.getCmt_kh_num();
 	}	
 	
+	
+	/*	Post Comment 댓글 등록 */ 
+	@RequestMapping("/service/PostCommentInsert")
+	public String PostComment(HttpSession session, HttpServletRequest request,
+			@ModelAttribute ProjPostCommentDto dto){
+		
+		String id = (String)session.getAttribute("id");
+		dto.setCmt_modr_id(id);
+		dto.setCmt_regr_id(id);
+		
+		/* 해당 회원 이미지 가져오기 */
+		String imgPath = membersService.getPath(dto.getCmt_regr_id());
+		dto.setCmt_imgPath(imgPath);
+		
+		System.out.println("댓글의 이미지 경로:"+dto.getCmt_imgPath());		
+
+		projTimelineService.cmtInsert(dto);
+		
+		return "redirect:/service/projPostDetail.do?proj_num="+dto.getCmt_proj_num()+"&post_num="+dto.getCmt_post_num();
+	}		
 	
 }
