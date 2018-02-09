@@ -55,13 +55,13 @@
       <div class="row">
 
       	<c:choose>
-      		<c:when test="${empty KhList}">
+      		<c:when test="${empty list}">
         		<div class="default-img" style="border:1px solid #e9e9e9;width:100%;height:250px;">
         			<p style="text-align: center;line-height: 250px;">등록된 포스트가 없습니다.</p>
         		</div>
         		<br /><br />      		
       		</c:when>
-      		<c:when test="${KhList ne null }">
+      		<c:when test="${list ne null }">
 		      	<!-- 카드1 -->
 		      	<c:forEach var="tmp" items="${list }">
 			        <div class="col-lg-4 mb-4">
