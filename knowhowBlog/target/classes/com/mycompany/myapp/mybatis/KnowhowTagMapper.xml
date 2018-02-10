@@ -5,7 +5,7 @@
 		INSERT INTO kh_tag (tag_name, tag_kh_num) 
 		VALUES(#{tag_name},#{tag_kh_num}) 
 	</insert>
-	<select id="getTags" resultType="knowhowTagDto" parameterType="knowhowTagDto"> <!-- knowhowDto 아님? -->
+	<select id="getTags" resultType="knowhowTagDto" parameterType="knowhowDto"> <!-- knowhowDto 아님? 안돼면 knowhowTagDto -->
 		SELECT tag_num, tag_name, tag_kh_num
 		FROM kh_tag
 		WHERE tag_kh_num=#{kh_num}
@@ -13,7 +13,12 @@
 	<select id="findTag" resultType="int" parameterType="knowhowTagDto"> 
 		SELECT COUNT(*) FROM kh_tag
 		WHERE tag_name=#{tag_name} AND tag_kh_num=#{tag_kh_num}
-	</select>		
+	</select>
+	<select id="findKh_num" resultType="java.util.HashMap" parameterType="string">
+		SELECT tag_kh_num
+		FROM kh_tag
+		WHERE tag_name=#{tag_name}		
+	</select>	
 </mapper>
 
 

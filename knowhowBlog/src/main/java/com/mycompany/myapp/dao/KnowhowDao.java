@@ -9,6 +9,7 @@ import com.mycompany.myapp.dto.KnowhowTagDto;
 
 public interface KnowhowDao {
 	public List<KnowhowDto> getList();
+	public List<KnowhowDto> getSearchList(List<Integer> kh_nums);	
 	public int insert(KnowhowDto dto);
 	public KnowhowDto getDetail(KnowhowDto dtoNum);
 	public KnowhowDto getFile(KnowhowDto dtoNum);

@@ -1,5 +1,7 @@
 package com.mycompany.myapp.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +28,12 @@ public class KnowhowTagDaoImpl implements KnowhowTagDao {
 			return false;
 		}else
 			return true;
-	}		
+	}	
+	
+	@Override
+	public List<Integer> findPost_num(String tag_name){
+		List<Integer> kh_num = session.selectList("knowhowTag.findKh_num", tag_name);
+		System.out.println("findPost_num:"+kh_num.get(0));
+		return kh_num;
+	}
 }

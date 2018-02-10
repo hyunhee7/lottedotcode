@@ -60,6 +60,16 @@ public class ServiceController {
 		ModelAndView mView=knowhowService.list();
 		mView.setViewName("service/knowhowList");
 		return mView;		
+	}
+	
+	/* 노하우 검색 리스트 */
+	@RequestMapping("/service/knowhowSearch.do")
+	public ModelAndView knowhowSearchList(HttpServletRequest request){
+		String tag_name=request.getParameter("tag_name");
+		
+		ModelAndView mView=knowhowService.Searchlist(tag_name);
+		mView.setViewName("service/knowhowSearch");
+		return mView;		
 	}	
 	
 	/* 노하우 등록 form */

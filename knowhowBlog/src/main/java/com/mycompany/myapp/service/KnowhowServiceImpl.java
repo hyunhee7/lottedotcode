@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dao.KnowhowDao;
+import com.mycompany.myapp.dao.KnowhowTagDao;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
@@ -24,6 +25,9 @@ public class KnowhowServiceImpl implements KnowhowService {
 	@Autowired
 	private KnowhowDao knowhowDao;
 	
+	@Autowired
+	private KnowhowTagDao knowhowTagDao;
+	
 	@Override
 	public ModelAndView list() {
 		List<KnowhowDto> list = knowhowDao.getList();
@@ -31,7 +35,17 @@ public class KnowhowServiceImpl implements KnowhowService {
 		mView.addObject("list", list);
 		return mView;
 	}	
-	
+
+	@Override
+	public ModelAndView Searchlist(String tag_name) {
+		List<Integer> kh_nums = knowhowTagDao.findPost_num(tag_name);
+		System.out.println("노하우숫자안들어갔나:"+kh_nums.get(0));
+		List<KnowhowDto> list = knowhowDao.getSearchList(kh_nums);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("list", list);
+		return mView;
+	}	
+		
 	
 	@Override
 	public int insert(KnowhowDto dto, HttpServletRequest request) {

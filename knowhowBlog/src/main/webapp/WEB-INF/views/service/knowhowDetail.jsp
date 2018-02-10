@@ -163,7 +163,7 @@
                   <ul class="list-unstyled mb-0">
 					<c:forEach items="${dto.post_tag}" var="TagList">
 		                    <li>
-		                      <a href="#">${TagList.tag_name}</a>
+		                      <a href="knowhowSearch.do?tag_name=${TagList.tag_name}">${TagList.tag_name}</a>
 		                    </li>
 					</c:forEach>   
                   </ul>

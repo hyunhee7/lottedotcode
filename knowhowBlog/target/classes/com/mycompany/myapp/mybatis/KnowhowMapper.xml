@@ -7,7 +7,17 @@
 		WHERE kh_disp_tf=0
 		ORDER BY kh_num DESC 
 	</select>
-
+	<select id="getSearchList" resultType="knowhowDto" parameterType="java.util.Map"> 
+		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+		FROM kh_board 
+		WHERE kh_num in
+		<foreach item="item" index="index" collection="list"
+      				open="(" separator="," close=")">
+		        #{item.tag_kh_num}
+		</foreach>		
+		ORDER BY kh_num DESC 
+	</select>
+	
  	<insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
 		INSERT INTO kh_board (kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_modr_id) 
 		VALUES(#{kh_title}, #{kh_filePath}, #{kh_fileOrgName}, #{kh_fileSize}, #{kh_content}, #{kh_regr_id}, #{kh_modr_id}) 

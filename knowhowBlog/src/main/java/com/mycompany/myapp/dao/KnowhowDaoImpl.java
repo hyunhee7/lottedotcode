@@ -23,6 +23,12 @@ public class KnowhowDaoImpl implements KnowhowDao {
 		List<KnowhowDto> list = session.selectList("knowhow.getList");
 		return list;
 	}
+
+	@Override
+	public List<KnowhowDto> getSearchList(List<Integer> kh_nums){
+		List<KnowhowDto> list = session.selectList("knowhow.getSearchList", kh_nums);
+		return list;
+	}	
 	
 	@Override
 	public int insert(KnowhowDto dto) {
