@@ -46,8 +46,8 @@ select * from proj_board;
 
 /* POST 테이블 생성 */
 CREATE TABLE PROJ_POST_BOARD (
-	post_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	post_title  		VARCHAR(50)		NOT NULL DEFAULT '포스팅',
+	post_num			INT				NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	post_title  		VARCHAR(50),
 	post_filePath		VARCHAR(50),
 	post_fileOrgName	VARCHAR(100),
 	post_fileSize		FLOAT, 
@@ -63,13 +63,13 @@ CREATE TABLE PROJ_POST_BOARD (
 ) ENGINE = InnoDB;
 
 CREATE TABLE PROJ_POST_TAG (
-	tag_num				INT				NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
+	tag_num				INT				NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	tag_name			VARCHAR(50)		NOT NULL,
 	tag_post_num		INT,
 	tag_proj_num		INT,
-	INDEX(tag_num),
-	FOREIGN KEY(tag_post_num) REFERENCES PROJ_POST_BOARD(post_num) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY(tag_proj_num) REFERENCES PROJ_POST_BOARD(post_proj_num) ON DELETE CASCADE ON UPDATE CASCADE
+	INDEX(tag_num)
+	/*FOREIGN KEY(tag_post_num) REFERENCES PROJ_POST_BOARD(post_num) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(tag_proj_num) REFERENCES PROJ_POST_BOARD(post_proj_num) ON DELETE CASCADE ON UPDATE CASCADE*/
 ) ENGINE = InnoDB;
 
 
@@ -91,7 +91,7 @@ INSERT INTO PROJ_POST_BOARD (post_title, post_content, post_regr_id, post_modr_i
 
 /* knowhow 테이블  */
 CREATE TABLE KH_BOARD (
-	kh_num			INT				NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	kh_num			INT				NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	kh_title  		VARCHAR(50)		NOT NULL DEFAULT "노하우",
 	kh_filePath		VARCHAR(50),
 	kh_fileOrgName	VARCHAR(100),

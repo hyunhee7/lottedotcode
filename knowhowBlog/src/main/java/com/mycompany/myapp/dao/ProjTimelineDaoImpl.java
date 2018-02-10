@@ -6,8 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mycompany.myapp.dto.KnowhowCommentDto;
-import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
@@ -27,8 +25,8 @@ public class ProjTimelineDaoImpl implements ProjTimelineDao{
 	@Override
 	public int insert(ProjTimelineDto dto) {
 		session.insert("projTimeline.insert", dto);
-		int post_num = dto.getPost_num();
-		System.out.println("포스트넘:"+post_num);
+		int post_num=dto.getPost_num();
+		System.out.println("daoPostnum:"+post_num);
 		return post_num;
 	}
 

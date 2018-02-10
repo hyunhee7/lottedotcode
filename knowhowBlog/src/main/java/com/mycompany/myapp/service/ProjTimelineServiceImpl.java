@@ -41,13 +41,14 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
         //파일을 저장할 폴더의 절대 경로를 얻어온다.
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
         System.out.println(realPath);
-        int post_num;
+        MultipartFile mFile=dto.getUploadImage();
         //MultipartFile 객체의 참조값 얻어오기
         //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
-        if( dto.getUploadImage().isEmpty() ) {
+        if( mFile.isEmpty() ) {
         	dto.setPost_filePath("");
+        	
         }else {
-            MultipartFile mFile=dto.getUploadImage();
+            
             //원본 파일명
             String orgFileName=mFile.getOriginalFilename();
             //파일 사이즈
@@ -74,8 +75,8 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
     		dto.setPost_fileSize(fileSize);            
         }
         
-
-		post_num=projTimelineDao.insert(dto);
+        
+		int post_num=projTimelineDao.insert(dto);
 		System.out.println("post_num:"+post_num);
 
 		return post_num;
