@@ -4,20 +4,22 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
-
+/* 포스트 Dto (TimelineDto) */
 @Repository
 public class ProjTimelineDto {
+			/*  포스트 번호,  프로젝트 번호 */
 	private int post_num, post_proj_num;
+			  /*  포스트 제목,	   포스트 첨부파일 경로,  포스트 내용,		포스트 등록 id,	  포스트 등록 날짜, 	  포스트 등록 id, 	포스트 수정 날짜  */
 	private String post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_modr_id, post_mod_dtime;
-	private boolean post_disp_tf;
-	private MultipartFile uploadImage;
-	private List<ProjPostTagDto> post_tag;
-	private String[] tags;
-	private int tmpPostNum;
-	private int lastPostNum;
-	private String post_fileOrgName;
-	private long post_fileSize;	
-	private List<ProjPostCommentDto> cmts;
+	private boolean post_disp_tf; 				/* 포스트 게시 여부 */
+	private MultipartFile uploadImage;			/* 업로드 파일 */
+	private List<ProjPostTagDto> post_tag;		/* 포스트 태그 리스트 */
+	private String[] tags;						/* 태그 목록 : Insert시 이용 */
+	private int tmpPostNum;						/* 임시 포스트 번호 */
+	private int lastPostNum;					/* 최종 포스트 번호 */
+	private String post_fileOrgName;			/* 첨부파일 원본 파일 명 */
+	private long post_fileSize;					/* 첨부파일 크기 */
+	private List<ProjPostCommentDto> cmts;		/* 포스트 내 댓글 리스트 */
 	
 	public ProjTimelineDto() {}
 

@@ -1,8 +1,9 @@
 package com.mycompany.myapp.dto;
-
+/* 포스트 태그 Dto */
 public class ProjPostTagDto {
+			/*  태그 번호,  태그 포스트 번호,   태그 프로젝트 번호  */
 	private int tag_num, tag_post_num, tag_proj_num;
-	private String tag_name;
+	private String tag_name; /* 태그 명 */
 	
 	public ProjPostTagDto() {}
 

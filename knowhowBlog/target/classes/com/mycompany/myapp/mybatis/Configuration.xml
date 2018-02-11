@@ -2,6 +2,7 @@
 <!DOCTYPE configuration
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- Ioc(Inversion of Control)컨테이너 사용 위한 정보. 청사진과 같다. -->
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mycompany.myapp.dto.MembersDto" alias="membersDto"/>

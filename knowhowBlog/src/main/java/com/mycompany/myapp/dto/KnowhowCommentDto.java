@@ -1,9 +1,12 @@
 package com.mycompany.myapp.dto;
-
+/* 노하우 댓글 Dto */
 public class KnowhowCommentDto {
-	int cmt_num, cmt_kh_num;
+	
+	int cmt_num, cmt_kh_num; /* 댓글 번호, 댓글의 노하우 번호 */
+	/* 	      댓글 작성자, 프로필 사진,   댓글 내용,       댓글 등록 id,	    댓글 등록날짜,	          댓글 수정 id,    댓글 수정 날짜 */
 	String cmt_id, cmt_imgPath, cmt_content, cmt_regr_id, cmt_reg_dtime, cmt_modr_id, cmt_mod_dtime;
 	
+	/* 생성자 */
 	public KnowhowCommentDto() {}
 
 	public KnowhowCommentDto(int cmt_num, int cmt_kh_num, String cmt_id, String cmt_imgPath, String cmt_content,

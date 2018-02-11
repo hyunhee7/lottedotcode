@@ -8,15 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
-
+/* 노하우 Service */
 public interface KnowhowService {
-	public ModelAndView list();
-	public ModelAndView Searchlist(String tag_name);	
-	public int insert(KnowhowDto dto,HttpServletRequest request);
-	public ModelAndView detail(KnowhowDto dtoNum);
-	public ModelAndView getFile(KnowhowDto dtoNum);
-	public void update(KnowhowDto dto, HttpServletRequest request);	
-	public void delete(int kh_num);
-	public void cmtInsert(KnowhowCommentDto dto);
-	public List<KnowhowDto> recentList();
+	public ModelAndView list();											/* 노하우 리스트 */
+	public ModelAndView Searchlist(String tag_name);					/* 노하우 태그별 검색 */
+	public int insert(KnowhowDto dto,HttpServletRequest request);		/* 노하우 등록 */
+	public ModelAndView detail(KnowhowDto dtoNum);						/* 노하우 상세보기 */
+	public ModelAndView getFile(KnowhowDto dtoNum);						/* 노하우 첨부파일 다운로드 준비 */
+	public void update(KnowhowDto dto, HttpServletRequest request);		/* 노하우 수정 */
+	public void delete(int kh_num);										/* 노하우 삭제 */
+	public void cmtInsert(KnowhowCommentDto dto);						/* 노하우 댓글 등록 */
+	public List<KnowhowDto> recentList();								/* 노하우 최근 게시물  */
 }

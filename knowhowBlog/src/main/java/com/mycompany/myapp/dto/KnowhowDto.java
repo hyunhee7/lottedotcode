@@ -5,18 +5,21 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-
+/* 노하우 보드 Dto */
 public class KnowhowDto {
-	private int kh_num;
-	private String kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_modr_id, kh_mod_dtime;
-	private boolean kh_disp_tf;
-	private MultipartFile uploadImage;
-	private List<KnowhowTagDto> post_tag;
-	private String[] tags;
-	private String kh_fileOrgName;
-	private long kh_fileSize;	
-	private List<KnowhowCommentDto> cmts;
+	private int kh_num; /* 노하우 번호 */
 	
+				/* 노하우 제목,  노하우 파일 경로, 노하우 내용,    노하우 등록 id, 노하우 등록 날짜,  노하우 수정 id, 노하우 수정 날짜   */
+	private String kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_modr_id, kh_mod_dtime;
+	private boolean kh_disp_tf; /* 노하우 게시 여부 */
+	private MultipartFile uploadImage; /* 업로드 파일 */
+	private List<KnowhowTagDto> post_tag; /* 해당 노하우의 태그 list - detail에 가져올 때 */
+	private String[] tags; /* 태그 list - 태그 insert 시 이용  */
+	private String kh_fileOrgName; /* 원본 파일 명 */
+	private long kh_fileSize;	/* 파일 크기 */
+	private List<KnowhowCommentDto> cmts; /* 해당 노하우의 댓글 리스트 */
+	
+	/* 생성자 */
 	public KnowhowDto() {}
 	
 	public KnowhowDto(int kh_num, String kh_title, String kh_filePath, String kh_content, String kh_regr_id,

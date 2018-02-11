@@ -4,10 +4,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MembersDto {
 	
-	private int mem_num;
-	private String id, pwd, name, imagePath;
-	private MultipartFile uploadImage;
-	private boolean isMember;
+	private int mem_num; /* 회원 번호 */
+	private String id, pwd, name, imagePath; /* 회원 id, 비밀번호, 이름, 프로필 사진 경로 */
+	private MultipartFile uploadImage; /* 업로드 이미지 */
+	private boolean isMember;/* 회원 여부  */
 	
 	public MembersDto() {}
 

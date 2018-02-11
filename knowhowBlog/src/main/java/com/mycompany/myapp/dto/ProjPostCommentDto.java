@@ -1,13 +1,15 @@
 package com.mycompany.myapp.dto;
-
+/* 포스트 댓글 Dto */
 public class ProjPostCommentDto {
+	/*  댓글 번호,  댓글 포스트 번호 ,  댓글 프로젝트 번호 */
 	int cmt_num, cmt_post_num, cmt_proj_num;
+	/* 	   댓글 작성자, 작성자 프로필 사진, 작성 내용,		 댓글 등록 id,    댓글 등록 날짜, 	 댓글 수정 id,	  댓글 수정 날짜 */
 	String cmt_id, cmt_imgPath, cmt_content, cmt_regr_id, cmt_reg_dtime, cmt_modr_id, cmt_mod_dtime;
 	
 	
 	public ProjPostCommentDto() {}
 
-
+	
 	public ProjPostCommentDto(int cmt_num, int cmt_post_num, int cmt_proj_num, String cmt_id, String cmt_imgPath,
 			String cmt_content, String cmt_regr_id, String cmt_reg_dtime, String cmt_modr_id, String cmt_mod_dtime) {
 		super();

@@ -1,13 +1,15 @@
 package com.mycompany.myapp.dto;
 
 import org.springframework.web.multipart.MultipartFile;
-
+/* 프로젝트 보드 Dto */
 public class ProjBoardDto {
 	
-	private int proj_num;
+	private int proj_num; /* 프로젝트 번호  */
+	
+				/* 프로젝트 제목,  프로젝트 작성자,  프로젝트 내용,     프로젝트 이미지 경로, 프로젝트 등록 날짜 */
 	private String proj_title, proj_writer, proj_content, proj_imagePath, proj_date;
-	private boolean proj_disp_tf;
-	private MultipartFile uploadImage;
+	private boolean proj_disp_tf; /* 프로젝트 게시 여부 */
+	private MultipartFile uploadImage; /* 업로드 이미지 */
 	
 	public ProjBoardDto() {}
 

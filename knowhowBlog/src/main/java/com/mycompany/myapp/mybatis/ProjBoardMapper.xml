@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 프로젝트 보드 -->
 <mapper namespace="projBoard">
+	
+	<!-- 프로젝트 등록하기 -->
 	<insert id="insert" parameterType="projBoardDto"> 
 		INSERT INTO proj_board (proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf) 
 		VALUES(#{proj_title},#{proj_writer},#{proj_content},#{proj_imagePath}, now(), #{proj_disp_tf}) 
 	</insert>
+	
+	<!-- 프로젝트 리스트 -->
 	<select id="getList" resultType="projBoardDto"> 
 		SELECT proj_num, proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf 
 		FROM proj_board 
 		WHERE proj_disp_tf=0
 		ORDER BY proj_num DESC 
 	</select>
+	
+	<!-- 최근 프로젝트 불러오기 -->
 	<select id="getRecentList" resultType="projBoardDto"> 
 		SELECT proj_num, proj_title, proj_writer, proj_content, proj_imagePath, proj_date, proj_disp_tf 
 		FROM proj_board 
 		WHERE proj_disp_tf=0
 		ORDER BY proj_num DESC LIMIT 0, 3
 	</select>	
+	
+	<!-- 프로젝트 타임라인 리스트(프로젝트 Detail) -->
 	<select id="getDetail" resultType="projBoardDto" parameterType="int">
 		SELECT proj_num, proj_writer, proj_title, proj_content, proj_imagePath, proj_disp_tf
 		FROM proj_board
 		WHERE proj_num=#{proj_num}
 	</select>
+	
+	<!-- 프로젝트 수정 -->
 	<update id="update" parameterType="projBoardDto"> 
 		UPDATE proj_board
 		SET proj_title=#{proj_title}, proj_imagePath=#{proj_imagePath}, proj_content=#{proj_content},
 		proj_date=CURRENT_TIMESTAMP
 		WHERE proj_num=#{proj_num} 
 	</update>
+	
+	<!-- 프로젝트 삭제 -->
 	<update id="delete" parameterType="int"> 
 		UPDATE proj_board
 		SET proj_disp_tf=1

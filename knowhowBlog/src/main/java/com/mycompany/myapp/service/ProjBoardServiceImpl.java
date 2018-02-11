@@ -12,25 +12,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dao.ProjBoardDao;
 import com.mycompany.myapp.dto.ProjBoardDto;
-
+/* 프로젝트 보드 Service */
 @Service
 public class ProjBoardServiceImpl implements ProjBoardService {
 
 	@Autowired
 	private ProjBoardDao projboardDao;
 	
+	/* 프로젝트 등록 */
 	@Override
 	public void insert(ProjBoardDto dto, HttpServletRequest request) {
         //파일을 저장할 폴더의 절대 경로를 얻어온다.
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
         System.out.println(realPath);
-        
+        MultipartFile mFile=dto.getUploadImage();
         //MultipartFile 객체의 참조값 얻어오기
         //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
-        if( dto.getUploadImage().isEmpty() ) {
+        if( mFile.isEmpty() ) {
         	dto.setProj_imagePath("");
         }else {
-            MultipartFile mFile=dto.getUploadImage();
             //원본 파일명
             String orgFileName=mFile.getOriginalFilename();
             //파일 사이즈
@@ -54,14 +54,10 @@ public class ProjBoardServiceImpl implements ProjBoardService {
             }        	
             dto.setProj_imagePath(saveFileName);
         }
-
-        //FileDto 객체에 추가 정보를 담는다.
-
-        //FileDao 객체를 이용해서 DB 에 저장하기		
-		
 		projboardDao.insert(dto);
 	}
 
+	/* 프로젝트 리스트 */
 	@Override
 	public ModelAndView list() {
 		List<ProjBoardDto> list=projboardDao.getList();
@@ -70,12 +66,14 @@ public class ProjBoardServiceImpl implements ProjBoardService {
 		return mView;
 	}	
 	
+	/* 최근 프로젝트 리스트 */
 	@Override
 	public List<ProjBoardDto> recentList() {
 		List<ProjBoardDto> list=projboardDao.getRecentList();
 		return list;
 	}	
 	
+	/* 프로젝트 상세보기 */
 	@Override
 	public ModelAndView detail(int proj_num) {
 		ProjBoardDto dto = projboardDao.getDetail(proj_num);
@@ -128,6 +126,7 @@ public class ProjBoardServiceImpl implements ProjBoardService {
 		projboardDao.update(dto);
 	}
 	
+	/* 프로젝트 삭제 */
 	@Override
 	public void delete(int proj_num) {
 		projboardDao.delete(proj_num);
