@@ -42,7 +42,7 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h1 class="my-4 col-xs-12">Post Write</h1>
+    	<h1 class="my-4 col-xs-12">Knowhow Write</h1>
 		<form action="knowhowInsert.do" method="post" enctype="multipart/form-data" id="postForm">
 		  <div class="form-group">
 		    <input type="text" class="form-control" id="post_title" name="kh_title" placeholder="포스트 명">

@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.AbstractView;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
 
-//component 스캔 되었을 때 bean으로 만들고 bean의 이름을 "fileDownView"
+/* post의 파일 다운로드 시  이곳으로 넘어옴 */
 @Component("fileDownView")
 public class FileDownView extends AbstractView{
 
@@ -30,8 +30,6 @@ public class FileDownView extends AbstractView{
 		String saveFileName=dto.getPost_filePath(); //저장된 파일명
 		long fileSize=dto.getPost_fileSize();  //파일의 크기
 		//다운로드 시켜줄 파일의 실제 경로 구성하기
-/*		String path=request.getServletContext().getRealPath("/upload")+
-				File.separator+saveFileName;*/
 		String path=request.getSession().getServletContext().getRealPath("/upload")+
 				File.separator+saveFileName;
 		//다운로드할 파일을 읽어들일 스트림 객체 생성하기
@@ -76,7 +74,6 @@ public class FileDownView extends AbstractView{
 		//스트림 닫아주기
 		bos.close();
 		fis.close();		
-		
 	}
 
 }

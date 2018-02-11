@@ -65,7 +65,7 @@
 			            	<a href="projectTimeline.do?num=${tmp.proj_num }" style="border-bottom:1px solid #e9e9e9;"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
 			            </c:if>
 			          	<c:if test="${!empty tmp.proj_imagePath}"> 
-			            	<a href="projectTimeline.do?num=${tmp.proj_num }" ><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" style="height:185px;" alt=""></a>
+			            	<a href="projectTimeline.do?num=${tmp.proj_num }" ><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" style="height:200px;" alt=""></a>
 			            </c:if>	            
 			            <div class="card-body">
 			              <h4 class="card-title">
@@ -91,7 +91,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; LOTTE.CODE 2018</p>
       </div>
       <!-- /.container -->
     </footer>

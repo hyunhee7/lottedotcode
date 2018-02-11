@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 회원가입 및 로그인 -->
 <mapper namespace="members">
+
+	<!-- 로그인  -->
 	<select id="isValid" parameterType="membersDto" 
 			resultType="membersDto">
 		SELECT id,pwd,imagePath
 		FROM members
 		WHERE id=#{id} AND pwd=#{pwd}
 	</select>
+	
+	<!-- 아이디 존재 여부 -->
 	<select id="isExistId" parameterType="string" 
 				resultType="string">
 		SELECT id 
 		FROM members
 		WHERE id=#{id}
 	</select>	
+	
+	<!-- 회원 가입 -->
 	<insert id="insert" parameterType="membersDto">
 		INSERT INTO members
-		(id,pwd,name,imagePath)
-		VALUES(#{id},#{pwd},#{name},#{imagePath})
+		(id,pwd,name,imagePath,user_regr_id,user_modr_id)
+		VALUES(#{id},#{pwd},#{name},#{imagePath},#{user_regr_id},#{user_modr_id})
 	</insert>
+	
+	<!-- 프로필 사진 가져오기  -->
 	<select id="getPath" parameterType="string" 
 				resultType="string">
 		SELECT imagePath 

@@ -45,8 +45,8 @@
 		    <input type="text" class="form-control" id="proj_title" name="proj_title" placeholder="프로젝트 명">
 		  </div>
 		  <div class="custom-file">
-		 	<input type="file" class="custom-file-input" id="proj_file" name="uploadImage">
-			<label class="custom-file-label" for="customFile">Choose file</label>
+		 	
+			<input type="file" class="form-control-file" id="exampleInputFile"  name="uploadImage" aria-describedby="fileHelp">
 		  </div>
 		  <div class="form-group">
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="13" style="margin-top:17px;" name="proj_content"

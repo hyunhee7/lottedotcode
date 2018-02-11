@@ -1,9 +1,10 @@
 package com.mycompany.myapp.dto;
 
+/* 노하우 태그 Dto */
 public class KnowhowTagDto {
-	private int tag_num, tag_kh_num;
-	private String tag_name;
-	
+	private int tag_num, tag_kh_num; /* 태그 번호, 태그의 노하우 번호 */
+	private String tag_name; /* 태그 명 */
+	/* 생성자 */
 	public KnowhowTagDto() {}
 
 	public KnowhowTagDto(int tag_num, int tag_kh_num, String tag_name) {

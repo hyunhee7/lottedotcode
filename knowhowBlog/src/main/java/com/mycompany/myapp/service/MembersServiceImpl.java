@@ -11,24 +11,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.dao.MembersDao;
 import com.mycompany.myapp.dto.MembersDto;
-
+/* 회원 Service */
 @Service
 public class MembersServiceImpl implements MembersService {
 
 	@Autowired
 	private MembersDao membersDao;
-
+	
+	/* 회원가입 */
 	@Override
 	public ModelAndView signup(MembersDto dto, HttpServletRequest request) {
-		System.out.println("들어옴2");
-		
+		/* 프로필 사진이 없을 경우 공백 넣어준다. */
 		if(dto.getUploadImage().isEmpty()) {
 			dto.setImagePath("");
 			String realPath=request.getSession().getServletContext().getRealPath("/upload");
 	        System.out.println(realPath);
 		}else {
-
-			
 	        //파일을 저장할 폴더의 절대 경로를 얻어온다.
 	        String realPath=request.getSession().getServletContext().getRealPath("/upload");
 	        System.out.println(realPath);
@@ -57,8 +55,9 @@ public class MembersServiceImpl implements MembersService {
 	        }
 	        //FileDto 객체에 추가 정보를 담는다.
 	        dto.setImagePath(saveFileName);
-		
 		}
+		dto.setUser_regr_id(dto.getId());
+		dto.setUser_modr_id(dto.getId());
         //FileDao 객체를 이용해서 DB 에 저장하기
 		membersDao.insert(dto);
 		ModelAndView mView=new ModelAndView();
@@ -67,6 +66,7 @@ public class MembersServiceImpl implements MembersService {
 		return mView;
 	}
 
+	/* ID 사용가능 여부 */
 	@Override
 	public boolean canUseId(String id) {
 		//사용가능한 아이디 인지 여부를 리턴받아서 
@@ -75,6 +75,7 @@ public class MembersServiceImpl implements MembersService {
 		return canUse;		
 	}	
 	
+	/* 로그인 */
 	@Override
 	public ModelAndView signin(MembersDto dto, HttpServletRequest request) {
 		boolean isValid=membersDao.isValid(dto);
@@ -83,11 +84,8 @@ public class MembersServiceImpl implements MembersService {
 		if(isValid){//아이디 비밀번호가 일치한 경우 
 			//로그인 처리를 해준다.
 			request.getSession().setAttribute("id", dto.getId());
-			
 			String id=(String)dto.getId();
 			String imagePath=(String)dto.getImagePath();
-			System.out.println(id);
-			System.out.println("왜안들와:"+imagePath);
 			mView.addObject("msg", dto.getId()+" 님 로그인 되었습니다.");
 			mView.addObject("url", url);				
 		}else{//아이디 혹은 비밀번호가 다른 경우 
@@ -96,10 +94,8 @@ public class MembersServiceImpl implements MembersService {
 			 "/members/loginform.do";
 			mView.addObject("url", location);
 		}
-		
 		return mView;
 	}	
-	
 	
 	/* 프로필 사진 가져오기 */
 	@Override

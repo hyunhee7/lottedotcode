@@ -59,7 +59,7 @@
 			            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
 			            </c:if>
 			          	<c:if test="${!empty tmp.proj_imagePath}"> 
-			            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="width:348px;height:200px;"></a>
+			            	<a style="border-bottom:1px solid #e9e9e9;" href="projectTimeline.do?num=${tmp.proj_num }" class="imgSize"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.proj_imagePath}" alt="" style="height:200px;"></a>
 			            </c:if>	            
 			            <div class="card-body">
 			              <h4 class="card-title">
@@ -102,7 +102,7 @@
 			            	<a style="border-bottom:1px solid #e9e9e9;" href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/defaultImg.png" alt=""></a>
 			            </c:if>
 			          	<c:if test="${!empty tmp.kh_filePath}"> 
-			            	<a href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="width:348px;height:200px;"></a>
+			            	<a href="knowhowDetail.do"><img class="card-img-top" src="${pageContext.request.contextPath }/upload/${tmp.kh_filePath}" alt="" style="height:200px;"></a>
 			            </c:if>	            
 			            <div class="">
 			              <textarea class="form-control CodeMirror CodeMirror-scroll post_code_content" rows="3" style="margin-top:17px;" name="post_content"

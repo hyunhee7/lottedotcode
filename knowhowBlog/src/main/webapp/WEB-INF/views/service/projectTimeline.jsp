@@ -66,6 +66,7 @@
         </ol>
  		<div  style="border:1px solid #e9e9e9;width:100%;height: auto;padding:10px;margin-bottom:5px;">
  			<li>프로젝트 명: ${pdto.proj_title }</li>
+ 			<li>날짜 : ${pdto.proj_mod_dtime }</li>
  			<li>내용 : ${pdto.proj_content }</li>
  		</div>
  		
@@ -77,10 +78,10 @@
       </div>    	 
       <% } %>
 
-       <c:set value="${pdto.proj_writer }" var="proj_writer"/>
-       <% String proj_writer = (String)pageContext.getAttribute("proj_writer"); %>
+       <c:set value="${pdto.proj_regr_id }" var="proj_regr_id"/>
+       <% String proj_regr_id = (String)pageContext.getAttribute("proj_regr_id"); %>
  
- 	   <% if (proj_writer.equals(id) ){ %>
+ 	   <% if (proj_regr_id.equals(id) ){ %>
 	      <div class="mobile-hidden write col-lg-12" style="margin-left:15px;">
 	      		<button type="button" class="btn btn-primary mobile-hidden" style="font-size:13px;float:right; margin-right:2px" onclick="location.href='projectUpdateform.do?num=<%=proj_num%>'">프로젝트 수정</button> 
 	      </div>      
@@ -150,7 +151,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; LOTTE.CODE 2018</p>
       </div>
       <!-- /.container -->
     </footer>

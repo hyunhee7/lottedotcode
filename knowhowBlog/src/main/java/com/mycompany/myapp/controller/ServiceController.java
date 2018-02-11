@@ -30,6 +30,7 @@ import com.mycompany.myapp.service.ProjTimelineService;
 @Controller
 public class ServiceController {
 	
+	/* 의존성을 줄이기 위해 자동으로 와이어링을 해줌 */
 	@Autowired
 	private ProjBoardService projboardService;
 	@Autowired
@@ -43,6 +44,7 @@ public class ServiceController {
 	@Autowired
 	private MembersService membersService;
 	
+	/* 메인 : 메인 화면에 최근 포스트들을 노출 시킨다 */
 	@RequestMapping("/service/main.do")
 	public ModelAndView recentList(){
 		List<ProjBoardDto> projList=projboardService.recentList();
@@ -60,6 +62,15 @@ public class ServiceController {
 		ModelAndView mView=knowhowService.list();
 		mView.setViewName("service/knowhowList");
 		return mView;		
+	}
+	
+	/* 노하우 검색 리스트 */
+	@RequestMapping("/service/knowhowSearch.do")
+	public ModelAndView knowhowSearchList(HttpServletRequest request){
+		String tag_name=request.getParameter("tag_name");
+		ModelAndView mView=knowhowService.Searchlist(tag_name);
+		mView.setViewName("service/knowhowSearch");
+		return mView;		
 	}	
 	
 	/* 노하우 등록 form */
@@ -76,10 +87,7 @@ public class ServiceController {
 	@RequestMapping("/service/knowhowInsert")
 	public String knowhowInsert(HttpSession session, HttpServletRequest request,
 			@ModelAttribute KnowhowDto dto){
-		System.out.println("노하우 들어옴");
 		String kh_regr_id = (String)session.getAttribute("id");
-		System.out.println("등록자:"+kh_regr_id);
-		
 		dto.setKh_regr_id(kh_regr_id);
 		dto.setKh_modr_id(kh_regr_id);
 		
@@ -94,16 +102,13 @@ public class ServiceController {
 			knowhowTagService.insert(dto);
 		}
 		
-		
 		return "redirect:/service/knowhowList.do";
 	}	
 	
 	/* 노하우 상세보기 */
 	@RequestMapping("/service/knowhowDetail.do")
 	public ModelAndView knowhowDetail(HttpServletRequest request, HttpSession session){
-
 	    int kh_num=Integer.parseInt(request.getParameter("kh_num"));
-		System.out.println("detailPROJ_NUM:"+kh_num);
 		KnowhowDto dtoNum = new KnowhowDto();
 		dtoNum.setKh_num(kh_num);
 		ModelAndView mView=knowhowService.detail(dtoNum);
@@ -120,7 +125,6 @@ public class ServiceController {
 		dtoNum.setKh_num(kh_num);
 		ModelAndView mView=knowhowService.getFile(dtoNum);
 		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
-		System.out.println("fileDoawnload여긴 옴.");
 		mView.setViewName("khfileDownView");
 		//리턴해준다.
 		return mView;
@@ -141,25 +145,18 @@ public class ServiceController {
 	@RequestMapping("/service/knowhowUpdate.do")
 	public String knowhowUpdate(HttpSession session, HttpServletRequest request,
 			@ModelAttribute KnowhowDto dto){
-		System.out.println("노하우 들어옴");
-		
 		// 수정한 사람 id 가져와서 modr_id 변경
 		String kh_modr_id = (String)session.getAttribute("id");
-		System.out.println("변경자:"+kh_modr_id);
 		dto.setKh_modr_id(kh_modr_id);
 		int kh_num = dto.getKh_num();
-		System.out.println("수정할때 khnum:"+kh_num);
 		try {
 			knowhowService.update(dto, request);
 			dto.setKh_num(kh_num);
-			System.out.println("post_num직후:"+dto.getKh_num());
 		}catch(Exception ex){
 			
 		}finally {
 			knowhowTagService.update(dto);
 		}
-		
-		
 		return "redirect:/service/knowhowDetail.do?kh_num="+kh_num;
 	}
 	
@@ -167,11 +164,10 @@ public class ServiceController {
 	@RequestMapping("/service/knowhowDelete.do")
 	public String knowhowDelete(HttpSession session,HttpServletRequest request) {
 		int kh_num = Integer.parseInt(request.getParameter("kh_num"));
+		/* kh_disp_tf 를 변경 시킨다 */
 		knowhowService.delete(kh_num);
-		
 		return "redirect:/service/knowhowList.do";
 	}
-	
 	
 	/* 프로젝트 등록 form */
 	@RequestMapping("/service/projectInsertform.do")
@@ -183,14 +179,13 @@ public class ServiceController {
 		return mView;
 	}		
 
-	
 	/* 프로젝트 등록 */
 	@RequestMapping("/service/projectInsert")
 	public String projectInsert(HttpSession session,HttpServletRequest request,
 			@ModelAttribute ProjBoardDto dto){
-		String proj_writer = (String)session.getAttribute("id");
-		System.out.println("작성자:"+proj_writer);
-		dto.setProj_writer(proj_writer);
+		String proj_regr_id = (String)session.getAttribute("id");
+		dto.setProj_regr_id(proj_regr_id);
+		dto.setProj_modr_id(proj_regr_id);
 		dto.setProj_disp_tf(false);
 		projboardService.insert(dto,request);
 		
@@ -209,7 +204,6 @@ public class ServiceController {
 	@RequestMapping("/service/projectUpdateform.do")
 	public ModelAndView ProjectUpdateform(HttpServletRequest request){
 		int proj_num = Integer.parseInt(request.getParameter("num"));
-		System.out.println("프로젝트번호"+proj_num);
 		ModelAndView mView=projboardService.detail(proj_num);
 		mView.setViewName("service/projectUpdateform");
 		return mView;
@@ -219,11 +213,8 @@ public class ServiceController {
 	@RequestMapping("/service/projectUpdate")
 	public String projectUpdate(HttpSession session,HttpServletRequest request,
 			@ModelAttribute ProjBoardDto dto){
-		String proj_writer = (String)session.getAttribute("id");
-		System.out.println("작성자:"+proj_writer);
-		dto.setProj_writer(proj_writer);
-		System.out.println(dto.getProj_num());
-
+		String proj_modr_id = (String)session.getAttribute("id");
+		dto.setProj_modr_id(proj_modr_id);
 		projboardService.update(dto,request);
 		
 		return "redirect:/service/projectBoard.do";
@@ -241,7 +232,6 @@ public class ServiceController {
 	/* 프로젝트 Timeline 목록 */
 	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(@RequestParam int num, HttpSession session){
-
 		ModelAndView mView=projTimelineService.list(num);
 		mView.setViewName("service/projectTimeline");
 		return mView;
@@ -261,27 +251,21 @@ public class ServiceController {
 	@RequestMapping("/service/projPostInsert")
 	public String postInsert(HttpSession session, HttpServletRequest request,
 			@ModelAttribute ProjTimelineDto dto){
-		System.out.println("오잉 들어옴");
 		String post_regr_id = (String)session.getAttribute("id");
-		System.out.println("등록자:"+post_regr_id);
-		System.out.println(dto.getPost_proj_num()); 
-		//int post_proj_num = (Integer)request.getAttribute("proj_num");
 		int post_proj_num = dto.getPost_proj_num();
-		dto.setPost_proj_num(post_proj_num);
-		System.out.println("프로젝트넘:"+dto.getPost_proj_num());		
+		dto.setPost_proj_num(post_proj_num);	
 		dto.setPost_regr_id(post_regr_id);
 		dto.setPost_modr_id(post_regr_id);
 
+		/* post가 등록된 두 auto_increment로 등록된 post_num을 가져온다. */
 		try {
 			int post_num=projTimelineService.insert(dto, request);
 			dto.setPost_num(post_num);
-			System.out.println("post_num직후:"+dto.getPost_num());
 		}catch(Exception ex){
 			
 		}finally {
 			projPostTagService.insert(dto);
 		}
-		
 		
 		return "redirect:/service/projectTimeline.do?num="+post_proj_num;
 	}
@@ -289,17 +273,19 @@ public class ServiceController {
 	/* 포스트 상세보기 */
 	@RequestMapping("/service/projPostDetail.do")
 	public ModelAndView projectDetail(HttpServletRequest request, HttpSession session){
-
+		/* post_num, proj_num 초기화 */
 	    int proj_num = 0;
 	    int post_num = 0;
-
+	    
+	    /* 해당 값을 넣어준다. */
     	proj_num=Integer.parseInt(request.getParameter("proj_num"));
     	post_num=Integer.parseInt(request.getParameter("post_num"));
-		System.out.println("detailPROJ_NUM:"+proj_num);
-		System.out.println("detailPOST_NUM:"+post_num);
+    	
+    	/* 두 개의 번호를 넣은 뒤 */
 		ProjTimelineDto dtoNum = new ProjTimelineDto();
 		dtoNum.setPost_proj_num(proj_num);
 		dtoNum.setPost_num(post_num);
+		/* 전달 및 return  */
 		ModelAndView mView=projTimelineService.detail(dtoNum);
 		mView.setViewName("service/projPostDetail");
 		return mView;
@@ -322,32 +308,22 @@ public class ServiceController {
 	@RequestMapping("/service/postUpdate.do")
 	public String postUpdate(HttpSession session, HttpServletRequest request,
 			@ModelAttribute ProjTimelineDto dto){
-		System.out.println("포스트update 들어옴");
 		
 		// 수정한 사람 id 가져와서 modr_id 변경
 		String post_modr_id = (String)session.getAttribute("id");
-		System.out.println("변경자:"+post_modr_id);
-		System.out.println("변경자:"+dto.getPost_title());
-		System.out.println("변경자:"+dto.getPost_content());
-		System.out.println("변경자:"+dto.getPost_num());
-		System.out.println(dto.getPost_proj_num());
-		System.out.println(dto.getTags());
 		dto.setPost_modr_id(post_modr_id);
 		int post_num = dto.getPost_num();
 		int post_proj_num = dto.getPost_proj_num();
-		System.out.println("수정할때 post_num:"+post_num+post_proj_num);
 		try {
 			projTimelineService.update(dto, request);
 			dto.setPost_num(post_num);
 			dto.setPost_proj_num(post_proj_num);
-			System.out.println("post_num직후:"+dto.getPost_num());
 		}catch(Exception ex){
 			
 		}finally {
 			projPostTagService.update(dto);
 		}
-		
-		
+
 		return "redirect:/service/projPostDetail.do?proj_num="+post_proj_num+"&post_num="+post_num;
 	}
 	
@@ -375,9 +351,8 @@ public class ServiceController {
 		dtoNum.setPost_num(post_num);
 		ModelAndView mView=projTimelineService.getFile(dtoNum);
 		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
-		System.out.println("fileDoawnload여긴 옴.");
 		mView.setViewName("fileDownView");
-		//리턴해준다.
+
 		return mView;
 	}	
 	
@@ -385,17 +360,12 @@ public class ServiceController {
 	@RequestMapping("/service/KHcommentInsert")
 	public String KHComment(HttpSession session, HttpServletRequest request,
 			@ModelAttribute KnowhowCommentDto dto){
-		
 		String id = (String)session.getAttribute("id");
 		dto.setCmt_modr_id(id);
 		dto.setCmt_regr_id(id);
-		
 		/* 해당 회원 이미지 가져오기 */
 		String imgPath = membersService.getPath(dto.getCmt_regr_id());
-		dto.setCmt_imgPath(imgPath);
-		
-		System.out.println("댓글의 이미지 경로:"+dto.getCmt_imgPath());		
-
+		dto.setCmt_imgPath(imgPath);	
 		knowhowService.cmtInsert(dto);
 		
 		return "redirect:/service/knowhowDetail.do?kh_num="+dto.getCmt_kh_num();
@@ -406,17 +376,12 @@ public class ServiceController {
 	@RequestMapping("/service/PostCommentInsert")
 	public String PostComment(HttpSession session, HttpServletRequest request,
 			@ModelAttribute ProjPostCommentDto dto){
-		
 		String id = (String)session.getAttribute("id");
 		dto.setCmt_modr_id(id);
 		dto.setCmt_regr_id(id);
-		
 		/* 해당 회원 이미지 가져오기 */
 		String imgPath = membersService.getPath(dto.getCmt_regr_id());
-		dto.setCmt_imgPath(imgPath);
-		
-		System.out.println("댓글의 이미지 경로:"+dto.getCmt_imgPath());		
-
+		dto.setCmt_imgPath(imgPath);	
 		projTimelineService.cmtInsert(dto);
 		
 		return "redirect:/service/projPostDetail.do?proj_num="+dto.getCmt_proj_num()+"&post_num="+dto.getCmt_post_num();

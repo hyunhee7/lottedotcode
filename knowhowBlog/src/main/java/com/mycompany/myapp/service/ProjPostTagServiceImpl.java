@@ -8,13 +8,14 @@ import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
-
+/* 포스트 태그 Service */
 @Service
 public class ProjPostTagServiceImpl implements ProjPostTagService {
 
 	@Autowired
 	private PostTagDao postTagDao;
 	
+	/* 포스트 태그 등록 */
 	@Override
 	public void insert(ProjTimelineDto dto) {
         
@@ -25,13 +26,11 @@ public class ProjPostTagServiceImpl implements ProjPostTagService {
         	tagDto.setTag_post_num(dto.getPost_num());
         	tagDto.setTag_proj_num(dto.getPost_proj_num());
             tagDto.setTag_name(tags[i]);
-            System.out.println("tagName"+tagDto.getTag_name());
-            System.out.println("PostNum"+tagDto.getTag_post_num());
-            System.out.println("ProjNum"+tagDto.getTag_proj_num());
         	postTagDao.insert(tagDto);
         }		
 	}
 	
+	/* 태그 수정 - 등록되지않은 태그만 DB에 등록 시킨다. */
 	@Override
 	public void update(ProjTimelineDto dto) {
 		String[] tags = dto.getTags();       
