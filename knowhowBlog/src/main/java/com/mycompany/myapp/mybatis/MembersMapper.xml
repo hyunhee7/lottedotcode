@@ -22,8 +22,8 @@
 	<!-- 회원 가입 -->
 	<insert id="insert" parameterType="membersDto">
 		INSERT INTO members
-		(id,pwd,name,imagePath)
-		VALUES(#{id},#{pwd},#{name},#{imagePath})
+		(id,pwd,name,imagePath,user_regr_id,user_modr_id)
+		VALUES(#{id},#{pwd},#{name},#{imagePath},#{user_regr_id},#{user_modr_id})
 	</insert>
 	
 	<!-- 프로필 사진 가져오기  -->

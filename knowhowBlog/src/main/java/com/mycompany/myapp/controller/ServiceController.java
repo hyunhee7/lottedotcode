@@ -183,8 +183,9 @@ public class ServiceController {
 	@RequestMapping("/service/projectInsert")
 	public String projectInsert(HttpSession session,HttpServletRequest request,
 			@ModelAttribute ProjBoardDto dto){
-		String proj_writer = (String)session.getAttribute("id");
-		dto.setProj_writer(proj_writer);
+		String proj_regr_id = (String)session.getAttribute("id");
+		dto.setProj_regr_id(proj_regr_id);
+		dto.setProj_modr_id(proj_regr_id);
 		dto.setProj_disp_tf(false);
 		projboardService.insert(dto,request);
 		
@@ -212,8 +213,8 @@ public class ServiceController {
 	@RequestMapping("/service/projectUpdate")
 	public String projectUpdate(HttpSession session,HttpServletRequest request,
 			@ModelAttribute ProjBoardDto dto){
-		String proj_writer = (String)session.getAttribute("id");
-		dto.setProj_writer(proj_writer);
+		String proj_modr_id = (String)session.getAttribute("id");
+		dto.setProj_modr_id(proj_modr_id);
 		projboardService.update(dto,request);
 		
 		return "redirect:/service/projectBoard.do";

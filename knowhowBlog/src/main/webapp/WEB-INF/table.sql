@@ -8,10 +8,14 @@ DROP TABLE MEMBERS;
 /* member 테이블 생성 */
 CREATE TABLE MEMBERS (
 	mem_num			INT		    NOT NULL AUTO_INCREMENT 	PRIMARY KEY,	/* num */
-	id 				VARCHAR(50) NOT NULL, 									/* 아이디 */
+	id 				VARCHAR(50) NOT NULL UNIQUE, 							/* 아이디 */
 	pwd				VARCHAR(50) NOT NULL, 	 								/* 비밀번호 */
 	name			VARCHAR(50) NOT NULL,	 								/* 이름 */
-	imagePath		VARCHAR(50)						 						/* 이미지 */
+	imagePath		VARCHAR(50),						 					/* 이미지 */
+	user_regr_id	VARCHAR(50) NOT NULL,									/* 유저 정보 등록자 아이디 */
+	user_reg_dtime  DATETIME	DEFAULT CURRENT_TIMESTAMP,					/* 유저 정보 등록 일시 */
+	user_modr_id	VARCHAR(50) NOT NULL,									/* 유저 정보 수정자 아이디 */
+	user_mod_dtime	DATETIME    DEFAULT CURRENT_TIMESTAMP					/* 유저 정보 수정 일시 */
 )
 
 /* member 컬럼 생성 */
@@ -24,10 +28,12 @@ SELECT * FROM MEMBERS;
 CREATE TABLE PROJ_BOARD (
 	proj_num		INT		    	NOT NULL AUTO_INCREMENT 	PRIMARY KEY,
 	proj_title		VARCHAR(50) 	NOT NULL DEFAULT '프로젝트',
-	proj_writer		VARCHAR(50)		NOT NULL,
 	proj_content	VARCHAR(500),
 	proj_imagePath	VARCHAR(50),
-	proj_date		DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	proj_regr_id	VARCHAR(50)		NOT NULL,
+	proj_reg_dtime	DATETIME		DEFAULT CURRENT_TIMESTAMP,
+	proj_modr_id	VARCHAR(50)		NOT NULL,
+	proj_mod_dtime	DATETIME		DEFAULT CURRENT_TIMESTAMP,
 	proj_disp_tf	BOOLEAN			NOT NULL  DEFAULT false
 ) ENGINE = InnoDB;
 

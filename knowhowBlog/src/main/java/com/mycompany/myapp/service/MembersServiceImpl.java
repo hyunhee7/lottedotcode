@@ -56,6 +56,8 @@ public class MembersServiceImpl implements MembersService {
 	        //FileDto 객체에 추가 정보를 담는다.
 	        dto.setImagePath(saveFileName);
 		}
+		dto.setUser_regr_id(dto.getId());
+		dto.setUser_modr_id(dto.getId());
         //FileDao 객체를 이용해서 DB 에 저장하기
 		membersDao.insert(dto);
 		ModelAndView mView=new ModelAndView();

@@ -43,7 +43,7 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h1 class="my-4 col-xs-12">Knowhow Update</h1>
+    	<h1 class="my-4 col-xs-12">Knowhow 수정</h1>
 		<form action="knowhowUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
 		 <div class="form-group">
 			<input type=hidden name="kh_num" value="${dto.kh_num }"> 
