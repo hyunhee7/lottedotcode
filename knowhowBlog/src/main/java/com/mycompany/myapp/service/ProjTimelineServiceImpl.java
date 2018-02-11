@@ -16,7 +16,7 @@ import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
-
+/* 프로젝트 타임라인 Service */
 @Service
 public class ProjTimelineServiceImpl implements ProjTimelineService{
 	
@@ -25,10 +25,12 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 	@Autowired
 	private ProjBoardDao projBoardDao;	
 	
+	/* 포스트 리스트  */
 	@Override
 	public ModelAndView list(int num) {
-
+		/* 포스트 리스트 가져오기 */
 		List<ProjTimelineDto> list = projTimelineDao.getList(num);
+		/* 프로젝트 내용 가져오기 */
 		ProjBoardDto pdto= projBoardDao.getDetail(num);
 		ModelAndView mView = new ModelAndView();
 		mView.addObject("list", list);
@@ -36,6 +38,7 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 		return mView;
 	}
 
+	/* 포스트 등록하기 */
 	@Override
 	public int insert(ProjTimelineDto dto, HttpServletRequest request) {
         //파일을 저장할 폴더의 절대 경로를 얻어온다.
@@ -74,20 +77,19 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
     		dto.setPost_fileOrgName(orgFileName);
     		dto.setPost_fileSize(fileSize);            
         }
-        
-        
 		int post_num=projTimelineDao.insert(dto);
-		System.out.println("post_num:"+post_num);
-
 		return post_num;
 	}
 	
+	/* 포스트 상세보기 */
 	@Override
 	public ModelAndView detail(ProjTimelineDto dtoNum) {
-
+		/* 포스트 상세 내용 가져오기 */
 		ProjTimelineDto dto = projTimelineDao.getDetail(dtoNum);
+		/* 포스트 태그 가져오기 */
 		List<ProjPostTagDto> tags = projTimelineDao.getTags(dtoNum);
 		dto.setPost_tag(tags);
+		/* 포스트 댓글 리스트 가져오기 */
 		List<ProjPostCommentDto> cmts = projTimelineDao.getCmts(dtoNum);
 		dto.setCmts(cmts);		
 		ModelAndView mView = new ModelAndView();
@@ -95,30 +97,29 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
 		return mView;
 	}	
 
+	/* 포스트 내 첨부파일 다운로드 준비 */
 	@Override
 	public ModelAndView getFile(ProjTimelineDto dtoNum) {
-
 		//다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
 		ProjTimelineDto dto=projTimelineDao.getFile(dtoNum);
 		//ModelAndView 객체에 담아서
-		System.out.println(dto.getPost_fileOrgName());
 		ModelAndView mView=new ModelAndView();
 		mView.addObject("dto",dto);
 		//리턴해준다.
 		return mView;
 	}
+	
+	/* 포스트 수정 */
 	@Override
 	public void update(ProjTimelineDto dto, HttpServletRequest request) {
         //파일을 저장할 폴더의 절대 경로를 얻어온다.
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
-        System.out.println(realPath);
         MultipartFile mFile=dto.getUploadImage();
         //MultipartFile 객체의 참조값 얻어오기
         //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
         if( mFile.isEmpty() ) {
         	dto.setPost_filePath(""); 
         }else {
-            
             //원본 파일명
             String orgFileName=mFile.getOriginalFilename();
             //파일 사이즈
@@ -144,17 +145,16 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
     		dto.setPost_fileOrgName(orgFileName);
     		dto.setPost_fileSize(fileSize);            
         }
-        System.out.println("service의:"+dto.getPost_num());
-        System.out.println("service의:"+dto.getPost_proj_num());
-        System.out.println("service의:"+dto.getPost_title());
         projTimelineDao.update(dto);
 	}	
 	
+	/* 포스트 삭제 */
 	@Override
 	public void delete(ProjTimelineDto dto) {
 		projTimelineDao.delete(dto);
 	}	
 	
+	/* 포스트 댓글 등록 */
 	@Override
 	public void cmtInsert(ProjPostCommentDto dto) {
 		projTimelineDao.cmtInsert(dto);

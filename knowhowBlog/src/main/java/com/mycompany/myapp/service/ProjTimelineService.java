@@ -7,13 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 
-
+/* 프로젝트 타임라인 Service */
 public interface ProjTimelineService {
-	public int insert(ProjTimelineDto dto,HttpServletRequest request);
-	ModelAndView list(int num);
-	public ModelAndView detail(ProjTimelineDto dto);
-	public ModelAndView getFile(ProjTimelineDto dtoNum);	
-	public void update(ProjTimelineDto dto, HttpServletRequest request);
-	public void delete(ProjTimelineDto dto);
-	public void cmtInsert(ProjPostCommentDto dto);
+	public int insert(ProjTimelineDto dto,HttpServletRequest request);		/* 포스트 등록 */
+	ModelAndView list(int num);												/* 포스트 리스트  */
+	public ModelAndView detail(ProjTimelineDto dto);						/* 포스트 상세보기 */
+	public ModelAndView getFile(ProjTimelineDto dtoNum);					/* 포스트 파일 다운로드 준비 */
+	public void update(ProjTimelineDto dto, HttpServletRequest request);	/* 포스트 수정 */
+	public void delete(ProjTimelineDto dto);								/* 포스트 삭제 */
+	public void cmtInsert(ProjPostCommentDto dto);							/* 포스트 댓글 등록 */
 }

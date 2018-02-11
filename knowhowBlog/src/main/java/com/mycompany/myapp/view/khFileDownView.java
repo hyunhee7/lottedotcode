@@ -15,8 +15,7 @@ import org.springframework.web.servlet.view.AbstractView;
 
 import com.mycompany.myapp.dto.KnowhowDto;
 
-
-//component 스캔 되었을 때 bean으로 만들고 bean의 이름을 "fileDownView"
+/* 노하우 첨부파일 다운로드 준비 후 이 곳으로 넘어온다. */
 @Component("khfileDownView")
 public class khFileDownView extends AbstractView{
 
