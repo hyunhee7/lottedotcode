@@ -66,7 +66,8 @@ public class ServiceController {
 	/* 노하우 리스트 */
 	@RequestMapping("/service/knowhowList.do")
 	public ModelAndView knowhowList(){
-		ModelAndView mView=knowhowService.list();
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("list", knowhowService.list());
 		mView.setViewName("service/knowhowList");
 		return mView;		
 	}
@@ -75,7 +76,8 @@ public class ServiceController {
 	@RequestMapping("/service/knowhowSearch.do")
 	public ModelAndView knowhowSearchList(HttpServletRequest request){
 		String tag_name=request.getParameter("tag_name");
-		ModelAndView mView=knowhowService.Searchlist(tag_name);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("list", knowhowService.Searchlist(tag_name));
 		mView.setViewName("service/knowhowSearch");
 		return mView;		
 	}	
