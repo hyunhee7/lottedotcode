@@ -1,5 +1,6 @@
 package com.mycompany.myapp.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.dao.ProjBoardDao;
+import com.mycompany.myapp.dao.ProjTimelineDao;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.ProjBoardDto;
@@ -43,7 +47,10 @@ public class ServiceController {
 	private KnowhowTagService knowhowTagService;
 	@Autowired
 	private MembersService membersService;
-	
+	@Autowired
+	private ProjTimelineDao projTimelineDao;
+	@Autowired
+	private ProjBoardDao projBoardDao;		
 	/* 메인 : 메인 화면에 최근 포스트들을 노출 시킨다 */
 	@RequestMapping("/service/main.do")
 	public ModelAndView recentList(){
@@ -90,10 +97,43 @@ public class ServiceController {
 		String kh_regr_id = (String)session.getAttribute("id");
 		dto.setKh_regr_id(kh_regr_id);
 		dto.setKh_modr_id(kh_regr_id);
+
+        String realPath=request.getSession().getServletContext().getRealPath("/upload");
+        //MultipartFile 객체의 참조값 얻어오기
+        //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
+        MultipartFile mFile=dto.getUploadImage();
+        if( mFile.isEmpty() ) {
+        	dto.setKh_filePath("");
+        }else {
+            //원본 파일명
+            String orgFileName=mFile.getOriginalFilename();
+            //파일 사이즈
+            long fileSize=mFile.getSize();
+            //저장할 파일의 상세 경로
+            String filePath=realPath+File.separator;
+            System.out.println("파일 경로"+filePath);
+            //디렉토리를 만들 파일 객체 생성
+            File file=new File(filePath);
+            if(!file.exists()){//디렉토리가 존재하지 않는다면
+                file.mkdir();//디렉토리를 만든다.
+            }
+            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("등록된 파일명:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }        	
+            dto.setKh_filePath(saveFileName);
+    		dto.setKh_fileOrgName(orgFileName);
+    		dto.setKh_fileSize(fileSize);            
+        }		
 		
 		/* autoIncrement 이후에 kh_num을 가져와 넣은 후 Tag 넣는 작업을 한다 */
 		try {
-			int kh_num = knowhowService.insert(dto, request);
+			int kh_num = knowhowService.insert(dto);
 			dto.setKh_num(kh_num);
 			System.out.println("kh_num직후:"+dto.getKh_num());
 		}catch(Exception ex){
@@ -109,9 +149,11 @@ public class ServiceController {
 	@RequestMapping("/service/knowhowDetail.do")
 	public ModelAndView knowhowDetail(HttpServletRequest request, HttpSession session){
 	    int kh_num=Integer.parseInt(request.getParameter("kh_num"));
-		KnowhowDto dtoNum = new KnowhowDto();
-		dtoNum.setKh_num(kh_num);
-		ModelAndView mView=knowhowService.detail(dtoNum);
+	    KnowhowDto dtoNum = new KnowhowDto();
+	    dtoNum.setKh_num(kh_num);
+		dtoNum = knowhowService.detail(dtoNum);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", dtoNum);
 		mView.setViewName("service/knowhowDetail");
 		return mView;
 	}
@@ -123,7 +165,9 @@ public class ServiceController {
     	int kh_num=Integer.parseInt(request.getParameter("kh_num"));
 		KnowhowDto dtoNum = new KnowhowDto();
 		dtoNum.setKh_num(kh_num);
-		ModelAndView mView=knowhowService.getFile(dtoNum);
+		dtoNum = knowhowService.getFile(dtoNum);
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("dto",dtoNum);
 		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
 		mView.setViewName("khfileDownView");
 		//리턴해준다.
@@ -136,7 +180,9 @@ public class ServiceController {
 		int kh_num = Integer.parseInt(request.getParameter("kh_num"));
 		KnowhowDto dtoNum = new KnowhowDto();
 		dtoNum.setKh_num(kh_num);
-		ModelAndView mView=knowhowService.detail(dtoNum);
+		KnowhowDto dto=knowhowService.detail(dtoNum);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", dto);
 		mView.setViewName("service/knowhowUpdateform");
 		return mView;
 	}
@@ -149,8 +195,45 @@ public class ServiceController {
 		String kh_modr_id = (String)session.getAttribute("id");
 		dto.setKh_modr_id(kh_modr_id);
 		int kh_num = dto.getKh_num();
+		
+        //파일을 저장할 폴더의 절대 경로를 얻어온다.
+        String realPath=request.getSession().getServletContext().getRealPath("/upload");
+        System.out.println(realPath);
+        //MultipartFile 객체의 참조값 얻어오기
+        MultipartFile mFile=dto.getUploadImage();
+        //비어있을 경우 공백 넣어준다.
+        if( mFile.isEmpty() ) {
+        	dto.setKh_filePath("");
+        }else {
+            //원본 파일명
+            String orgFileName=mFile.getOriginalFilename();
+            //파일 사이즈
+            long fileSize=mFile.getSize();
+            //저장할 파일의 상세 경로
+            String filePath=realPath+File.separator;
+            System.out.println(filePath);
+            //디렉토리를 만들 파일 객체 생성
+            File file=new File(filePath);
+            if(!file.exists()){//디렉토리가 존재하지 않는다면
+                file.mkdir();//디렉토리를 만든다.
+            }
+            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("세이프파일:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }        	
+            dto.setKh_filePath(saveFileName);
+    		dto.setKh_fileOrgName(orgFileName);
+    		dto.setKh_fileSize(fileSize);            
+        }		
+		
+        
 		try {
-			knowhowService.update(dto, request);
+			knowhowService.update(dto);
 			dto.setKh_num(kh_num);
 		}catch(Exception ex){
 			
@@ -187,7 +270,41 @@ public class ServiceController {
 		dto.setProj_regr_id(proj_regr_id);
 		dto.setProj_modr_id(proj_regr_id);
 		dto.setProj_disp_tf(false);
-		projboardService.insert(dto,request);
+		
+        //파일을 저장할 폴더의 절대 경로를 얻어온다.
+        String realPath=request.getSession().getServletContext().getRealPath("/upload");
+        System.out.println(realPath);
+        MultipartFile mFile=dto.getUploadImage();
+        //MultipartFile 객체의 참조값 얻어오기
+        //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
+        if( mFile.isEmpty() ) {
+        	dto.setProj_imagePath("");
+        }else {
+            //원본 파일명
+            String orgFileName=mFile.getOriginalFilename();
+            //파일 사이즈
+            long fileSize=mFile.getSize();
+            //저장할 파일의 상세 경로
+            String filePath=realPath+File.separator;
+            System.out.println(filePath);
+            //디렉토리를 만들 파일 객체 생성
+            File file=new File(filePath);
+            if(!file.exists()){//디렉토리가 존재하지 않는다면
+                file.mkdir();//디렉토리를 만든다.
+            }
+            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("사진세이프파일:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }        	
+            dto.setProj_imagePath(saveFileName);
+        }
+		
+		projboardService.insert(dto);
 		
 		return "redirect:/service/projectBoard.do";
 	}
@@ -195,7 +312,8 @@ public class ServiceController {
 	/* 프로젝트 목록 */
 	@RequestMapping("/service/projectBoard")
 	public ModelAndView projectList(){
-		ModelAndView mView=projboardService.list();
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("list", projboardService.list());
 		mView.setViewName("service/projectBoard");
 		return mView;
 	}	
@@ -204,7 +322,8 @@ public class ServiceController {
 	@RequestMapping("/service/projectUpdateform.do")
 	public ModelAndView ProjectUpdateform(HttpServletRequest request){
 		int proj_num = Integer.parseInt(request.getParameter("num"));
-		ModelAndView mView=projboardService.detail(proj_num);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", projboardService.detail(proj_num));
 		mView.setViewName("service/projectUpdateform");
 		return mView;
 	}		
@@ -215,7 +334,41 @@ public class ServiceController {
 			@ModelAttribute ProjBoardDto dto){
 		String proj_modr_id = (String)session.getAttribute("id");
 		dto.setProj_modr_id(proj_modr_id);
-		projboardService.update(dto,request);
+        //파일을 저장할 폴더의 절대 경로를 얻어온다.
+        String realPath=request.getSession().getServletContext().getRealPath("/upload");
+        System.out.println(realPath);
+        
+        //MultipartFile 객체의 참조값 얻어오기
+        //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
+        if( dto.getUploadImage().isEmpty() ) {
+        	dto.setProj_imagePath("");
+        }else {
+            MultipartFile mFile=dto.getUploadImage();
+            //원본 파일명
+            String orgFileName=mFile.getOriginalFilename();
+            //파일 사이즈
+            long fileSize=mFile.getSize();
+            //저장할 파일의 상세 경로
+            String filePath=realPath+File.separator;
+            System.out.println(filePath);
+            //디렉토리를 만들 파일 객체 생성
+            File file=new File(filePath);
+            if(!file.exists()){//디렉토리가 존재하지 않는다면
+                file.mkdir();//디렉토리를 만든다.
+            }
+            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("사진세이프파일:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }        	
+            dto.setProj_imagePath(saveFileName);
+        }
+		
+		projboardService.update(dto);
 		
 		return "redirect:/service/projectBoard.do";
 	}	
@@ -232,7 +385,13 @@ public class ServiceController {
 	/* 프로젝트 Timeline 목록 */
 	@RequestMapping("/service/projectTimeline.do")
 	public ModelAndView projectTimeline(@RequestParam int num, HttpSession session){
-		ModelAndView mView=projTimelineService.list(num);
+		/* 포스트 리스트 가져오기 */
+		List<ProjTimelineDto> list = projTimelineDao.getList(num);
+		/* 프로젝트 내용 가져오기 */
+		ProjBoardDto pdto= projBoardDao.getDetail(num);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("list", list);
+		mView.addObject("pdto", pdto);		
 		mView.setViewName("service/projectTimeline");
 		return mView;
 	}	
@@ -257,9 +416,46 @@ public class ServiceController {
 		dto.setPost_regr_id(post_regr_id);
 		dto.setPost_modr_id(post_regr_id);
 
+        //파일을 저장할 폴더의 절대 경로를 얻어온다.
+        String realPath=request.getSession().getServletContext().getRealPath("/upload");
+        System.out.println(realPath);
+        MultipartFile mFile=dto.getUploadImage();
+        //MultipartFile 객체의 참조값 얻어오기
+        //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
+        if( mFile.isEmpty() ) {
+        	dto.setPost_filePath("");
+        	
+        }else {
+            
+            //원본 파일명
+            String orgFileName=mFile.getOriginalFilename();
+            //파일 사이즈
+            long fileSize=mFile.getSize();
+            //저장할 파일의 상세 경로
+            String filePath=realPath+File.separator;
+            System.out.println(filePath);
+            //디렉토리를 만들 파일 객체 생성
+            File file=new File(filePath);
+            if(!file.exists()){//디렉토리가 존재하지 않는다면
+                file.mkdir();//디렉토리를 만든다.
+            }
+            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("세이프파일:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }        	
+            dto.setPost_filePath(saveFileName);
+    		dto.setPost_fileOrgName(orgFileName);
+    		dto.setPost_fileSize(fileSize);            
+        }		
+		
 		/* post가 등록된 두 auto_increment로 등록된 post_num을 가져온다. */
 		try {
-			int post_num=projTimelineService.insert(dto, request);
+			int post_num=projTimelineService.insert(dto);
 			dto.setPost_num(post_num);
 		}catch(Exception ex){
 			
@@ -286,7 +482,8 @@ public class ServiceController {
 		dtoNum.setPost_proj_num(proj_num);
 		dtoNum.setPost_num(post_num);
 		/* 전달 및 return  */
-		ModelAndView mView=projTimelineService.detail(dtoNum);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", projTimelineService.detail(dtoNum));
 		mView.setViewName("service/projPostDetail");
 		return mView;
 	}
@@ -299,7 +496,8 @@ public class ServiceController {
 		ProjTimelineDto dtoNum = new ProjTimelineDto();
 		dtoNum.setPost_num(post_num);
 		dtoNum.setPost_proj_num(proj_num);
-		ModelAndView mView=projTimelineService.detail(dtoNum);
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("dto", projTimelineService.detail(dtoNum));
 		mView.setViewName("service/projPostUpdateform");
 		return mView;
 	}
@@ -314,8 +512,43 @@ public class ServiceController {
 		dto.setPost_modr_id(post_modr_id);
 		int post_num = dto.getPost_num();
 		int post_proj_num = dto.getPost_proj_num();
+		
+        //파일을 저장할 폴더의 절대 경로를 얻어온다.
+        String realPath=request.getSession().getServletContext().getRealPath("/upload");
+        MultipartFile mFile=dto.getUploadImage();
+        //MultipartFile 객체의 참조값 얻어오기
+        //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
+        if( mFile.isEmpty() ) {
+        	dto.setPost_filePath(""); 
+        }else {
+            //원본 파일명
+            String orgFileName=mFile.getOriginalFilename();
+            //파일 사이즈
+            long fileSize=mFile.getSize();
+            //저장할 파일의 상세 경로
+            String filePath=realPath+File.separator;
+            System.out.println(filePath);
+            //디렉토리를 만들 파일 객체 생성
+            File file=new File(filePath);
+            if(!file.exists()){//디렉토리가 존재하지 않는다면
+                file.mkdir();//디렉토리를 만든다.
+            }
+            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("세이프파일:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }        	
+            dto.setPost_filePath(saveFileName);
+    		dto.setPost_fileOrgName(orgFileName);
+    		dto.setPost_fileSize(fileSize);            
+        }		
+		
 		try {
-			projTimelineService.update(dto, request);
+			projTimelineService.update(dto);
 			dto.setPost_num(post_num);
 			dto.setPost_proj_num(post_proj_num);
 		}catch(Exception ex){
@@ -349,10 +582,11 @@ public class ServiceController {
 		ProjTimelineDto dtoNum = new ProjTimelineDto();
 		dtoNum.setPost_proj_num(post_proj_num);
 		dtoNum.setPost_num(post_num);
-		ModelAndView mView=projTimelineService.getFile(dtoNum);
+		//ModelAndView 객체에 담아서 리턴
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("dto",projTimelineService.getFile(dtoNum));
 		//파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
 		mView.setViewName("fileDownView");
-
 		return mView;
 	}	
 	
