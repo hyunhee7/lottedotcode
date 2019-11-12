@@ -7,8 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.myapp.dto.MembersDto;
 /* 회원 Service */
 public interface MembersService {
-	public ModelAndView signup(MembersDto dto, HttpServletRequest request);
+	public MembersDto signup(MembersDto dto);
 	public boolean canUseId(String id);	
-	public ModelAndView signin(MembersDto dto, HttpServletRequest request);
+	public boolean signin(MembersDto dto);
 	public String getPath(String id);
 }
