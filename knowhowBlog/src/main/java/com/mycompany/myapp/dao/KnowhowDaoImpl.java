@@ -41,22 +41,22 @@ public class KnowhowDaoImpl implements KnowhowDao {
     
     /* 노하우 상세보기  */
     @Override
-    public KnowhowDto getDetail(KnowhowDto dtoNum){
-        KnowhowDto dto = session.selectOne("knowhow.getDetail", dtoNum);
+    public KnowhowDto getDetail(int num){
+        KnowhowDto dto = session.selectOne("knowhow.getDetail", num);
         return dto;
     }
     
     /* 노하우 파일 다운로드 */
     @Override
-    public KnowhowDto getFile(KnowhowDto dtoNum){
-        KnowhowDto dto = session.selectOne("knowhow.getFile", dtoNum);
+    public KnowhowDto getFile(int kh_num){
+        KnowhowDto dto = session.selectOne("knowhow.getFile", kh_num);
         return dto;
     }
     
     /* 태그 가져오기 */
     @Override
-    public List<KnowhowTagDto> getTags(KnowhowDto dtoNum){
-        List<KnowhowTagDto> tagDto = session.selectList("knowhowTag.getTags", dtoNum);
+    public List<KnowhowTagDto> getTags(int kh_num){
+        List<KnowhowTagDto> tagDto = session.selectList("knowhowTag.getTags", kh_num);
         return tagDto;
     }        
 
@@ -80,8 +80,8 @@ public class KnowhowDaoImpl implements KnowhowDao {
     
     /* 노하우 댓글 리스트 가져오기 */
     @Override
-    public List<KnowhowCommentDto> getCmts(KnowhowDto dtoNum){
-        List<KnowhowCommentDto> cmtDto = session.selectList("knowhow.getCmts",dtoNum);
+    public List<KnowhowCommentDto> getCmts(int kh_num){
+        List<KnowhowCommentDto> cmtDto = session.selectList("knowhow.getCmts", kh_num);
         return cmtDto;
     }
     

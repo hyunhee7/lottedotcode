@@ -81,19 +81,20 @@ public class KnowhowServiceImpl implements KnowhowService {
 
     /* 노하우 상세보기 */
     @Override
-    public KnowhowDto detail(KnowhowDto dtoNum, int num) {
-        dtoNum.setKh_num(num);
-        KnowhowDto dto = knowhowDao.getDetail(dtoNum);
-        List<KnowhowTagDto> tags = knowhowDao.getTags(dtoNum);
+    public KnowhowDto detail(int kh_num) {
+        KnowhowDto dto = knowhowDao.getDetail(kh_num);
+        /* 태그 달기 */
+        List<KnowhowTagDto> tags = knowhowDao.getTags(kh_num);
         dto.setPost_tag(tags);
-        List<KnowhowCommentDto> cmts = knowhowDao.getCmts(dtoNum);
+        /* 댓글 달기 */
+        List<KnowhowCommentDto> cmts = knowhowDao.getCmts(kh_num);
         dto.setCmts(cmts);
         return dto;
     }    
 
     /* 파일 다운로드 준비 */
     @Override
-    public KnowhowDto getFile(KnowhowDto dtoNum) {
+    public KnowhowDto getFile(int dtoNum) {
         //다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
         KnowhowDto dto=knowhowDao.getFile(dtoNum);
         logger.info("다운로드파일 정보: "+dto.getKh_fileOrgName());
@@ -103,7 +104,33 @@ public class KnowhowServiceImpl implements KnowhowService {
     
     /* 노하우 수정 */
     @Override
-    public void update(KnowhowDto dto) {
+    public void update(KnowhowDto dto, int kh_num, String id, String realPath) {
+        MultipartFile mFile=dto.getUploadImage();
+        if( mFile.isEmpty() ) {
+            dto.setKh_filePath("");
+        }else {
+            String orgFileName=mFile.getOriginalFilename();
+            long fileSize=mFile.getSize();
+            String filePath=realPath+File.separator;
+            logger.info("수정된 파일경로:"+filePath);
+            File file=new File(filePath);
+            if(!file.exists()){
+                file.mkdir();
+            }
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            logger.info("수정된 세이프파일:"+saveFileName);
+            try{
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                logger.error("fail to process file", e);
+            }            
+            dto.setKh_filePath(saveFileName);
+            dto.setKh_fileOrgName(orgFileName);
+            dto.setKh_fileSize(fileSize);            
+        }  
+        dto.setKh_modr_id(id);
+        dto.setKh_num(kh_num);
+        knowhowTagService.update(dto);       
         knowhowDao.update(dto);
     }    
     

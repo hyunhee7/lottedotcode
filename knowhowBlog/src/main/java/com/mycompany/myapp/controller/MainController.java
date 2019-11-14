@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,8 +34,8 @@ import com.mycompany.myapp.service.ProjTimelineService;
 
 
 @Controller
-public class ServiceController {
-    
+public class MainController {
+    public Logger logger = LoggerFactory.getLogger(this.getClass());    
     /* 의존성을 줄이기 위해 자동으로 와이어링을 해줌 */
     @Autowired
     private ProjBoardService projboardService;
@@ -97,7 +99,7 @@ public class ServiceController {
     public String knowhowInsert(HttpSession session, HttpServletRequest request, @ModelAttribute KnowhowDto dto){
         String kh_regr_id = (String)session.getAttribute("id");
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
-        /* autoIncrement 이후에 kh_num을 가져와 넣은 후 Tag 넣는 작업을 한다 */
+        logger.info("파일 경로"+realPath);
         knowhowService.insert(dto, kh_regr_id, realPath);
         return "redirect:/service/knowhowList.do";
     }    
@@ -106,8 +108,7 @@ public class ServiceController {
     @RequestMapping("/service/knowhowDetail.do")
     public ModelAndView knowhowDetail(HttpServletRequest request, HttpSession session){
         int kh_num=Integer.parseInt(request.getParameter("kh_num"));
-
-        dtoNum = knowhowService.detail(dtoNum, kh_num);
+        KnowhowDto dtoNum = knowhowService.detail(kh_num);
         ModelAndView mView = new ModelAndView();
         mView.addObject("dto", dtoNum);
         mView.setViewName("service/knowhowDetail");
@@ -117,16 +118,11 @@ public class ServiceController {
     /* 노하우 파일 다운로드 */
     @RequestMapping("/service/khFileDownload")
     public ModelAndView khdownload(HttpServletRequest request){
-        //다운로드할 파일의 정보를 ModelAndView 객체에 담아서 리턴 받는다.
         int kh_num=Integer.parseInt(request.getParameter("kh_num"));
-        KnowhowDto dtoNum = new KnowhowDto();
-        dtoNum.setKh_num(kh_num);
-        dtoNum = knowhowService.getFile(dtoNum);
+        KnowhowDto dtoNum = knowhowService.getFile(kh_num);
         ModelAndView mView=new ModelAndView();
         mView.addObject("dto",dtoNum);
-        //파일을 다운로드 시켜줄 view 객체의 이름을 지정하고
         mView.setViewName("khfileDownView");
-        //리턴해준다.
         return mView;
     }        
     
@@ -134,9 +130,7 @@ public class ServiceController {
     @RequestMapping("/service/knowhowUpdateform.do")
     public ModelAndView knowhowUpdateform(HttpServletRequest request){
         int kh_num = Integer.parseInt(request.getParameter("kh_num"));
-        KnowhowDto dtoNum = new KnowhowDto();
-        dtoNum.setKh_num(kh_num);
-        KnowhowDto dto=knowhowService.detail(dtoNum);
+        KnowhowDto dto=knowhowService.detail(kh_num);
         ModelAndView mView = new ModelAndView();
         mView.addObject("dto", dto);
         mView.setViewName("service/knowhowUpdateform");
@@ -147,55 +141,10 @@ public class ServiceController {
     @RequestMapping("/service/knowhowUpdate.do")
     public String knowhowUpdate(HttpSession session, HttpServletRequest request,
             @ModelAttribute KnowhowDto dto){
-        // 수정한 사람 id 가져와서 modr_id 변경
         String kh_modr_id = (String)session.getAttribute("id");
-        dto.setKh_modr_id(kh_modr_id);
         int kh_num = dto.getKh_num();
-        
-        //파일을 저장할 폴더의 절대 경로를 얻어온다.
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
-        System.out.println(realPath);
-        //MultipartFile 객체의 참조값 얻어오기
-        MultipartFile mFile=dto.getUploadImage();
-        //비어있을 경우 공백 넣어준다.
-        if( mFile.isEmpty() ) {
-            dto.setKh_filePath("");
-        }else {
-            //원본 파일명
-            String orgFileName=mFile.getOriginalFilename();
-            //파일 사이즈
-            long fileSize=mFile.getSize();
-            //저장할 파일의 상세 경로
-            String filePath=realPath+File.separator;
-            System.out.println(filePath);
-            //디렉토리를 만들 파일 객체 생성
-            File file=new File(filePath);
-            if(!file.exists()){//디렉토리가 존재하지 않는다면
-                file.mkdir();//디렉토리를 만든다.
-            }
-            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
-            String saveFileName=System.currentTimeMillis()+orgFileName;
-            System.out.println("세이프파일:"+saveFileName);
-            try{
-                //upload 폴더에 파일을 저장한다.
-                mFile.transferTo(new File(filePath+saveFileName));
-            }catch(Exception e){
-                e.printStackTrace();
-            }            
-            dto.setKh_filePath(saveFileName);
-            dto.setKh_fileOrgName(orgFileName);
-            dto.setKh_fileSize(fileSize);            
-        }        
-        
-        
-        try {
-            knowhowService.update(dto);
-            dto.setKh_num(kh_num);
-        }catch(Exception ex){
-            
-        }finally {
-            knowhowTagService.update(dto);
-        }
+        knowhowService.update(dto, kh_num, kh_modr_id,realPath);
         return "redirect:/service/knowhowDetail.do?kh_num="+kh_num;
     }
     
@@ -203,7 +152,6 @@ public class ServiceController {
     @RequestMapping("/service/knowhowDelete.do")
     public String knowhowDelete(HttpSession session,HttpServletRequest request) {
         int kh_num = Integer.parseInt(request.getParameter("kh_num"));
-        /* kh_disp_tf 를 변경 시킨다 */
         knowhowService.delete(kh_num);
         return "redirect:/service/knowhowList.do";
     }

@@ -10,7 +10,7 @@
     </insert>
     
     <!-- 노하우 태그 가져오기 -->
-    <select id="getTags" resultType="knowhowTagDto" parameterType="knowhowDto"> <!-- knowhowDto 아님? 안돼면 knowhowTagDto -->
+    <select id="getTags" resultType="knowhowTagDto" parameterType="int">
         SELECT tag_num, tag_name, tag_kh_num
         FROM kh_tag
         WHERE tag_kh_num=#{kh_num}

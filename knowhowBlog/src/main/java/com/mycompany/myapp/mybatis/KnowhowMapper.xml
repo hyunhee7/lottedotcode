@@ -29,14 +29,14 @@
     </insert>    
     
     <!-- 노하우 상세보기 -->
-    <select id="getDetail" resultType="knowhowDto" parameterType="knowhowDto"> 
+    <select id="getDetail" resultType="knowhowDto" parameterType="int"> 
         SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
         FROM kh_board
         WHERE kh_num=#{kh_num}
     </select>        
     
     <!-- 노하우 파일 다운로드 -->
-    <select id="getFile" resultType="knowhowDto" parameterType="knowhowDto"> 
+    <select id="getFile" resultType="knowhowDto" parameterType="int"> 
         SELECT kh_num, kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
         FROM kh_board
         WHERE kh_num=#{kh_num}
@@ -64,7 +64,7 @@
     </insert>        
     
     <!-- 노하우 댓글 리스트 불러오기 -->
-    <select id="getCmts" resultType="KnowhowCommentDto" parameterType="knowhowDto"> 
+    <select id="getCmts" resultType="KnowhowCommentDto" parameterType="int"> 
         SELECT cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id
         FROM KH_CMT
         WHERE cmt_kh_num=#{kh_num}
