@@ -45,8 +45,36 @@ public class KnowhowServiceImpl implements KnowhowService {
 		
 	/* 노하우 등록 */
 	@Override
-	public int insert(KnowhowDto dto) {
-        //파일을 저장할 폴더의 절대 경로를 얻어온다.
+	public int insert(KnowhowDto dto, String id, String realPath) {
+		dto.setKh_regr_id(id);
+		dto.setKh_modr_id(id);
+		MultipartFile mFile=dto.getUploadImage();
+		if( mFile.isEmpty() ) {
+			dto.setKh_filePath("");
+		}else {
+			//원본 파일명
+			String orgFileName=mFile.getOriginalFilename();
+			//파일 사이즈
+			long fileSize=mFile.getSize();
+			//저장할 파일의 상세 경로
+			String filePath=realPath+File.separator;
+			System.out.println("파일 경로"+filePath);
+
+			File file=new File(filePath);
+			if(!file.exists()){
+				file.mkdir();
+			}
+			String saveFileName=System.currentTimeMillis()+orgFileName;
+			System.out.println("등록된 파일명:"+saveFileName);
+			try{
+				mFile.transferTo(new File(filePath+saveFileName));
+			}catch(Exception e){
+				e.printStackTrace();
+			}        	
+			dto.setKh_filePath(saveFileName);
+			dto.setKh_fileOrgName(orgFileName);
+			dto.setKh_fileSize(fileSize);            
+		}		
 		int kh_num=knowhowDao.insert(dto);
 		return kh_num;
 	}

@@ -94,48 +94,12 @@ public class ServiceController {
 	
 	/*	노하우 등록 */ 
 	@RequestMapping("/service/knowhowInsert")
-	public String knowhowInsert(HttpSession session, HttpServletRequest request,
-			@ModelAttribute KnowhowDto dto){
+	public String knowhowInsert(HttpSession session, HttpServletRequest request, @ModelAttribute KnowhowDto dto){
 		String kh_regr_id = (String)session.getAttribute("id");
-		dto.setKh_regr_id(kh_regr_id);
-		dto.setKh_modr_id(kh_regr_id);
-
-        String realPath=request.getSession().getServletContext().getRealPath("/upload");
-        //MultipartFile 객체의 참조값 얻어오기
-        //FileDto 에 담긴 MultipartFile 객체의 참조값을 얻어온다.
-        MultipartFile mFile=dto.getUploadImage();
-        if( mFile.isEmpty() ) {
-        	dto.setKh_filePath("");
-        }else {
-            //원본 파일명
-            String orgFileName=mFile.getOriginalFilename();
-            //파일 사이즈
-            long fileSize=mFile.getSize();
-            //저장할 파일의 상세 경로
-            String filePath=realPath+File.separator;
-            System.out.println("파일 경로"+filePath);
-            //디렉토리를 만들 파일 객체 생성
-            File file=new File(filePath);
-            if(!file.exists()){//디렉토리가 존재하지 않는다면
-                file.mkdir();//디렉토리를 만든다.
-            }
-            //파일 시스템에 저장할 파일명을 만든다. (겹치치 않게)
-            String saveFileName=System.currentTimeMillis()+orgFileName;
-            System.out.println("등록된 파일명:"+saveFileName);
-            try{
-                //upload 폴더에 파일을 저장한다.
-                mFile.transferTo(new File(filePath+saveFileName));
-            }catch(Exception e){
-                e.printStackTrace();
-            }        	
-            dto.setKh_filePath(saveFileName);
-    		dto.setKh_fileOrgName(orgFileName);
-    		dto.setKh_fileSize(fileSize);            
-        }		
-		
+		String realPath=request.getSession().getServletContext().getRealPath("/upload");
 		/* autoIncrement 이후에 kh_num을 가져와 넣은 후 Tag 넣는 작업을 한다 */
 		try {
-			int kh_num = knowhowService.insert(dto);
+			int kh_num = knowhowService.insert(dto, kh_regr_id, realPath);
 			dto.setKh_num(kh_num);
 			System.out.println("kh_num직후:"+dto.getKh_num());
 		}catch(Exception ex){
@@ -143,7 +107,6 @@ public class ServiceController {
 		}finally {
 			knowhowTagService.insert(dto);
 		}
-		
 		return "redirect:/service/knowhowList.do";
 	}	
 	

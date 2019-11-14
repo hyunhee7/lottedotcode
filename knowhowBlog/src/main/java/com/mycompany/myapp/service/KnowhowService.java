@@ -12,7 +12,7 @@ import com.mycompany.myapp.dto.KnowhowDto;
 public interface KnowhowService {
 	public List<KnowhowDto> list();											/* 노하우 리스트 */
 	public List<KnowhowDto> Searchlist(String tag_name);					/* 노하우 태그별 검색 */
-	public int insert(KnowhowDto dto);									/* 노하우 등록 */
+	public int insert(KnowhowDto dto, String id, String path);									/* 노하우 등록 */
 	public KnowhowDto detail(KnowhowDto dtoNum);						/* 노하우 상세보기 */
 	public KnowhowDto getFile(KnowhowDto dtoNum);						/* 노하우 첨부파일 다운로드 준비 */
 	public void update(KnowhowDto dto);		/* 노하우 수정 */
