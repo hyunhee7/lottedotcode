@@ -2,32 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 노하우 태그 -->
 <mapper namespace="knowhowTag">
-	
-	<!-- 노하우 태그 등록 -->
-	<insert id="insert" parameterType="knowhowTagDto"> 
-		INSERT INTO kh_tag (tag_name, tag_kh_num) 
-		VALUES(#{tag_name},#{tag_kh_num}) 
-	</insert>
-	
-	<!-- 노하우 태그 가져오기 -->
-	<select id="getTags" resultType="knowhowTagDto" parameterType="knowhowDto"> <!-- knowhowDto 아님? 안돼면 knowhowTagDto -->
-		SELECT tag_num, tag_name, tag_kh_num
-		FROM kh_tag
-		WHERE tag_kh_num=#{kh_num}
-	</select>	
-	
-	<!-- 태그 등록 여부 반환, 0의 경우 없음으로 간주 -->
-	<select id="findTag" resultType="int" parameterType="knowhowTagDto"> 
-		SELECT COUNT(*) FROM kh_tag
-		WHERE tag_name=#{tag_name} AND tag_kh_num=#{tag_kh_num}
-	</select>
-	
-	<!-- 태그 검색 시 노하우 번호 가져오기 -->
-	<select id="findKh_num" resultType="java.util.HashMap" parameterType="string">
-		SELECT tag_kh_num
-		FROM kh_tag
-		WHERE tag_name=#{tag_name}		
-	</select>	
+    
+    <!-- 노하우 태그 등록 -->
+    <insert id="insert" parameterType="knowhowTagDto"> 
+        INSERT INTO kh_tag (tag_name, tag_kh_num) 
+        VALUES(#{tag_name},#{tag_kh_num}) 
+    </insert>
+    
+    <!-- 노하우 태그 가져오기 -->
+    <select id="getTags" resultType="knowhowTagDto" parameterType="knowhowDto"> <!-- knowhowDto 아님? 안돼면 knowhowTagDto -->
+        SELECT tag_num, tag_name, tag_kh_num
+        FROM kh_tag
+        WHERE tag_kh_num=#{kh_num}
+    </select>    
+    
+    <!-- 태그 등록 여부 반환, 0의 경우 없음으로 간주 -->
+    <select id="findTag" resultType="int" parameterType="knowhowTagDto"> 
+        SELECT COUNT(*) FROM kh_tag
+        WHERE tag_name=#{tag_name} AND tag_kh_num=#{tag_kh_num}
+    </select>
+    
+    <!-- 태그 검색 시 노하우 번호 가져오기 -->
+    <select id="findKh_num" resultType="java.util.HashMap" parameterType="string">
+        SELECT tag_kh_num
+        FROM kh_tag
+        WHERE tag_name=#{tag_name}        
+    </select>    
 </mapper>
 
 

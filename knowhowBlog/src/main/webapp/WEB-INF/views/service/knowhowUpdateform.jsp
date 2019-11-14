@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-	<meta name="viewport" http-equiv="Content-Type"
+    <meta name="viewport" http-equiv="Content-Type"
           content="width=device-width, initial-scale=1 text/html; charset=utf-8">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -16,25 +16,25 @@
     
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modern-business.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main-custom.css"/>
-  	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"/>	  
-	<!-- Editor --> 
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main-custom.css"/>
+      <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"/>      
+    <!-- Editor --> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <!-- tag -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/tagsinput.css">  
     <!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/custom.css" />
-	<!-- jQuery -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/custom.css" />
+    <!-- jQuery -->
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.2.0.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-	<!-- Editor -->
-	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-	
+    <!-- Editor -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    
     <style>
-    	.menu1 { font-weight : bold;}
+        .menu1 { font-weight : bold;}
     </style>
 </head>
 <body>
@@ -43,37 +43,37 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h1 class="my-4 col-xs-12">Knowhow 수정</h1>
-		<form action="knowhowUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
-		 <div class="form-group">
-			<input type=hidden name="kh_num" value="${dto.kh_num }"> 
-		 </div>
-		  <div class="form-group">
-		    <input type="text" class="form-control" id="post_title" name="kh_title" placeholder="포스트 명" value="${dto.kh_title }">
-		  </div>
-		  <div class="custom-file">
-		 	<input type="file" class="custom-file-input" id="post_file" name="uploadImage">
-			<label class="custom-file-label" for="customFile">${dto.kh_filePath }</label>
-		  </div>
-		  <br /><br />
-		  <div class="form-group">
-		    <textarea class="form-control" id="post_code_content" rows="13" style="margin-top:17px;" name="kh_content"
-		    >${dto.kh_content }</textarea>
-		  </div>
+        <h1 class="my-4 col-xs-12">Knowhow 수정</h1>
+        <form action="knowhowUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
+         <div class="form-group">
+            <input type=hidden name="kh_num" value="${dto.kh_num }"> 
+         </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="post_title" name="kh_title" placeholder="포스트 명" value="${dto.kh_title }">
+          </div>
+          <div class="custom-file">
+             <input type="file" class="custom-file-input" id="post_file" name="uploadImage">
+            <label class="custom-file-label" for="customFile">${dto.kh_filePath }</label>
+          </div>
+          <br /><br />
+          <div class="form-group">
+            <textarea class="form-control" id="post_code_content" rows="13" style="margin-top:17px;" name="kh_content"
+            >${dto.kh_content }</textarea>
+          </div>
           <div class="form-group bs-example">
             <input type="text"  data-role="tagsinput" name="tags" id="tags" />
-          </div>	
-            	
-	  	  <br /><br /> 
-	  	           	  
-		  <div style="text-align: center;">
-	      <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
-	      		<button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" id="submitBtn">수정</button>
-	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='knowhowList.do'">취소</button> 
-	      </div>    
-    	</div>
-		</form> 
-		<br />   
+          </div>    
+                
+            <br /><br /> 
+                           
+          <div style="text-align: center;">
+          <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
+                  <button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" id="submitBtn">수정</button>
+                  <button type="button" class="btn btn-b hvr-shadow" onclick="location.href='knowhowList.do'">취소</button> 
+          </div>    
+        </div>
+        </form> 
+        <br />   
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
@@ -86,22 +86,22 @@
     <script src="${pageContext.request.contextPath }/resources/assets/app.js"></script>
     <script src="${pageContext.request.contextPath }/resources/assets/app_bs3.js"></script>    
     <script src="${pageContext.request.contextPath }/resources/js/tagsinput.js"></script>  
-	<script type="text/javascript">
-		var simplemde = new SimpleMDE({
-/* 			previewRender: function(plainText) {
-				return customMarkdownParser(plainText); // Returns HTML from a custom parser
-			}	 */		
-		});
-		simplemde.value();
+    <script type="text/javascript">
+        var simplemde = new SimpleMDE({
+/*             previewRender: function(plainText) {
+                return customMarkdownParser(plainText); // Returns HTML from a custom parser
+            }     */        
+        });
+        simplemde.value();
 
-		
-		
-		$(function(){
-			<c:forEach items="${dto.post_tag}" var="TagList">
-				var tag_name = '${TagList.tag_name}'
-				$("#tags").tagsinput('add', tag_name);
-			</c:forEach>
-		});
-	</script>
+        
+        
+        $(function(){
+            <c:forEach items="${dto.post_tag}" var="TagList">
+                var tag_name = '${TagList.tag_name}'
+                $("#tags").tagsinput('add', tag_name);
+            </c:forEach>
+        });
+    </script>
 </body>
 </html>

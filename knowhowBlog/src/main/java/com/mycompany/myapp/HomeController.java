@@ -12,16 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomeController {
-	
-	@RequestMapping("/home.do")
-	public ModelAndView home(){
-		List<String> list=new ArrayList<String>();
-		ModelAndView mView=new ModelAndView();
-		mView.addObject("list", list);
-		mView.setViewName("home");
-		return mView;
-	}
-	
+    
+    @RequestMapping("/home.do")
+    public ModelAndView home(){
+        List<String> list=new ArrayList<String>();
+        ModelAndView mView=new ModelAndView();
+        mView.addObject("list", list);
+        mView.setViewName("home");
+        return mView;
+    }
+    
 }
-	
+    
 

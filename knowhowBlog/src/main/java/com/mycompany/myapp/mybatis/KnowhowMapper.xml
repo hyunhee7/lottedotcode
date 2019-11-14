@@ -2,81 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 노하우 Mapper -->
 <mapper namespace="knowhow">
-	<!-- 노하우 리스트 -->
-	<select id="getList" resultType="knowhowDto"> 
-		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
-		FROM kh_board 
-		WHERE kh_disp_tf=0
-		ORDER BY kh_num DESC 
-	</select>
-	
-	<!-- 노하우 검색 -->
-	<select id="getSearchList" resultType="knowhowDto" parameterType="java.util.Map"> 
-		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
-		FROM kh_board 
-		WHERE kh_num in
-		<foreach item="item" index="index" collection="list"
-      				open="(" separator="," close=")">
-		        #{item.tag_kh_num}
-		</foreach>		
-		ORDER BY kh_num DESC 
-	</select>
-	
-	<!-- 노하우 등록 -->
- 	<insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
-		INSERT INTO kh_board (kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_modr_id) 
-		VALUES(#{kh_title}, #{kh_filePath}, #{kh_fileOrgName}, #{kh_fileSize}, #{kh_content}, #{kh_regr_id}, #{kh_modr_id}) 
-	</insert>	
-	
-	<!-- 노하우 상세보기 -->
-	<select id="getDetail" resultType="knowhowDto" parameterType="knowhowDto"> 
-		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
-		FROM kh_board
-		WHERE kh_num=#{kh_num}
-	</select>		
-	
-	<!-- 노하우 파일 다운로드 -->
-	<select id="getFile" resultType="knowhowDto" parameterType="knowhowDto"> 
-		SELECT kh_num, kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
-		FROM kh_board
-		WHERE kh_num=#{kh_num}
-	</select>	
-	
-	<!-- 노하우 수정 -->
-	<update id="update" parameterType="knowhowDto"> 
-		UPDATE kh_board
-		SET kh_title=#{kh_title},kh_filePath=#{kh_filePath}, kh_fileOrgName=#{kh_fileOrgName}, kh_fileSize=#{kh_fileSize}, kh_content=#{kh_content},
-		kh_modr_id=#{kh_modr_id}, kh_mod_dtime=CURRENT_TIMESTAMP
-		WHERE kh_num=#{kh_num} 
-	</update>	
-	
-	<!-- 노하우 삭제 -->
-	<update id="delete" parameterType="int"> 
-		UPDATE kh_board
-		SET kh_disp_tf=1
-		WHERE kh_num=#{kh_num} 
-	</update>
-	
-	<!-- 노하우 댓글 등록 -->
- 	<insert id="cmtinsert" parameterType="KnowhowCommentDto"> 
-		INSERT INTO KH_CMT (cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id, cmt_modr_id) 
-		VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_kh_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
-	</insert>		
-	
-	<!-- 노하우 댓글 리스트 불러오기 -->
-	<select id="getCmts" resultType="KnowhowCommentDto" parameterType="knowhowDto"> 
-		SELECT cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id
-		FROM KH_CMT
-		WHERE cmt_kh_num=#{kh_num}
-	</select>	
-	
-	<!-- 노하우 최근 게시물 불러오기 -->
-	<select id="getRecentList" resultType="knowhowDto"> 
-		SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
-		FROM kh_board 
-		WHERE kh_disp_tf=0
-		ORDER BY kh_num DESC LIMIT 0, 3
-	</select>			
+    <!-- 노하우 리스트 -->
+    <select id="getList" resultType="knowhowDto"> 
+        SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+        FROM kh_board 
+        WHERE kh_disp_tf=0
+        ORDER BY kh_num DESC 
+    </select>
+    
+    <!-- 노하우 검색 -->
+    <select id="getSearchList" resultType="knowhowDto" parameterType="java.util.Map"> 
+        SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+        FROM kh_board 
+        WHERE kh_num in
+        <foreach item="item" index="index" collection="list"
+                      open="(" separator="," close=")">
+                #{item.tag_kh_num}
+        </foreach>        
+        ORDER BY kh_num DESC 
+    </select>
+    
+    <!-- 노하우 등록 -->
+     <insert id="insert" parameterType="knowhowDto" useGeneratedKeys="true" keyProperty="kh_num"> 
+        INSERT INTO kh_board (kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_modr_id) 
+        VALUES(#{kh_title}, #{kh_filePath}, #{kh_fileOrgName}, #{kh_fileSize}, #{kh_content}, #{kh_regr_id}, #{kh_modr_id}) 
+    </insert>    
+    
+    <!-- 노하우 상세보기 -->
+    <select id="getDetail" resultType="knowhowDto" parameterType="knowhowDto"> 
+        SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+        FROM kh_board
+        WHERE kh_num=#{kh_num}
+    </select>        
+    
+    <!-- 노하우 파일 다운로드 -->
+    <select id="getFile" resultType="knowhowDto" parameterType="knowhowDto"> 
+        SELECT kh_num, kh_title, kh_filePath, kh_fileOrgName, kh_fileSize, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+        FROM kh_board
+        WHERE kh_num=#{kh_num}
+    </select>    
+    
+    <!-- 노하우 수정 -->
+    <update id="update" parameterType="knowhowDto"> 
+        UPDATE kh_board
+        SET kh_title=#{kh_title},kh_filePath=#{kh_filePath}, kh_fileOrgName=#{kh_fileOrgName}, kh_fileSize=#{kh_fileSize}, kh_content=#{kh_content},
+        kh_modr_id=#{kh_modr_id}, kh_mod_dtime=CURRENT_TIMESTAMP
+        WHERE kh_num=#{kh_num} 
+    </update>    
+    
+    <!-- 노하우 삭제 -->
+    <update id="delete" parameterType="int"> 
+        UPDATE kh_board
+        SET kh_disp_tf=1
+        WHERE kh_num=#{kh_num} 
+    </update>
+    
+    <!-- 노하우 댓글 등록 -->
+     <insert id="cmtinsert" parameterType="KnowhowCommentDto"> 
+        INSERT INTO KH_CMT (cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id, cmt_modr_id) 
+        VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_kh_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
+    </insert>        
+    
+    <!-- 노하우 댓글 리스트 불러오기 -->
+    <select id="getCmts" resultType="KnowhowCommentDto" parameterType="knowhowDto"> 
+        SELECT cmt_imgPath, cmt_content, cmt_kh_num, cmt_regr_id
+        FROM KH_CMT
+        WHERE cmt_kh_num=#{kh_num}
+    </select>    
+    
+    <!-- 노하우 최근 게시물 불러오기 -->
+    <select id="getRecentList" resultType="knowhowDto"> 
+        SELECT kh_num, kh_title, kh_filePath, kh_content, kh_regr_id, kh_reg_dtime, kh_disp_tf
+        FROM kh_board 
+        WHERE kh_disp_tf=0
+        ORDER BY kh_num DESC LIMIT 0, 3
+    </select>            
 
 </mapper>
 

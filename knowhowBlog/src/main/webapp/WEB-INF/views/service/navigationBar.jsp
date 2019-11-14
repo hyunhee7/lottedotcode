@@ -8,33 +8,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-			<% if(session.getAttribute("id") == null) { %>
-		            <li class="nav-item">
-		              <a class="nav-link" href="${pageContext.request.contextPath }/members/loginform.do" style="color:white">login</a>
-		            </li>    
-		            <li class="nav-item">
-		              <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
-		            </li>
-		            <li class="nav-item">
-		              <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
-		            </li>	
-		            	                    
-			<% } else { %>
-         			<li class="nav-item dropdown">
-			              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			                ${id}님
-			              </a>
-			              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-			              	 <a class="dropdown-item" href="${pageContext.request.contextPath }/members/logout.do">Logout</a>
-			              </div>
-            		</li>
-		            <li class="nav-item">
-		              <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
-		            </li>
-		            <li class="nav-item">
-		              <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
-		            </li>		            	            
-			<% } %>
+            <% if(session.getAttribute("id") == null) { %>
+                    <li class="nav-item">
+                      <a class="nav-link" href="${pageContext.request.contextPath }/members/loginform.do" style="color:white">login</a>
+                    </li>    
+                    <li class="nav-item">
+                      <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
+                    </li>    
+                                            
+            <% } else { %>
+                     <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ${id}님
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                               <a class="dropdown-item" href="${pageContext.request.contextPath }/members/logout.do">Logout</a>
+                          </div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
+                    </li>                                    
+            <% } %>
             
 
 <!--          <li class="nav-item dropdown">

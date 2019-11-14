@@ -2,61 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 프로젝트 타임라인(포스트 리스트) -->
 <mapper namespace="projTimeline">
-	<!-- 리스트 가져오기 -->
-	<select id="getList" parameterType="int" resultType="projTimelineDto"> 
-		SELECT post_num, post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num 
-		FROM proj_post_board 
-		WHERE post_proj_num=#{num} AND post_disp_tf=0
-		ORDER BY post_num DESC 
-	</select>
-	
-	<!-- 포스트 등록 -->
- 	<insert id="insert" parameterType="projTimelineDto" useGeneratedKeys="true" keyProperty="post_num"> 
-		INSERT INTO proj_post_board (post_title, post_filePath, post_fileOrgName, post_fileSize, post_content, post_regr_id, post_modr_id, post_proj_num) 
-		VALUES(#{post_title}, #{post_filePath}, #{post_fileOrgName}, #{post_fileSize}, #{post_content}, #{post_regr_id}, #{post_modr_id}, #{post_proj_num}) 
-	</insert>
-	
-	<!-- 포스트 상세보기 -->
-	<select id="getDetail" resultType="projTimelineDto" parameterType="projTimelineDto"> 
-		SELECT post_num, post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num
-		FROM proj_post_board
-		WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
-	</select>		
-	
-	<!-- 포스트 내 파일 다운로드 -->
-	<select id="getFile" resultType="projTimelineDto" parameterType="ProjTimelineDto"> 
-		SELECT post_num, post_title, post_filePath, post_fileOrgName, post_fileSize, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num
-		FROM proj_post_board
-		WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
-	</select>	
-	
-	<!-- 포스트 수정 -->
-	<update id="update" parameterType="projTimelineDto"> 
-		UPDATE proj_post_board
-		SET post_title=#{post_title}, post_filePath=#{post_filePath}, post_fileOrgName=#{post_fileOrgName}, post_fileSize=#{post_fileSize}, post_content=#{post_content},
-		post_modr_id=#{post_modr_id}, post_mod_dtime=CURRENT_TIMESTAMP
-		WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
-	</update>	
-	
-	<!-- 포스트 삭제 -->
-	<update id="delete" parameterType="projTimelineDto"> 
-		UPDATE proj_post_board
-		SET post_disp_tf=1
-		WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
-	</update>	
-	
-	<!-- 포스트 댓글 등록 -->
- 	<insert id="cmtinsert" parameterType="projPostCommentDto"> 
-		INSERT INTO POST_CMT (cmt_imgPath, cmt_content, cmt_proj_num, cmt_post_num, cmt_regr_id, cmt_modr_id) 
-		VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_proj_num},#{cmt_post_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
-	</insert>		
-	
-	<!-- 포스트 댓글 리스트 불러오기 -->
-	<select id="getCmts" resultType="projPostCommentDto" parameterType="projTimelineDto"> 
-		SELECT cmt_imgPath, cmt_content, cmt_proj_num, cmt_post_num, cmt_regr_id
-		FROM POST_CMT
-		WHERE cmt_post_num=#{post_num} AND cmt_proj_num=#{post_proj_num}
-	</select>			
+    <!-- 리스트 가져오기 -->
+    <select id="getList" parameterType="int" resultType="projTimelineDto"> 
+        SELECT post_num, post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num 
+        FROM proj_post_board 
+        WHERE post_proj_num=#{num} AND post_disp_tf=0
+        ORDER BY post_num DESC 
+    </select>
+    
+    <!-- 포스트 등록 -->
+     <insert id="insert" parameterType="projTimelineDto" useGeneratedKeys="true" keyProperty="post_num"> 
+        INSERT INTO proj_post_board (post_title, post_filePath, post_fileOrgName, post_fileSize, post_content, post_regr_id, post_modr_id, post_proj_num) 
+        VALUES(#{post_title}, #{post_filePath}, #{post_fileOrgName}, #{post_fileSize}, #{post_content}, #{post_regr_id}, #{post_modr_id}, #{post_proj_num}) 
+    </insert>
+    
+    <!-- 포스트 상세보기 -->
+    <select id="getDetail" resultType="projTimelineDto" parameterType="projTimelineDto"> 
+        SELECT post_num, post_title, post_filePath, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num
+        FROM proj_post_board
+        WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
+    </select>        
+    
+    <!-- 포스트 내 파일 다운로드 -->
+    <select id="getFile" resultType="projTimelineDto" parameterType="ProjTimelineDto"> 
+        SELECT post_num, post_title, post_filePath, post_fileOrgName, post_fileSize, post_content, post_regr_id, post_reg_dtime, post_disp_tf, post_proj_num
+        FROM proj_post_board
+        WHERE post_proj_num=#{post_proj_num} AND post_num=#{post_num}
+    </select>    
+    
+    <!-- 포스트 수정 -->
+    <update id="update" parameterType="projTimelineDto"> 
+        UPDATE proj_post_board
+        SET post_title=#{post_title}, post_filePath=#{post_filePath}, post_fileOrgName=#{post_fileOrgName}, post_fileSize=#{post_fileSize}, post_content=#{post_content},
+        post_modr_id=#{post_modr_id}, post_mod_dtime=CURRENT_TIMESTAMP
+        WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
+    </update>    
+    
+    <!-- 포스트 삭제 -->
+    <update id="delete" parameterType="projTimelineDto"> 
+        UPDATE proj_post_board
+        SET post_disp_tf=1
+        WHERE post_num=#{post_num} AND post_proj_num=#{post_proj_num} 
+    </update>    
+    
+    <!-- 포스트 댓글 등록 -->
+     <insert id="cmtinsert" parameterType="projPostCommentDto"> 
+        INSERT INTO POST_CMT (cmt_imgPath, cmt_content, cmt_proj_num, cmt_post_num, cmt_regr_id, cmt_modr_id) 
+        VALUES(#{cmt_imgPath}, #{cmt_content}, #{cmt_proj_num},#{cmt_post_num}, #{cmt_regr_id}, #{cmt_modr_id}) 
+    </insert>        
+    
+    <!-- 포스트 댓글 리스트 불러오기 -->
+    <select id="getCmts" resultType="projPostCommentDto" parameterType="projTimelineDto"> 
+        SELECT cmt_imgPath, cmt_content, cmt_proj_num, cmt_post_num, cmt_regr_id
+        FROM POST_CMT
+        WHERE cmt_post_num=#{post_num} AND cmt_proj_num=#{post_proj_num}
+    </select>
 </mapper>
 
 

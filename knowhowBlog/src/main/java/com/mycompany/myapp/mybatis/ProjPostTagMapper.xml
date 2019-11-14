@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 포스트 태그 -->
 <mapper namespace="projPostTag">
-	
-	<!-- 태그 등록 -->
-	<insert id="insert" parameterType="ProjPostTagDto"> 
-		INSERT INTO proj_post_tag (tag_name, tag_post_num, tag_proj_num) 
-		VALUES(#{tag_name},#{tag_post_num}, #{tag_proj_num}) 
-	</insert>
-	
-	<!-- 태그 리스트 가져오기 -->
-	<select id="getTags" resultType="projPostTagDto" parameterType="projTimelineDto"> 
-		SELECT tag_num, tag_name, tag_proj_num, tag_post_num
-		FROM proj_post_tag
-		WHERE tag_proj_num=#{post_proj_num} AND tag_post_num=#{post_num}
-	</select>	
-	
-	<!-- 태그 등록 여부  -->	
-	<select id="findTag" resultType="int" parameterType="projPostTagDto"> 
-		SELECT COUNT(*) FROM proj_post_tag
-		WHERE tag_name=#{tag_name} AND tag_post_num=#{tag_post_num} AND tag_proj_num=#{tag_proj_num} 
-	</select>	
+    
+    <!-- 태그 등록 -->
+    <insert id="insert" parameterType="ProjPostTagDto"> 
+        INSERT INTO proj_post_tag (tag_name, tag_post_num, tag_proj_num) 
+        VALUES(#{tag_name},#{tag_post_num}, #{tag_proj_num}) 
+    </insert>
+    
+    <!-- 태그 리스트 가져오기 -->
+    <select id="getTags" resultType="projPostTagDto" parameterType="projTimelineDto"> 
+        SELECT tag_num, tag_name, tag_proj_num, tag_post_num
+        FROM proj_post_tag
+        WHERE tag_proj_num=#{post_proj_num} AND tag_post_num=#{post_num}
+    </select>    
+    
+    <!-- 태그 등록 여부  -->    
+    <select id="findTag" resultType="int" parameterType="projPostTagDto"> 
+        SELECT COUNT(*) FROM proj_post_tag
+        WHERE tag_name=#{tag_name} AND tag_post_num=#{tag_post_num} AND tag_proj_num=#{tag_proj_num} 
+    </select>    
 </mapper>
 
 

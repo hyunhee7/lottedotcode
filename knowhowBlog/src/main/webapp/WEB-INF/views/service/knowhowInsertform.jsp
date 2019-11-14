@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-	<meta name="viewport" http-equiv="Content-Type"
+    <meta name="viewport" http-equiv="Content-Type"
           content="width=device-width, initial-scale=1 text/html; charset=utf-8">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -14,26 +14,26 @@
     
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modern-business.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main-custom.css"/>
-  	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"/>	  
-	<!-- Editor --> 
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main-custom.css"/>
+      <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/hover-min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/font-awesome.css"/>      
+    <!-- Editor --> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <!-- tag -->
     
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/tagsinput.css">  
     <!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/custom.css" />
-	<!-- jQuery -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/css/custom.css" />
+    <!-- jQuery -->
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.2.0.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-	<!-- Editor -->
-	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-	
+    <!-- Editor -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    
     <style>
-    	.menu2 { font-weight : bold;}
+        .menu2 { font-weight : bold;}
     </style>
 </head>
 <body>
@@ -42,34 +42,34 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h1 class="my-4 col-xs-12">Knowhow Write</h1>
-		<form action="knowhowInsert.do" method="post" enctype="multipart/form-data" id="postForm">
-		  <div class="form-group">
-		    <input type="text" class="form-control" id="post_title" name="kh_title" placeholder="포스트 명">
-		  </div>
-		  <div class="custom-file">
-		 	<input type="file" class="custom-file-input" id="post_file" name="uploadImage">
-			<label class="custom-file-label" for="customFile">Choose file</label>
-		  </div>
-		  <br /><br />
-		  <div class="form-group">
-		    <textarea class="form-control" id="post_code_content" rows="13" style="margin-top:17px;" name="kh_content"
-		    placeholder="포스트 내용" ></textarea>
-		  </div>
+        <h1 class="my-4 col-xs-12">Knowhow Write</h1>
+        <form action="knowhowInsert.do" method="post" enctype="multipart/form-data" id="postForm">
+          <div class="form-group">
+            <input type="text" class="form-control" id="post_title" name="kh_title" placeholder="포스트 명">
+          </div>
+          <div class="custom-file">
+             <input type="file" class="custom-file-input" id="post_file" name="uploadImage">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+          <br /><br />
+          <div class="form-group">
+            <textarea class="form-control" id="post_code_content" rows="13" style="margin-top:17px;" name="kh_content"
+            placeholder="포스트 내용" ></textarea>
+          </div>
           <div class="form-group bs-example">
             <input type="text" value="java,spring,javascript" data-role="tagsinput" name="tags" />
-          </div>	
-            	
-	  	  <br /><br /> 
-	  	           	  
-		  <div style="text-align: center;">
-	      <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
-	      		<button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" id="submitBtn">등록</button>
-	      		<button type="button" class="btn btn-b hvr-shadow" onclick="location.href='knowhowList.do'">취소</button> 
-	      </div>    
-    	</div>
-		</form> 
-		<br />   
+          </div>    
+                
+            <br /><br /> 
+                           
+          <div style="text-align: center;">
+          <div style="display: table; margin-left: auto; margin-right: auto; display: inline-block;">
+                  <button type="submit" class="btn btn-b hvr-shadow" style="margin-right:10px" id="submitBtn">등록</button>
+                  <button type="button" class="btn btn-b hvr-shadow" onclick="location.href='knowhowList.do'">취소</button> 
+          </div>    
+        </div>
+        </form> 
+        <br />   
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
@@ -82,13 +82,13 @@
     <script src="${pageContext.request.contextPath }/resources/assets/app.js"></script>
     <script src="${pageContext.request.contextPath }/resources/assets/app_bs3.js"></script>    
     <script src="${pageContext.request.contextPath }/resources/js/tagsinput.js"></script>  
-	<script>
-		var simplemde = new SimpleMDE({
-/* 			previewRender: function(plainText) {
-				return customMarkdownParser(plainText); // Returns HTML from a custom parser
-			}	 */		
-		});
-		simplemde.value("이곳에 `code`를 입력해보세요!");
-	</script>
+    <script>
+        var simplemde = new SimpleMDE({
+/*             previewRender: function(plainText) {
+                return customMarkdownParser(plainText); // Returns HTML from a custom parser
+            }     */        
+        });
+        simplemde.value("이곳에 `code`를 입력해보세요!");
+    </script>
 </body>
 </html>
