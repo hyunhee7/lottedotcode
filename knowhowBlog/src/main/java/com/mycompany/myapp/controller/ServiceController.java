@@ -98,15 +98,7 @@ public class ServiceController {
         String kh_regr_id = (String)session.getAttribute("id");
         String realPath=request.getSession().getServletContext().getRealPath("/upload");
         /* autoIncrement 이후에 kh_num을 가져와 넣은 후 Tag 넣는 작업을 한다 */
-        try {
-            int kh_num = knowhowService.insert(dto, kh_regr_id, realPath);
-            dto.setKh_num(kh_num);
-            System.out.println("kh_num직후:"+dto.getKh_num());
-        }catch(Exception ex){ 
-            
-        }finally {
-            knowhowTagService.insert(dto);
-        }
+        knowhowService.insert(dto, kh_regr_id, realPath);
         return "redirect:/service/knowhowList.do";
     }    
     

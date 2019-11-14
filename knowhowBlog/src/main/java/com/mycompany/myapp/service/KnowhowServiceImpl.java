@@ -24,10 +24,10 @@ public class KnowhowServiceImpl implements KnowhowService {
 
     @Autowired
     private KnowhowDao knowhowDao;
-    
     @Autowired
     private KnowhowTagDao knowhowTagDao;
-    
+    @Autowired
+    private KnowhowTagService knowhowTagService;    
     /* 노하우 리스트 */
     @Override
     public List<KnowhowDto> list() {
@@ -76,6 +76,8 @@ public class KnowhowServiceImpl implements KnowhowService {
             dto.setKh_fileSize(fileSize);            
         }        
         int kh_num=knowhowDao.insert(dto);
+        dto.setKh_num(kh_num);
+        knowhowTagService.insert(dto);
         return kh_num;
     }
 
