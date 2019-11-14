@@ -16,7 +16,7 @@ public interface KnowhowService {
 	public KnowhowDto detail(KnowhowDto dtoNum);						/* 노하우 상세보기 */
 	public KnowhowDto getFile(KnowhowDto dtoNum);						/* 노하우 첨부파일 다운로드 준비 */
 	public void update(KnowhowDto dto);									/* 노하우 수정 */
-	public void delete(int kh_num);										/* 노하우 삭제 */
+	public void delete(int kh_num);				 						/* 노하우 삭제 */
 	public void cmtInsert(KnowhowCommentDto dto);						/* 노하우 댓글 등록 */
 	public List<KnowhowDto> recentList();								/* 노하우 최근 게시물  */
 }
