@@ -57,8 +57,7 @@ public class KnowhowServiceImpl implements KnowhowService {
             String orgFileName=mFile.getOriginalFilename();
             long fileSize=mFile.getSize();
             String filePath=realPath+File.separator;
-            System.out.println("파일 경로"+filePath);
-
+            logger.info("파일 경로"+filePath);
             File file=new File(filePath);
             if(!file.exists()){
                 file.mkdir();
@@ -68,7 +67,7 @@ public class KnowhowServiceImpl implements KnowhowService {
             try{
                 mFile.transferTo(new File(filePath+saveFileName));
             }catch(Exception e){
-                e.printStackTrace();
+                logger.error("fail to process file", e);
             }            
             dto.setKh_filePath(saveFileName);
             dto.setKh_fileOrgName(orgFileName);
@@ -97,7 +96,7 @@ public class KnowhowServiceImpl implements KnowhowService {
     public KnowhowDto getFile(KnowhowDto dtoNum) {
         //다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
         KnowhowDto dto=knowhowDao.getFile(dtoNum);
-        System.out.println(dto.getKh_fileOrgName());
+        logger.info("다운로드파일 정보: "+dto.getKh_fileOrgName());
         //리턴해준다.
         return dto;
     }
