@@ -106,9 +106,8 @@ public class ServiceController {
     @RequestMapping("/service/knowhowDetail.do")
     public ModelAndView knowhowDetail(HttpServletRequest request, HttpSession session){
         int kh_num=Integer.parseInt(request.getParameter("kh_num"));
-        KnowhowDto dtoNum = new KnowhowDto();
-        dtoNum.setKh_num(kh_num);
-        dtoNum = knowhowService.detail(dtoNum);
+
+        dtoNum = knowhowService.detail(dtoNum, kh_num);
         ModelAndView mView = new ModelAndView();
         mView.addObject("dto", dtoNum);
         mView.setViewName("service/knowhowDetail");

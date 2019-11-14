@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +23,7 @@ import com.mycompany.myapp.dto.ProjTimelineDto;
 /* 노하우 Service */
 @Service
 public class KnowhowServiceImpl implements KnowhowService {
-
+    public Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private KnowhowDao knowhowDao;
     @Autowired
@@ -52,11 +54,8 @@ public class KnowhowServiceImpl implements KnowhowService {
         if( mFile.isEmpty() ) {
             dto.setKh_filePath("");
         }else {
-            //원본 파일명
             String orgFileName=mFile.getOriginalFilename();
-            //파일 사이즈
             long fileSize=mFile.getSize();
-            //저장할 파일의 상세 경로
             String filePath=realPath+File.separator;
             System.out.println("파일 경로"+filePath);
 
@@ -65,7 +64,7 @@ public class KnowhowServiceImpl implements KnowhowService {
                 file.mkdir();
             }
             String saveFileName=System.currentTimeMillis()+orgFileName;
-            System.out.println("등록된 파일명:"+saveFileName);
+            logger.info("등록된 파일명:"+saveFileName);
             try{
                 mFile.transferTo(new File(filePath+saveFileName));
             }catch(Exception e){
@@ -83,12 +82,11 @@ public class KnowhowServiceImpl implements KnowhowService {
 
     /* 노하우 상세보기 */
     @Override
-    public KnowhowDto detail(KnowhowDto dtoNum) {
+    public KnowhowDto detail(KnowhowDto dtoNum, int num) {
+        dtoNum.setKh_num(num);
         KnowhowDto dto = knowhowDao.getDetail(dtoNum);
-        /* 노하우 태그 리스트 가져오기 */
         List<KnowhowTagDto> tags = knowhowDao.getTags(dtoNum);
         dto.setPost_tag(tags);
-        /* 노하우 댓글 리스트 가져오기 */
         List<KnowhowCommentDto> cmts = knowhowDao.getCmts(dtoNum);
         dto.setCmts(cmts);
         return dto;

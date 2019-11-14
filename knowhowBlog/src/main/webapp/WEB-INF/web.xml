@@ -6,19 +6,35 @@
     <welcome-file-list>
         <welcome-file>home.do</welcome-file>
     </welcome-file-list>
-
-    <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+    <!-- 컨테이너생성 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/root-context.xml</param-value>
+    </context-param>    
+    <!-- log4J -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log/log4j.xml</param-value>
     </context-param>
-    
-    <!-- Creates the Spring Container shared by all Servlets and Filters -->
+    <!-- log4jRefreshInterval 을 세팅하면 log4j.xml 에서 level 이나 
+         로그출력 패턴 변경을 하면 자동 리프레쉬 된다. -->
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>60000</param-value>
+    </context-param>
+
+ 
+ 
+    <listener>
+    <!-- listener-class에 등록되어 있는 Log4jConfigListener는 log4j라는 로깅 프레임워크를 초기화 하는 클래스이다.
+         이 클래스를 초기화 할 때 log4jConfigLocation context-param을 넘겨준다. -->
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>   
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- Processes application requests -->
+    <!-- 클라이언트에서 요청을 처음으로 받는 클래스 -->
     <servlet>
         <servlet-name>appServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -28,7 +44,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-        
+    <!-- .do로 끝나는 url요청 받아 appServlet에서 처리 -->    
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
         <url-pattern>*.do</url-pattern>
