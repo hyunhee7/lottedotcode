@@ -102,7 +102,7 @@ public class ServiceController {
 			int kh_num = knowhowService.insert(dto, kh_regr_id, realPath);
 			dto.setKh_num(kh_num);
 			System.out.println("kh_num직후:"+dto.getKh_num());
-		}catch(Exception ex){
+		}catch(Exception ex){ 
 			
 		}finally {
 			knowhowTagService.insert(dto);
