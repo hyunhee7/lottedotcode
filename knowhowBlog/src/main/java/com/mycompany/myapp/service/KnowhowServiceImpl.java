@@ -3,23 +3,16 @@ package com.mycompany.myapp.service;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.mycompany.myapp.dao.KnowhowDao;
 import com.mycompany.myapp.dao.KnowhowTagDao;
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 import com.mycompany.myapp.dto.KnowhowTagDto;
-import com.mycompany.myapp.dto.ProjBoardDto;
-import com.mycompany.myapp.dto.ProjPostTagDto;
-import com.mycompany.myapp.dto.ProjTimelineDto;
 /* 노하우 Service */
 @Service
 public class KnowhowServiceImpl implements KnowhowService {
@@ -57,7 +50,7 @@ public class KnowhowServiceImpl implements KnowhowService {
             String orgFileName=mFile.getOriginalFilename();
             long fileSize=mFile.getSize();
             String filePath=realPath+File.separator;
-            logger.info("파일 경로"+filePath);
+            logger.info("노하우 사진 파일 경로"+filePath);
             File file=new File(filePath);
             if(!file.exists()){
                 file.mkdir();
@@ -95,10 +88,8 @@ public class KnowhowServiceImpl implements KnowhowService {
     /* 파일 다운로드 준비 */
     @Override
     public KnowhowDto getFile(int dtoNum) {
-        //다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
         KnowhowDto dto=knowhowDao.getFile(dtoNum);
         logger.info("다운로드파일 정보: "+dto.getKh_fileOrgName());
-        //리턴해준다.
         return dto;
     }
     

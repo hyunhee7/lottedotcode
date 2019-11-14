@@ -3,44 +3,54 @@ package com.mycompany.myapp.service;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.mycompany.myapp.dao.ProjBoardDao;
 import com.mycompany.myapp.dao.ProjTimelineDao;
-import com.mycompany.myapp.dto.ProjBoardDto;
 import com.mycompany.myapp.dto.ProjPostCommentDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 /* 프로젝트 타임라인 Service */
 @Service
 public class ProjTimelineServiceImpl implements ProjTimelineService{
-    
+    public Logger logger = LoggerFactory.getLogger(this.getClass());    
     @Autowired
-    private ProjTimelineDao projTimelineDao;
+    private ProjTimelineDao projTimelineDao; 
     @Autowired
-    private ProjBoardDao projBoardDao;    
-    
-    /* 포스트 리스트  */
-    /*    
-
-    @Override
-    public ModelAndView list(int num) {
-
-
-        return mView;
-    }
-     */
+    private ProjPostTagService projPostTagService;    
     
     /* 포스트 등록하기 */
     @Override
-    public int insert(ProjTimelineDto dto) {
+    public void insert(ProjTimelineDto dto, String realPath) {
+        MultipartFile mFile=dto.getUploadImage();
+        if( mFile.isEmpty() ) {
+            dto.setPost_filePath("");
+            
+        }else {
+            String orgFileName=mFile.getOriginalFilename();
+            long fileSize=mFile.getSize();
+            String filePath=realPath+File.separator;
+            logger.info("포스트 사진 파일 경로"+filePath);
+            File file=new File(filePath);
+            if(!file.exists()){
+                file.mkdir();
+            }
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            logger.info("등록된 파일명:"+saveFileName);
+            try{
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                logger.error("fail to process file", e);
+            }            
+            dto.setPost_filePath(saveFileName);
+            dto.setPost_fileOrgName(orgFileName);
+            dto.setPost_fileSize(fileSize);            
+        }        
         int post_num=projTimelineDao.insert(dto);
-        return post_num;
+        dto.setPost_num(post_num);
+        projPostTagService.insert(dto);
     }
     
     /* 포스트 상세보기 */
@@ -60,15 +70,38 @@ public class ProjTimelineServiceImpl implements ProjTimelineService{
     /* 포스트 내 첨부파일 다운로드 준비 */
     @Override
     public ProjTimelineDto getFile(ProjTimelineDto dtoNum) {
-        //다운로드 시켜줄 파일의 정보를 DB 에서 얻어오고
         ProjTimelineDto dto=projTimelineDao.getFile(dtoNum);
         return dto;
     }
     
     /* 포스트 수정 */
     @Override
-    public void update(ProjTimelineDto dto) {
+    public void update(ProjTimelineDto dto, String realPath) {
+        MultipartFile mFile=dto.getUploadImage();
+        if( mFile.isEmpty() ) {
+            dto.setPost_filePath(""); 
+        }else {
+            String orgFileName=mFile.getOriginalFilename();
+            long fileSize=mFile.getSize();
+            String filePath=realPath+File.separator;
+            logger.info("수정된 파일경로:"+filePath);
+            File file=new File(filePath);
+            if(!file.exists()){
+                file.mkdir();
+            }
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            logger.info("수정된 세이프파일:"+saveFileName);
+            try{
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                logger.error("fail to process file", e);
+            }            
+            dto.setPost_filePath(saveFileName);
+            dto.setPost_fileOrgName(orgFileName);
+            dto.setPost_fileSize(fileSize);            
+        }
         projTimelineDao.update(dto);
+        projPostTagService.update(dto);
     }    
     
     /* 포스트 삭제 */

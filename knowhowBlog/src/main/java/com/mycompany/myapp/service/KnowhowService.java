@@ -2,10 +2,6 @@ package com.mycompany.myapp.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import com.mycompany.myapp.dto.KnowhowCommentDto;
 import com.mycompany.myapp.dto.KnowhowDto;
 /* 노하우 Service */

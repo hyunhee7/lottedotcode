@@ -1,14 +1,7 @@
 package com.mycompany.myapp.service;
 
-import java.io.File;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.mycompany.myapp.dao.MembersDao;
 import com.mycompany.myapp.dto.MembersDto;
 /* 회원 Service */

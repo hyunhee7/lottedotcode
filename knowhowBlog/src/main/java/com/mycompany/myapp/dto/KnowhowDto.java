@@ -2,7 +2,6 @@ package com.mycompany.myapp.dto;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 /* 노하우 보드 Dto */

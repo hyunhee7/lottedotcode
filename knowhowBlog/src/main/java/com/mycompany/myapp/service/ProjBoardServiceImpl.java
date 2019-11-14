@@ -3,25 +3,43 @@ package com.mycompany.myapp.service;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.mycompany.myapp.dao.ProjBoardDao;
 import com.mycompany.myapp.dto.ProjBoardDto;
 /* 프로젝트 보드 Service */
 @Service
 public class ProjBoardServiceImpl implements ProjBoardService {
-
+    public Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ProjBoardDao projboardDao;
     
     /* 프로젝트 등록 */
     @Override
-    public void insert(ProjBoardDto dto) {
+    public void insert(ProjBoardDto dto, String realPath) {
+        MultipartFile mFile=dto.getUploadImage();
+        if( mFile.isEmpty() ) {
+            dto.setProj_imagePath("");
+        }else {
+            String orgFileName=mFile.getOriginalFilename();
+            String filePath=realPath+File.separator;
+            logger.info("프로젝트 사진 파일 경로"+filePath);
+            File file=new File(filePath);
+            if(!file.exists()){
+                file.mkdir();
+            }
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            logger.info("등록된 파일명:"+saveFileName);
+            try{
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                logger.error("fail to process file", e);
+            }
+            dto.setProj_imagePath(saveFileName);
+        }        
         projboardDao.insert(dto);
     }
 
@@ -48,7 +66,29 @@ public class ProjBoardServiceImpl implements ProjBoardService {
     
     /* 프로젝트 수정하기 */
     @Override
-    public void update(ProjBoardDto dto) {        
+    public void update(ProjBoardDto dto, String realPath) {  
+        if( dto.getUploadImage().isEmpty() ) {
+            dto.setProj_imagePath("");
+        }else {
+            MultipartFile mFile=dto.getUploadImage();
+            String orgFileName=mFile.getOriginalFilename();
+            String filePath=realPath+File.separator;
+            System.out.println(filePath);
+            File file=new File(filePath);
+            if(!file.exists()){
+                file.mkdir();
+            }
+            String saveFileName=System.currentTimeMillis()+orgFileName;
+            System.out.println("사진세이프파일:"+saveFileName);
+            try{
+                //upload 폴더에 파일을 저장한다.
+                mFile.transferTo(new File(filePath+saveFileName));
+            }catch(Exception e){
+                e.printStackTrace();
+            }            
+            dto.setProj_imagePath(saveFileName);
+        }
+                
         projboardDao.update(dto);
     }
     

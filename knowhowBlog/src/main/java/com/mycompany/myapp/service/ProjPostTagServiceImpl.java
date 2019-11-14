@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.myapp.dao.PostTagDao;
-import com.mycompany.myapp.dto.KnowhowDto;
-import com.mycompany.myapp.dto.KnowhowTagDto;
 import com.mycompany.myapp.dto.ProjPostTagDto;
 import com.mycompany.myapp.dto.ProjTimelineDto;
 /* 포스트 태그 Service */
