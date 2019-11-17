@@ -28,12 +28,14 @@ Blog 형태의 개발 노하우 공유 및 프로젝트 공유 커뮤니티
 
 ### 포스트 목록(프로젝트 보드 클릭 시 나타나는 화면)
 - 프로젝트에 관련된 개발 내용들을 공유하는 공간.
+
 ![postlist](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/projectTimeline.png)
 
 
 
 ### 포스트 쓰기 및 태그 달기
 - 포스트에 개발 내용을 써서 공유할 수 있다. 코드, 파일 등 공유가 가능하다.
+
 ![postwrite](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/postWrite.png)
 
 
@@ -41,6 +43,7 @@ Blog 형태의 개발 노하우 공유 및 프로젝트 공유 커뮤니티
 ### 포스트 상세화면
 - 등록한 파일 다운로드가 가능하고 댓글로 소통이 가능하다. 
 - 등록한 포스트를 클릭 시 상세화면으로 볼 수 있다. 
+
 ![detail](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/knowhowDetail.png)
 
 
@@ -48,18 +51,21 @@ Blog 형태의 개발 노하우 공유 및 프로젝트 공유 커뮤니티
 
 ### 태그 검색 (상세 화면의 태그 클릭 시)
 - 상세화면에 등록된 태그를 클릭할 경우, 연관된 포스트 검색이 가능하다.
+
 ![search](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/knowhowSearch.png)
 
 
 
 ### 댓글 쓰기 및 보기
 - 상세화면에서 댓글로 소통이 가능하다.
+
 ![comment](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/comment.png)
 
 
 
 ### 모바일 웹
 - 모바일에서 접속 시 반응형 웹으로 볼 수 있다.
+
 ![mobileweb](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/mobilecomment.png)
 
 
