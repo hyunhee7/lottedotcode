@@ -16,7 +16,7 @@
                       <a class="nav-link menu1" href="projectBoard.do">ProjectBoard</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link menu2" href="knowhowList.do">KnowHow</a>
+                      <a class="nav-link menu2" href="knowhowList.do">KnowHow</a> 
                     </li>    
                                             
             <% } else { %>
