@@ -13,6 +13,12 @@ Blog 형태의 개발 노하우 공유 및 프로젝트 공유 커뮤니티
 * Enviroment : Eclipse
 * 버전 관리 : Git, Github
 
+## 주요 기능
+![function](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/%EA%B8%B0%EB%8A%A5%EC%A0%95%EC%9D%98.png)
+
+## 유스케이스
+![usercase](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/usecase.png)
+
 ## 구현 모습
 ### 프로젝트 목록 및 노하우 목록 (메인 화면)
 ![Main](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/Main.png)
@@ -50,8 +56,3 @@ Blog 형태의 개발 노하우 공유 및 프로젝트 공유 커뮤니티
 - 모바일에서 접속 시 반응형 웹으로 볼 수 있다.
 
 
-## 주요 기능
-![function](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/%EA%B8%B0%EB%8A%A5%EC%A0%95%EC%9D%98.png)
-
-## 유스케이스
-![usercase](https://github.com/hyunhee7/PROJECT-MOEIM.COM/blob/master/screenshot/usecase.png)
